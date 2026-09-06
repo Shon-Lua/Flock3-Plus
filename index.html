@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Прошивка LILYGO Flock3+</title>
+    <style>
+        :root {
+            --bg: #f5f7fa;
+            --card-bg: #ffffff;
+            --text: #2c3e50;
+            --accent: #3498db;
+            --accent-hover: #2980b9;
+            --danger: #e74c3c;
+            --success: #2ecc71;
+            --border: #dce1e8;
+            --shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Roboto', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 720px;
+            width: 100%;
+            background: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 4px;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .subtitle {
+            color: #7f8c8d;
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+        }
+
+        .card {
+            background: #fafbfc;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .card h2 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--text);
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 8px;
+            display: inline-block;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 6px;
+            font-size: 0.9rem;
+        }
+
+        input[type="file"],
+        select,
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            background: white;
+            transition: border-color 0.2s;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(52,152,219,0.1);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+        }
+        .btn-primary:hover {
+            background: var(--accent-hover);
+        }
+        .btn-primary:disabled {
+            background: #b0c4de;
+            cursor: not-allowed;
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+        .btn-success:hover {
+            background: #27ae60;
+        }
+        .btn-success:disabled {
+            background: #a8d5ba;
+            cursor: not-allowed;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+        }
+        .btn-outline:hover {
+            background: #eaf2fa;
+        }
+
+        .progress-container {
+            margin: 20px 0;
+            display: none;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+            width: 0%;
+            transition: width 0.3s ease;
+            border-radius: 10px;
+        }
+
+        .progress-text {
+            text-align: center;
+            margin-top: 8px;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .log {
+            background: #2c3e50;
+            color: #ecf0f1;
+            border-radius: 8px;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            max-height: 200px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            margin-top: 15px;
+            display: none;
+        }
+
+        .log.visible {
+            display: block;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .status-badge.disconnected {
+            background: #fadbd8;
+            color: #c0392b;
+        }
+        .status-badge.connected {
+            background: #d5f5e3;
+            color: #27ae60;
+        }
+
+        .flash-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        @media (max-width: 600px) {
+            .flash-options {
+                grid-template-columns: 1fr;
+            }
+            .container {
+                padding: 20px;
+            }
+        }
+
+        .note {
+            font-size: 0.85rem;
+            background: #fef9e7;
+            border-left: 4px solid #f1c40f;
+            padding: 10px 15px;
+            border-radius: 4px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>
+            🔧 Прошивка LILYGO Flock3+
+            <span id="connectionStatus" class="status-badge disconnected">Не подключено</span>
+        </h1>
+        <p class="subtitle">Установка прошивки через Web Serial API (браузер Chrome/Edge)</p>
+
+        <!-- Шаг 1: Подключение -->
+        <div class="card">
+            <h2>1. Подключение устройства</h2>
+            <p style="margin-bottom: 15px;">Подключите плату к компьютеру через USB. Для перевода в режим загрузчика: удерживайте кнопку BOOT, нажмите RESET, затем отпустите BOOT.</p>
+            <button id="connectBtn" class="btn btn-primary">
+                🔌 Подключиться к устройству
+            </button>
+            <button id="disconnectBtn" class="btn btn-outline" style="display: none; margin-left: 10px;">
+                Отключить
+            </button>
+        </div>
+
+        <!-- Шаг 2: Выбор прошивки -->
+        <div class="card">
+            <h2>2. Выбор файла прошивки</h2>
+            <div class="form-group">
+                <label for="firmwareFile">Файл прошивки (.bin)</label>
+                <input type="file" id="firmwareFile" accept=".bin" />
+            </div>
+            <div class="flash-options">
+                <div class="form-group">
+                    <label for="flashAddress">Адрес записи</label>
+                    <input type="text" id="flashAddress" value="0x0" placeholder="0x0" />
+                </div>
+                <div class="form-group">
+                    <label for="baudRate">Скорость (baud)</label>
+                    <select id="baudRate">
+                        <option value="115200">115200</option>
+                        <option value="230400">230400</option>
+                        <option value="460800" selected>460800</option>
+                        <option value="921600">921600</option>
+                        <option value="1500000">1500000</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="flashSize">Размер flash</label>
+                    <select id="flashSize">
+                        <option value="4MB" selected>4MB</option>
+                        <option value="8MB">8MB</option>
+                        <option value="16MB">16MB</option>
+                        <option value="32MB">32MB</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="flashMode">Режим flash</label>
+                    <select id="flashMode">
+                        <option value="dio" selected>DIO</option>
+                        <option value="qio">QIO</option>
+                        <option value="dout">DOUT</option>
+                        <option value="qout">QOUT</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Шаг 3: Запуск -->
+        <div class="card">
+            <h2>3. Установка</h2>
+            <button id="flashBtn" class="btn btn-success" disabled>
+                ⚡ Начать прошивку
+            </button>
+            <div class="progress-container" id="progressContainer">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-text" id="progressText">0%</div>
+            </div>
+        </div>
+
+        <!-- Лог -->
+        <div id="log" class="log"></div>
+
+        <div class="note">
+            <strong>Важно:</strong> Для работы требуется браузер с поддержкой Web Serial (Chrome, Edge, Opera). 
+            Страница должна быть открыта по HTTPS или на localhost. 
+            Если плата не определяется, проверьте драйверы USB-UART (обычно CP210x или CH340).
+        </div>
+    </div>
+
+    <!-- Подключение esptool-js из CDN -->
+    <script src="https://unpkg.com/esptool-js@0.4.1/bundle.js"></script>
+    <script>
+        (function() {
+            // DOM элементы
+            const connectBtn = document.getElementById('connectBtn');
+            const disconnectBtn = document.getElementById('disconnectBtn');
+            const flashBtn = document.getElementById('flashBtn');
+            const firmwareFileInput = document.getElementById('firmwareFile');
+            const flashAddressInput = document.getElementById('flashAddress');
+            const baudRateSelect = document.getElementById('baudRate');
+            const flashSizeSelect = document.getElementById('flashSize');
+            const flashModeSelect = document.getElementById('flashMode');
+            const progressContainer = document.getElementById('progressContainer');
+            const progressFill = document.getElementById('progressFill');
+            const progressText = document.getElementById('progressText');
+            const logElement = document.getElementById('log');
+            const connectionStatus = document.getElementById('connectionStatus');
+
+            // Состояние
+            let device = null;
+            let transport = null;
+            let esptool = null;
+            let isConnected = false;
+
+            // Функция логирования
+            function log(message) {
+                logElement.classList.add('visible');
+                logElement.textContent += message + '\n';
+                logElement.scrollTop = logElement.scrollHeight;
+                console.log(message);
+            }
+
+            // Обновление статуса подключения
+            function updateConnectionStatus(connected) {
+                isConnected = connected;
+                if (connected) {
+                    connectionStatus.textContent = 'Подключено';
+                    connectionStatus.className = 'status-badge connected';
+                    connectBtn.style.display = 'none';
+                    disconnectBtn.style.display = 'inline-flex';
+                    flashBtn.disabled = false;
+                } else {
+                    connectionStatus.textContent = 'Не подключено';
+                    connectionStatus.className = 'status-badge disconnected';
+                    connectBtn.style.display = 'inline-flex';
+                    disconnectBtn.style.display = 'none';
+                    flashBtn.disabled = true;
+                }
+            }
+
+            // Обновление прогресса
+            function updateProgress(value) {
+                const percent = Math.round(value * 100);
+                progressFill.style.width = percent + '%';
+                progressText.textContent = percent + '%';
+            }
+
+            // Подключение к устройству
+            connectBtn.addEventListener('click', async () => {
+                try {
+                    log('Запрос доступа к последовательному порту...');
+                    device = await navigator.serial.requestPort();
+                    await device.open({ baudRate: 115200 });
+                    
+                    transport = new ESPSerialTransport(device);
+                    esptool = new ESPTool(transport);
+                    
+                    log('Порт открыт, инициализация esptool...');
+                    await esptool.initialize();
+                    
+                    const chipName = esptool.chipName || 'ESP32';
+                    log(`Чип обнаружен: ${chipName}`);
+                    
+                    updateConnectionStatus(true);
+                } catch (error) {
+                    log('Ошибка подключения: ' + error.message);
+                    updateConnectionStatus(false);
+                }
+            });
+
+            // Отключение
+            disconnectBtn.addEventListener('click', async () => {
+                try {
+                    if (device) {
+                        await device.close();
+                        log('Порт закрыт');
+                    }
+                } catch (e) {
+                    log('Ошибка при закрытии порта: ' + e.message);
+                }
+                device = null;
+                transport = null;
+                esptool = null;
+                updateConnectionStatus(false);
+                flashBtn.disabled = true;
+            });
+
+            // Проверка выбора файла
+            firmwareFileInput.addEventListener('change', () => {
+                if (firmwareFileInput.files.length > 0) {
+                    log(`Выбран файл: ${firmwareFileInput.files[0].name} (${firmwareFileInput.files[0].size} байт)`);
+                }
+            });
+
+            // Запуск прошивки
+            flashBtn.addEventListener('click', async () => {
+                if (!isConnected || !esptool) {
+                    alert('Сначала подключите устройство!');
+                    return;
+                }
+
+                const file = firmwareFileInput.files[0];
+                if (!file) {
+                    alert('Выберите файл прошивки!');
+                    return;
+                }
+
+                // Парсинг параметров
+                const address = parseInt(flashAddressInput.value, 16) || 0;
+                const baudRate = parseInt(baudRateSelect.value, 10);
+                const flashSize = flashSizeSelect.value;
+                const flashMode = flashModeSelect.value;
+
+                // Маппинг размера flash в байты
+                const flashSizeMap = {
+                    '4MB': 4 * 1024 * 1024,
+                    '8MB': 8 * 1024 * 1024,
+                    '16MB': 16 * 1024 * 1024,
+                    '32MB': 32 * 1024 * 1024
+                };
+                const flashSizeBytes = flashSizeMap[flashSize] || 4 * 1024 * 1024;
+
+                try {
+                    log('Начинаю прошивку...');
+                    progressContainer.style.display = 'block';
+                    updateProgress(0);
+                    flashBtn.disabled = true;
+
+                    // Чтение файла в ArrayBuffer
+                    const fileData = await file.arrayBuffer();
+                    const uint8Data = new Uint8Array(fileData);
+
+                    log(`Запись ${uint8Data.length} байт по адресу 0x${address.toString(16)}...`);
+
+                    // Параметры flash
+                    const flashOptions = {
+                        flashSize: flashSizeBytes,
+                        flashMode: flashMode,
+                        flashFrequency: 40, // 40MHz
+                        eraseAll: false
+                    };
+
+                    // Выполнение записи
+                    await esptool.writeFlash({
+                        fileArray: [{
+                            data: uint8Data,
+                            address: address
+                        }],
+                        flashSize: flashOptions.flashSize,
+                        flashMode: flashOptions.flashMode,
+                        flashFreq: flashOptions.flashFrequency,
+                        eraseAll: flashOptions.eraseAll,
+                        compress: true,
+                        reportProgress: (fileIndex, written, total) => {
+                            const progress = written / total;
+                            updateProgress(progress);
+                            if (written % 4096 === 0 || written === total) {
+                                log(`Прогресс: ${written}/${total} байт (${Math.round(progress*100)}%)`);
+                            }
+                        }
+                    });
+
+                    log('Прошивка успешно завершена! ✅');
+                    updateProgress(1);
+                    alert('Прошивка успешно установлена!');
+                } catch (error) {
+                    log('Ошибка прошивки: ' + error.message);
+                    alert('Ошибка прошивки: ' + error.message);
+                } finally {
+                    flashBtn.disabled = false;
+                    // Не скрываем прогресс, чтобы пользователь видел результат
+                }
+            });
+
+            // Обработка закрытия страницы
+            window.addEventListener('beforeunload', async () => {
+                if (device) {
+                    try {
+                        await device.close();
+                    } catch (e) {
+                        // ignore
+                    }
+                }
+            });
+
+            // Первоначальное сообщение
+            log('Добро пожаловать! Подключите устройство и выберите файл прошивки.');
+        })();
+    </script>
+</body>
+</html>
