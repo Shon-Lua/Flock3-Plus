@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Прошивка LILYGO Flock3+</title>
+    <title>Flock3+ Firmware Flasher</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         :root {
@@ -61,6 +61,7 @@
         .topbar .logo img {
             height: 40px;
             width: auto;
+            filter: grayscale(100%) contrast(1000%) brightness(100%);
         }
 
         .topbar nav {
@@ -104,18 +105,18 @@
             width: 100%;
             height: 200px;
             background: #e0e0e0;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 20px;
             border-bottom: 2px solid #cccccc;
+            position: relative;
             overflow: hidden;
         }
 
         .banner-left {
-            flex: 0 0 auto;
-            z-index: 1;
-            padding-right: 20px;
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 2;
+            pointer-events: none;
         }
 
         .banner-left h1 {
@@ -132,10 +133,9 @@
         }
 
         .banner-right {
-            flex: 1;
-            height: 100%;
-            min-width: 0;
-            position: relative;
+            position: absolute;
+            inset: 0;
+            z-index: 1;
         }
 
         .main-content {
@@ -224,16 +224,9 @@
             }
             .banner {
                 height: 140px;
-                flex-direction: column;
-                align-items: flex-start;
-                padding: 15px;
             }
             .banner-left h1 {
                 font-size: 2rem;
-            }
-            .banner-right {
-                width: 100%;
-                height: 80px;
             }
         }
 
@@ -384,41 +377,41 @@
     <div class="banner">
         <div class="banner-left">
             <h1>Flock3+</h1>
-            <p>мультимедийный плеер</p>
+            <p>Multimedia Player</p>
         </div>
         <div class="banner-right" id="three-container"></div>
     </div>
 
     <div class="main-content">
         <div class="section">
-            <h2><i class="fas fa-plug"></i> Подключение устройства</h2>
-            <p style="margin-bottom: 15px;">Подключите плату к компьютеру через USB. Для перевода в режим загрузчика: удерживайте кнопку BOOT, нажмите RESET, затем отпустите BOOT.</p>
+            <h2><i class="fas fa-plug"></i> Device Connection</h2>
+            <p style="margin-bottom: 15px;">Connect the board to your computer via USB. To enter bootloader mode: hold BOOT, press RESET, then release BOOT.</p>
             <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 10px;">
                 <button id="connectBtn" class="btn btn-primary">
-                    <i class="fas fa-plug"></i> Подключиться
+                    <i class="fas fa-plug"></i> Connect
                 </button>
                 <button id="disconnectBtn" class="btn btn-outline" style="display: none;">
-                    <i class="fas fa-unlink"></i> Отключить
+                    <i class="fas fa-unlink"></i> Disconnect
                 </button>
                 <span id="connectionStatus" class="status-indicator disconnected">
-                    <i class="fas fa-circle"></i> Не подключено
+                    <i class="fas fa-circle"></i> Not connected
                 </span>
             </div>
         </div>
 
         <div class="section">
-            <h2><i class="fas fa-file-upload"></i> Выбор файла прошивки</h2>
+            <h2><i class="fas fa-file-upload"></i> Firmware Selection</h2>
             <div class="form-group">
-                <label for="firmwareFile"><i class="fas fa-file"></i> Файл прошивки (.bin)</label>
+                <label for="firmwareFile"><i class="fas fa-file"></i> Firmware file (.bin)</label>
                 <input type="file" id="firmwareFile" accept=".bin" />
             </div>
             <div class="flash-options">
                 <div class="form-group">
-                    <label for="flashAddress"><i class="fas fa-map-pin"></i> Адрес записи</label>
+                    <label for="flashAddress"><i class="fas fa-map-pin"></i> Flash address</label>
                     <input type="text" id="flashAddress" value="0x0" placeholder="0x0" />
                 </div>
                 <div class="form-group">
-                    <label for="baudRate"><i class="fas fa-tachometer-alt"></i> Скорость (baud)</label>
+                    <label for="baudRate"><i class="fas fa-tachometer-alt"></i> Baud rate</label>
                     <select id="baudRate">
                         <option value="115200">115200</option>
                         <option value="230400">230400</option>
@@ -428,7 +421,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="flashSize"><i class="fas fa-memory"></i> Размер flash</label>
+                    <label for="flashSize"><i class="fas fa-memory"></i> Flash size</label>
                     <select id="flashSize">
                         <option value="4MB" selected>4MB</option>
                         <option value="8MB">8MB</option>
@@ -437,7 +430,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="flashMode"><i class="fas fa-cog"></i> Режим flash</label>
+                    <label for="flashMode"><i class="fas fa-cog"></i> Flash mode</label>
                     <select id="flashMode">
                         <option value="dio" selected>DIO</option>
                         <option value="qio">QIO</option>
@@ -449,9 +442,9 @@
         </div>
 
         <div class="section">
-            <h2><i class="fas fa-bolt"></i> Установка прошивки</h2>
+            <h2><i class="fas fa-bolt"></i> Flash Installation</h2>
             <button id="flashBtn" class="btn btn-success" disabled>
-                <i class="fas fa-bolt"></i> Начать прошивку
+                <i class="fas fa-bolt"></i> Start Flashing
             </button>
             <div class="progress-container" id="progressContainer">
                 <div class="progress-bar">
@@ -465,7 +458,7 @@
 
         <div class="note">
             <i class="fas fa-exclamation-triangle"></i>
-            <span><strong>Важно:</strong> Для работы требуется браузер с поддержкой Web Serial (Chrome, Edge, Opera). Страница должна быть открыта по HTTPS или на localhost. Если плата не определяется, проверьте драйверы USB-UART (обычно CP210x или CH340).</span>
+            <span><strong>Important:</strong> Requires a browser with Web Serial support (Chrome, Edge, Opera). The page must be served over HTTPS or on localhost. If the board is not detected, check USB-UART drivers (usually CP210x or CH340).</span>
         </div>
     </div>
 
@@ -502,13 +495,13 @@
             function updateConnectionStatus(connected) {
                 isConnected = connected;
                 if (connected) {
-                    connectionStatus.innerHTML = '<i class="fas fa-circle"></i> Подключено';
+                    connectionStatus.innerHTML = '<i class="fas fa-circle"></i> Connected';
                     connectionStatus.className = 'status-indicator connected';
                     connectBtn.style.display = 'none';
                     disconnectBtn.style.display = 'inline-flex';
                     flashBtn.disabled = false;
                 } else {
-                    connectionStatus.innerHTML = '<i class="fas fa-circle"></i> Не подключено';
+                    connectionStatus.innerHTML = '<i class="fas fa-circle"></i> Not connected';
                     connectionStatus.className = 'status-indicator disconnected';
                     connectBtn.style.display = 'inline-flex';
                     disconnectBtn.style.display = 'none';
@@ -524,18 +517,18 @@
 
             connectBtn.addEventListener('click', async () => {
                 try {
-                    log('Запрос доступа к последовательному порту...');
+                    log('Requesting serial port access...');
                     device = await navigator.serial.requestPort();
                     await device.open({ baudRate: 115200 });
                     transport = new ESPSerialTransport(device);
                     esptool = new ESPTool(transport);
-                    log('Порт открыт, инициализация esptool...');
+                    log('Port opened, initializing esptool...');
                     await esptool.initialize();
                     const chipName = esptool.chipName || 'ESP32';
-                    log(`Чип обнаружен: ${chipName}`);
+                    log(`Chip detected: ${chipName}`);
                     updateConnectionStatus(true);
                 } catch (error) {
-                    log('Ошибка подключения: ' + error.message);
+                    log('Connection error: ' + error.message);
                     updateConnectionStatus(false);
                 }
             });
@@ -544,10 +537,10 @@
                 try {
                     if (device) {
                         await device.close();
-                        log('Порт закрыт');
+                        log('Port closed');
                     }
                 } catch (e) {
-                    log('Ошибка при закрытии порта: ' + e.message);
+                    log('Error closing port: ' + e.message);
                 }
                 device = null;
                 transport = null;
@@ -558,18 +551,18 @@
 
             firmwareFileInput.addEventListener('change', () => {
                 if (firmwareFileInput.files.length > 0) {
-                    log(`Выбран файл: ${firmwareFileInput.files[0].name} (${firmwareFileInput.files[0].size} байт)`);
+                    log(`File selected: ${firmwareFileInput.files[0].name} (${firmwareFileInput.files[0].size} bytes)`);
                 }
             });
 
             flashBtn.addEventListener('click', async () => {
                 if (!isConnected || !esptool) {
-                    alert('Сначала подключите устройство!');
+                    alert('Please connect the device first!');
                     return;
                 }
                 const file = firmwareFileInput.files[0];
                 if (!file) {
-                    alert('Выберите файл прошивки!');
+                    alert('Please select a firmware file!');
                     return;
                 }
                 const address = parseInt(flashAddressInput.value, 16) || 0;
@@ -584,13 +577,13 @@
                 };
                 const flashSizeBytes = flashSizeMap[flashSize] || 4 * 1024 * 1024;
                 try {
-                    log('Начинаю прошивку...');
+                    log('Starting flashing...');
                     progressContainer.style.display = 'block';
                     updateProgress(0);
                     flashBtn.disabled = true;
                     const fileData = await file.arrayBuffer();
                     const uint8Data = new Uint8Array(fileData);
-                    log(`Запись ${uint8Data.length} байт по адресу 0x${address.toString(16)}...`);
+                    log(`Writing ${uint8Data.length} bytes at address 0x${address.toString(16)}...`);
                     const flashOptions = {
                         flashSize: flashSizeBytes,
                         flashMode: flashMode,
@@ -611,16 +604,16 @@
                             const progress = written / total;
                             updateProgress(progress);
                             if (written % 4096 === 0 || written === total) {
-                                log(`Прогресс: ${written}/${total} байт (${Math.round(progress*100)}%)`);
+                                log(`Progress: ${written}/${total} bytes (${Math.round(progress*100)}%)`);
                             }
                         }
                     });
-                    log('Прошивка успешно завершена!');
+                    log('Flashing completed successfully!');
                     updateProgress(1);
-                    alert('Прошивка успешно установлена!');
+                    alert('Firmware installed successfully!');
                 } catch (error) {
-                    log('Ошибка прошивки: ' + error.message);
-                    alert('Ошибка прошивки: ' + error.message);
+                    log('Flashing error: ' + error.message);
+                    alert('Flashing error: ' + error.message);
                 } finally {
                     flashBtn.disabled = false;
                 }
@@ -635,7 +628,7 @@
                 }
             });
 
-            log('Добро пожаловать! Подключите устройство и выберите файл прошивки.');
+            log('Welcome! Connect your device and select a firmware file.');
 
             function initThreeScene() {
                 const container = document.getElementById('three-container');
