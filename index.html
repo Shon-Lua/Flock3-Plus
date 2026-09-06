@@ -4,19 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Прошивка LILYGO Flock3+</title>
-    <!-- Font Awesome для иконок -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         :root {
-            --bg: #f5f7fa;
-            --text: #2c3e50;
-            --accent: #3498db;
-            --accent-hover: #2980b9;
-            --border: #dce1e8;
-            --shadow: 0 2px 10px rgba(0,0,0,0.05);
+            --bg: #f0f0f0;
+            --text: #222222;
+            --accent: #000000;
+            --accent-hover: #333333;
+            --border: #cccccc;
+            --shadow: 0 1px 3px rgba(0,0,0,0.1);
             --topbar-bg: #ffffff;
-            --topbar-text: #2c3e50;
-            --topbar-active: #3498db;
+            --topbar-text: #222222;
+            --topbar-active: #000000;
+            --log-bg: #222222;
+            --log-text: #f0f0f0;
         }
 
         * {
@@ -34,10 +35,9 @@
             min-height: 100vh;
         }
 
-        /* Топбар */
         .topbar {
             background: var(--topbar-bg);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            box-shadow: var(--shadow);
             padding: 0 20px;
             position: sticky;
             top: 0;
@@ -58,8 +58,9 @@
             gap: 8px;
         }
 
-        .topbar .logo i {
-            font-size: 1.5rem;
+        .topbar .logo img {
+            height: 40px;
+            width: auto;
         }
 
         .topbar nav {
@@ -86,46 +87,34 @@
         }
 
         .topbar nav a:hover {
-            background: #eaf2fa;
+            background: #e0e0e0;
             color: var(--accent);
         }
 
         .topbar nav a.active {
             background: var(--accent);
-            color: white;
+            color: #ffffff;
         }
 
         .topbar nav a.active:hover {
             background: var(--accent-hover);
         }
 
-        /* Баннер */
         .banner {
             width: 100%;
-            height: 200px;
-            background: linear-gradient(135deg, #2c3e50, #3498db);
+            height: 180px;
+            background: #e0e0e0;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
+            color: #000000;
             font-size: 1.8rem;
             font-weight: 600;
             text-align: center;
             padding: 20px;
             letter-spacing: 0.5px;
             margin-bottom: 30px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .banner::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: rgba(255,255,255,0.3);
+            border-bottom: 2px solid #cccccc;
         }
 
         .banner .banner-content {
@@ -137,10 +126,9 @@
 
         .banner .banner-content i {
             font-size: 3rem;
-            opacity: 0.9;
+            opacity: 0.7;
         }
 
-        /* Основной контент */
         .main-content {
             max-width: 800px;
             margin: 0 auto;
@@ -193,9 +181,9 @@
             width: 100%;
             padding: 10px 12px;
             border: 1px solid var(--border);
-            border-radius: 8px;
+            border-radius: 4px;
             font-size: 0.95rem;
-            background: white;
+            background: #ffffff;
             transition: border-color 0.2s;
         }
 
@@ -203,7 +191,7 @@
         select:focus {
             outline: none;
             border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(52,152,219,0.1);
+            box-shadow: 0 0 0 2px rgba(0,0,0,0.1);
         }
 
         .flash-options {
@@ -226,7 +214,7 @@
                 justify-content: center;
             }
             .banner {
-                height: 150px;
+                height: 140px;
                 font-size: 1.4rem;
             }
         }
@@ -237,7 +225,7 @@
             justify-content: center;
             padding: 10px 20px;
             border: none;
-            border-radius: 8px;
+            border-radius: 4px;
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
@@ -247,36 +235,36 @@
         }
 
         .btn-primary {
-            background: var(--accent);
-            color: white;
+            background: #000000;
+            color: #ffffff;
         }
         .btn-primary:hover {
-            background: var(--accent-hover);
+            background: #333333;
         }
         .btn-primary:disabled {
-            background: #b0c4de;
+            background: #999999;
             cursor: not-allowed;
         }
 
         .btn-success {
-            background: #2ecc71;
-            color: white;
+            background: #000000;
+            color: #ffffff;
         }
         .btn-success:hover {
-            background: #27ae60;
+            background: #333333;
         }
         .btn-success:disabled {
-            background: #a8d5ba;
+            background: #999999;
             cursor: not-allowed;
         }
 
         .btn-outline {
             background: transparent;
-            border: 2px solid var(--accent);
-            color: var(--accent);
+            border: 2px solid #000000;
+            color: #000000;
         }
         .btn-outline:hover {
-            background: #eaf2fa;
+            background: #e0e0e0;
         }
 
         .progress-container {
@@ -287,18 +275,18 @@
         .progress-bar {
             width: 100%;
             height: 20px;
-            background: #e9ecef;
-            border-radius: 10px;
+            background: #dddddd;
+            border-radius: 4px;
             overflow: hidden;
             position: relative;
         }
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #3498db, #2ecc71);
+            background: #000000;
             width: 0%;
             transition: width 0.3s ease;
-            border-radius: 10px;
+            border-radius: 4px;
         }
 
         .progress-text {
@@ -309,9 +297,9 @@
         }
 
         .log {
-            background: #2c3e50;
-            color: #ecf0f1;
-            border-radius: 8px;
+            background: var(--log-bg);
+            color: var(--log-text);
+            border-radius: 4px;
             padding: 15px;
             font-family: 'Courier New', monospace;
             font-size: 0.85rem;
@@ -336,17 +324,17 @@
         }
 
         .status-indicator.connected {
-            color: #27ae60;
+            color: #1a1a1a;
         }
 
         .status-indicator.disconnected {
-            color: #c0392b;
+            color: #555555;
         }
 
         .note {
             font-size: 0.85rem;
-            background: #fef9e7;
-            border-left: 4px solid #f1c40f;
+            background: #e8e8e8;
+            border-left: 4px solid #000000;
             padding: 10px 15px;
             border-radius: 4px;
             margin-top: 15px;
@@ -357,15 +345,14 @@
 
         .note i {
             margin-top: 2px;
-            color: #f1c40f;
+            color: #000000;
         }
     </style>
 </head>
 <body>
-    <!-- Топбар -->
     <header class="topbar">
         <a href="#" class="logo">
-            <i class="fas fa-microchip"></i> Flock3+
+            <img src="Flock3.png" alt="Flock3+">
         </a>
         <nav>
             <a href="#"><i class="fas fa-home"></i> Home</a>
@@ -376,7 +363,6 @@
         </nav>
     </header>
 
-    <!-- Горизонтальный баннер -->
     <div class="banner">
         <div class="banner-content">
             <i class="fas fa-microchip"></i>
@@ -384,9 +370,7 @@
         </div>
     </div>
 
-    <!-- Основной контент -->
     <div class="main-content">
-        <!-- Секция подключения -->
         <div class="section">
             <h2><i class="fas fa-plug"></i> Подключение устройства</h2>
             <p style="margin-bottom: 15px;">Подключите плату к компьютеру через USB. Для перевода в режим загрузчика: удерживайте кнопку BOOT, нажмите RESET, затем отпустите BOOT.</p>
@@ -403,7 +387,6 @@
             </div>
         </div>
 
-        <!-- Секция выбора прошивки -->
         <div class="section">
             <h2><i class="fas fa-file-upload"></i> Выбор файла прошивки</h2>
             <div class="form-group">
@@ -446,7 +429,6 @@
             </div>
         </div>
 
-        <!-- Секция запуска -->
         <div class="section">
             <h2><i class="fas fa-bolt"></i> Установка прошивки</h2>
             <button id="flashBtn" class="btn btn-success" disabled>
@@ -460,21 +442,17 @@
             </div>
         </div>
 
-        <!-- Лог -->
         <div id="log" class="log"></div>
 
-        <!-- Примечание -->
         <div class="note">
             <i class="fas fa-exclamation-triangle"></i>
             <span><strong>Важно:</strong> Для работы требуется браузер с поддержкой Web Serial (Chrome, Edge, Opera). Страница должна быть открыта по HTTPS или на localhost. Если плата не определяется, проверьте драйверы USB-UART (обычно CP210x или CH340).</span>
         </div>
     </div>
 
-    <!-- Подключение esptool-js из CDN -->
     <script src="https://unpkg.com/esptool-js@0.4.1/bundle.js"></script>
     <script>
         (function() {
-            // DOM элементы
             const connectBtn = document.getElementById('connectBtn');
             const disconnectBtn = document.getElementById('disconnectBtn');
             const flashBtn = document.getElementById('flashBtn');
@@ -489,13 +467,11 @@
             const logElement = document.getElementById('log');
             const connectionStatus = document.getElementById('connectionStatus');
 
-            // Состояние
             let device = null;
             let transport = null;
             let esptool = null;
             let isConnected = false;
 
-            // Функция логирования
             function log(message) {
                 logElement.classList.add('visible');
                 logElement.textContent += message + '\n';
@@ -503,7 +479,6 @@
                 console.log(message);
             }
 
-            // Обновление статуса подключения
             function updateConnectionStatus(connected) {
                 isConnected = connected;
                 if (connected) {
@@ -521,29 +496,23 @@
                 }
             }
 
-            // Обновление прогресса
             function updateProgress(value) {
                 const percent = Math.round(value * 100);
                 progressFill.style.width = percent + '%';
                 progressText.textContent = percent + '%';
             }
 
-            // Подключение к устройству
             connectBtn.addEventListener('click', async () => {
                 try {
                     log('Запрос доступа к последовательному порту...');
                     device = await navigator.serial.requestPort();
                     await device.open({ baudRate: 115200 });
-                    
                     transport = new ESPSerialTransport(device);
                     esptool = new ESPTool(transport);
-                    
                     log('Порт открыт, инициализация esptool...');
                     await esptool.initialize();
-                    
                     const chipName = esptool.chipName || 'ESP32';
                     log(`Чип обнаружен: ${chipName}`);
-                    
                     updateConnectionStatus(true);
                 } catch (error) {
                     log('Ошибка подключения: ' + error.message);
@@ -551,7 +520,6 @@
                 }
             });
 
-            // Отключение
             disconnectBtn.addEventListener('click', async () => {
                 try {
                     if (device) {
@@ -568,33 +536,26 @@
                 flashBtn.disabled = true;
             });
 
-            // Проверка выбора файла
             firmwareFileInput.addEventListener('change', () => {
                 if (firmwareFileInput.files.length > 0) {
                     log(`Выбран файл: ${firmwareFileInput.files[0].name} (${firmwareFileInput.files[0].size} байт)`);
                 }
             });
 
-            // Запуск прошивки
             flashBtn.addEventListener('click', async () => {
                 if (!isConnected || !esptool) {
                     alert('Сначала подключите устройство!');
                     return;
                 }
-
                 const file = firmwareFileInput.files[0];
                 if (!file) {
                     alert('Выберите файл прошивки!');
                     return;
                 }
-
-                // Парсинг параметров
                 const address = parseInt(flashAddressInput.value, 16) || 0;
                 const baudRate = parseInt(baudRateSelect.value, 10);
                 const flashSize = flashSizeSelect.value;
                 const flashMode = flashModeSelect.value;
-
-                // Маппинг размера flash в байты
                 const flashSizeMap = {
                     '4MB': 4 * 1024 * 1024,
                     '8MB': 8 * 1024 * 1024,
@@ -602,28 +563,20 @@
                     '32MB': 32 * 1024 * 1024
                 };
                 const flashSizeBytes = flashSizeMap[flashSize] || 4 * 1024 * 1024;
-
                 try {
                     log('Начинаю прошивку...');
                     progressContainer.style.display = 'block';
                     updateProgress(0);
                     flashBtn.disabled = true;
-
-                    // Чтение файла в ArrayBuffer
                     const fileData = await file.arrayBuffer();
                     const uint8Data = new Uint8Array(fileData);
-
                     log(`Запись ${uint8Data.length} байт по адресу 0x${address.toString(16)}...`);
-
-                    // Параметры flash
                     const flashOptions = {
                         flashSize: flashSizeBytes,
                         flashMode: flashMode,
-                        flashFrequency: 40, // 40MHz
+                        flashFrequency: 40,
                         eraseAll: false
                     };
-
-                    // Выполнение записи
                     await esptool.writeFlash({
                         fileArray: [{
                             data: uint8Data,
@@ -642,7 +595,6 @@
                             }
                         }
                     });
-
                     log('Прошивка успешно завершена!');
                     updateProgress(1);
                     alert('Прошивка успешно установлена!');
@@ -654,18 +606,15 @@
                 }
             });
 
-            // Обработка закрытия страницы
             window.addEventListener('beforeunload', async () => {
                 if (device) {
                     try {
                         await device.close();
                     } catch (e) {
-                        // ignore
                     }
                 }
             });
 
-            // Первоначальное сообщение
             log('Добро пожаловать! Подключите устройство и выберите файл прошивки.');
         })();
     </script>
