@@ -121,50 +121,62 @@
         }
 
         .banner-left h1 {
-            font-size: 3.2rem;
+            font-size: 4rem;
             font-weight: 700;
             color: #ffffff;
             line-height: 1.2;
         }
 
         .banner-left p {
-            font-size: 1.5rem;
+            font-size: 2rem;
             color: #ffffff;
             margin-top: 5px;
         }
 
-        .install-btn {
+        .install-btn, .github-btn {
             pointer-events: auto;
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: #000000;
-            color: #ffffff;
             border: none;
-            padding: 10px 20px;
+            padding: 14px 28px;
             border-radius: 4px;
-            font-size: 1.1rem;
+            font-size: 1.3rem;
             font-weight: 600;
             cursor: pointer;
             text-decoration: none;
-            transition: background 0.2s;
+            transition: background 0.2s, color 0.2s;
             margin-top: 15px;
         }
 
+        .install-btn {
+            background: #000000;
+            color: #ffffff;
+        }
         .install-btn:hover {
             background: #333333;
         }
 
+        .github-btn {
+            background: transparent;
+            border: 2px solid #000000;
+            color: #000000;
+        }
+        .github-btn:hover {
+            background: #000000;
+            color: #ffffff;
+        }
+
         .banner-right {
             position: absolute;
-            top: -30px;
+            top: -70px;
             left: 55%;
             z-index: 2;
             pointer-events: none;
         }
 
         .banner-right img {
-            max-width: 580px;
+            max-width: 480px;
             height: auto;
             filter: grayscale(1);
         }
@@ -203,7 +215,7 @@
             .banner-right img {
                 max-width: 250px;
             }
-            .install-btn {
+            .install-btn, .github-btn {
                 padding: 8px 16px;
                 font-size: 0.9rem;
             }
@@ -229,6 +241,7 @@
             <h1>Flock3+</h1>
             <p>Multimedia player</p>
             <a href="#" class="install-btn"><i class="fas fa-download"></i> Install</a>
+            <a href="#" class="github-btn"><i class="fab fa-github"></i> GitHub</a>
         </div>
         <div class="banner-right">
             <img src="T5-4.7.png" alt="T5-4.7">
