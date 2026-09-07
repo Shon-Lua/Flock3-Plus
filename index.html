@@ -108,14 +108,13 @@
             position: relative;
             overflow: hidden;
             border-bottom: 2px solid #cccccc;
-            display: flex;
-            align-items: center;
         }
 
         .banner-left {
-            position: relative;
+            position: absolute;
+            top: 20px;
+            left: 20px;
             z-index: 2;
-            padding-left: 20px;
             pointer-events: none;
         }
 
@@ -164,76 +163,6 @@
 
         .section h2 i {
             color: var(--accent);
-        }
-
-        .form-group {
-            margin-bottom: 18px;
-        }
-
-        label {
-            display: block;
-            font-weight: 500;
-            margin-bottom: 6px;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        label i {
-            width: 18px;
-            text-align: center;
-            color: var(--accent);
-        }
-
-        input[type="file"],
-        select,
-        input[type="text"],
-        input[type="number"] {
-            width: 100%;
-            padding: 10px 12px;
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            font-size: 0.95rem;
-            background: #ffffff;
-            transition: border-color 0.2s;
-        }
-
-        input:focus,
-        select:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 0 2px rgba(0,0,0,0.1);
-        }
-
-        .flash-options {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-
-        @media (max-width: 600px) {
-            .flash-options {
-                grid-template-columns: 1fr;
-            }
-            .topbar {
-                flex-direction: column;
-                height: auto;
-                padding: 10px;
-            }
-            .topbar nav {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            .banner {
-                height: 140px;
-            }
-            .banner-left h1 {
-                font-size: 2rem;
-            }
-            .banner-left p {
-                font-size: 0.9rem;
-            }
         }
 
         .btn {
@@ -364,6 +293,27 @@
             margin-top: 2px;
             color: #000000;
         }
+
+        @media (max-width: 600px) {
+            .topbar {
+                flex-direction: column;
+                height: auto;
+                padding: 10px;
+            }
+            .topbar nav {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .banner {
+                height: 140px;
+            }
+            .banner-left h1 {
+                font-size: 2rem;
+            }
+            .banner-left p {
+                font-size: 0.9rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -372,8 +322,8 @@
             <img src="Flock3.png" alt="Flock3+">
         </a>
         <nav>
-            <a href="#"><i class="fas fa-home"></i> Home</a>
-            <a href="#" class="active"><i class="fas fa-download"></i> Install</a>
+            <a href="#" class="active"><i class="fas fa-home"></i> Home</a>
+            <a href="#"><i class="fas fa-download"></i> Install</a>
             <a href="#"><i class="fas fa-book"></i> Docs</a>
             <a href="#"><i class="fab fa-github"></i> Github</a>
             <a href="#"><i class="fas fa-info-circle"></i> About</a>
@@ -406,48 +356,6 @@
         </div>
 
         <div class="section">
-            <h2><i class="fas fa-file-upload"></i> Firmware File Selection</h2>
-            <div class="form-group">
-                <label for="firmwareFile"><i class="fas fa-file"></i> Firmware file (.bin)</label>
-                <input type="file" id="firmwareFile" accept=".bin" />
-            </div>
-            <div class="flash-options">
-                <div class="form-group">
-                    <label for="flashAddress"><i class="fas fa-map-pin"></i> Flash address</label>
-                    <input type="text" id="flashAddress" value="0x0" placeholder="0x0" />
-                </div>
-                <div class="form-group">
-                    <label for="baudRate"><i class="fas fa-tachometer-alt"></i> Baud rate</label>
-                    <select id="baudRate">
-                        <option value="115200">115200</option>
-                        <option value="230400">230400</option>
-                        <option value="460800" selected>460800</option>
-                        <option value="921600">921600</option>
-                        <option value="1500000">1500000</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="flashSize"><i class="fas fa-memory"></i> Flash size</label>
-                    <select id="flashSize">
-                        <option value="4MB" selected>4MB</option>
-                        <option value="8MB">8MB</option>
-                        <option value="16MB">16MB</option>
-                        <option value="32MB">32MB</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="flashMode"><i class="fas fa-cog"></i> Flash mode</label>
-                    <select id="flashMode">
-                        <option value="dio" selected>DIO</option>
-                        <option value="qio">QIO</option>
-                        <option value="dout">DOUT</option>
-                        <option value="qout">QOUT</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-
-        <div class="section">
             <h2><i class="fas fa-bolt"></i> Firmware Installation</h2>
             <button id="flashBtn" class="btn btn-success" disabled>
                 <i class="fas fa-bolt"></i> Start Flashing
@@ -475,11 +383,6 @@
             const connectBtn = document.getElementById('connectBtn');
             const disconnectBtn = document.getElementById('disconnectBtn');
             const flashBtn = document.getElementById('flashBtn');
-            const firmwareFileInput = document.getElementById('firmwareFile');
-            const flashAddressInput = document.getElementById('flashAddress');
-            const baudRateSelect = document.getElementById('baudRate');
-            const flashSizeSelect = document.getElementById('flashSize');
-            const flashModeSelect = document.getElementById('flashMode');
             const progressContainer = document.getElementById('progressContainer');
             const progressFill = document.getElementById('progressFill');
             const progressText = document.getElementById('progressText');
@@ -555,74 +458,13 @@
                 flashBtn.disabled = true;
             });
 
-            firmwareFileInput.addEventListener('change', () => {
-                if (firmwareFileInput.files.length > 0) {
-                    log('Selected file: ' + firmwareFileInput.files[0].name + ' (' + firmwareFileInput.files[0].size + ' bytes)');
-                }
-            });
-
             flashBtn.addEventListener('click', async () => {
                 if (!isConnected || !esptool) {
                     alert('Please connect the device first!');
                     return;
                 }
-                const file = firmwareFileInput.files[0];
-                if (!file) {
-                    alert('Please select a firmware file!');
-                    return;
-                }
-                const address = parseInt(flashAddressInput.value, 16) || 0;
-                const baudRate = parseInt(baudRateSelect.value, 10);
-                const flashSize = flashSizeSelect.value;
-                const flashMode = flashModeSelect.value;
-                const flashSizeMap = {
-                    '4MB': 4 * 1024 * 1024,
-                    '8MB': 8 * 1024 * 1024,
-                    '16MB': 16 * 1024 * 1024,
-                    '32MB': 32 * 1024 * 1024
-                };
-                const flashSizeBytes = flashSizeMap[flashSize] || 4 * 1024 * 1024;
-                try {
-                    log('Starting flashing...');
-                    progressContainer.style.display = 'block';
-                    updateProgress(0);
-                    flashBtn.disabled = true;
-                    const fileData = await file.arrayBuffer();
-                    const uint8Data = new Uint8Array(fileData);
-                    log('Writing ' + uint8Data.length + ' bytes at address 0x' + address.toString(16) + '...');
-                    const flashOptions = {
-                        flashSize: flashSizeBytes,
-                        flashMode: flashMode,
-                        flashFrequency: 40,
-                        eraseAll: false
-                    };
-                    await esptool.writeFlash({
-                        fileArray: [{
-                            data: uint8Data,
-                            address: address
-                        }],
-                        flashSize: flashOptions.flashSize,
-                        flashMode: flashOptions.flashMode,
-                        flashFreq: flashOptions.flashFrequency,
-                        eraseAll: flashOptions.eraseAll,
-                        compress: true,
-                        reportProgress: (fileIndex, written, total) => {
-                            const progress = written / total;
-                            updateProgress(progress);
-                            if (written % 4096 === 0 || written === total) {
-                                log('Progress: ' + written + '/' + total + ' bytes (' + Math.round(progress * 100) + '%)');
-                            }
-                        }
-                    });
-                    log('Flashing completed successfully!');
-                    updateProgress(1);
-                    alert('Firmware installed successfully!');
-                } catch (error) {
-                    log('Flashing error: ' + error.message);
-                    alert('Flashing error: ' + error.message);
-                } finally {
-                    flashBtn.disabled = false;
-                }
+                alert('Firmware file not selected. Please select a .bin file first.');
+                log('No firmware file selected.');
             });
 
             window.addEventListener('beforeunload', async () => {
@@ -644,7 +486,7 @@
                 const scene = new THREE.Scene();
                 scene.background = new THREE.Color(0xe0e0e0);
                 const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
-                camera.position.set(0, 2, 8);
+                camera.position.set(0, 2, 10);
                 camera.lookAt(0, 0, 0);
                 const renderer = new THREE.WebGLRenderer({ antialias: true });
                 renderer.setSize(width, height);
@@ -656,7 +498,7 @@
                 const ambientLight = new THREE.AmbientLight(0x404040);
                 scene.add(ambientLight);
 
-                const geometry = new THREE.PlaneGeometry(10, 6, 50, 30);
+                const geometry = new THREE.PlaneGeometry(20, 12, 60, 40);
                 const material = new THREE.MeshStandardMaterial({ color: 0x888888, side: THREE.DoubleSide, flatShading: true });
                 const plane = new THREE.Mesh(geometry, material);
                 plane.rotation.x = -0.5;
