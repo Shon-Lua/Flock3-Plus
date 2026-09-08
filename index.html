@@ -121,20 +121,30 @@
             overflow: hidden;
         }
 
-        .banner-left {
+        .banner-left,
+        .banner-instructions {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            left: 40px;
             z-index: 2;
             pointer-events: none;
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
             background: #ffffff;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            width: 360px;
+            max-width: 90%;
+        }
+
+        .banner-left {
+            left: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .banner-instructions {
+            right: 40px;
         }
 
         .banner-left h1 {
@@ -204,20 +214,6 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
 
-        .banner-instructions {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            right: 40px;
-            z-index: 2;
-            pointer-events: none;
-            background: #ffffff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            width: 320px;
-        }
-
         .banner-instructions h2 {
             font-size: 1.6rem;
             font-weight: 700;
@@ -246,17 +242,40 @@
             z-index: 1;
         }
 
-        @media (max-width: 1024px) {
+        @media (max-width: 1200px) {
+            .banner-left,
             .banner-instructions {
-                width: 280px;
-                right: 20px;
+                width: 300px;
+            }
+            .banner-right img {
+                max-width: 600px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .banner-left,
+            .banner-instructions {
+                width: 260px;
                 padding: 15px;
+            }
+            .banner-left h1 {
+                font-size: 3rem;
+            }
+            .banner-left p {
+                font-size: 1.5rem;
+            }
+            .install-btn, .github-btn {
+                padding: 10px 20px;
+                font-size: 1rem;
             }
             .banner-instructions h2 {
                 font-size: 1.3rem;
             }
+            .banner-instructions ol {
+                font-size: 0.9rem;
+            }
             .banner-right img {
-                max-width: 500px;
+                max-width: 450px;
             }
         }
 
@@ -268,8 +287,9 @@
                 padding: 6px 10px;
                 font-size: 0.85rem;
             }
-            .banner-left {
-                left: 20px;
+            .banner-left,
+            .banner-instructions {
+                width: 220px;
                 padding: 10px;
             }
             .banner-left h1 {
@@ -279,9 +299,15 @@
                 font-size: 1.2rem;
             }
             .install-btn, .github-btn {
-                padding: 10px 20px;
-                font-size: 1rem;
+                padding: 10px 16px;
+                font-size: 0.9rem;
                 margin-top: 10px;
+            }
+            .banner-instructions h2 {
+                font-size: 1.1rem;
+            }
+            .banner-instructions ol {
+                font-size: 0.8rem;
             }
             .banner-right {
                 top: 45%;
@@ -296,9 +322,6 @@
                 padding: 10px 15px;
                 max-width: 300px;
                 margin-top: 15px;
-            }
-            .banner-instructions {
-                display: none;
             }
         }
 
@@ -317,9 +340,10 @@
                 flex-wrap: wrap;
                 justify-content: center;
             }
-            .banner-left {
-                left: 10px;
-                padding: 5px;
+            .banner-left,
+            .banner-instructions {
+                width: 180px;
+                padding: 8px;
             }
             .banner-left h1 {
                 font-size: 2rem;
@@ -333,13 +357,16 @@
                 transform: translate(-50%, -50%);
             }
             .banner-right img {
-                max-width: 220px;
+                max-width: 250px;
             }
             .banner-description {
                 font-size: 0.8rem;
                 padding: 8px 10px;
                 max-width: 200px;
                 margin-top: 10px;
+            }
+            .banner-instructions {
+                display: none;
             }
         }
     </style>
@@ -375,11 +402,11 @@
         <div class="banner-instructions">
             <h2>READ BEFORE INSTALLING</h2>
             <ol>
-                <li>Connect the device via USB to your computer.</li>
-                <li>Hold the BOOT button and press RESET to enter bootloader mode.</li>
-                <li>Select the firmware file (.bin) in the Install section.</li>
-                <li>Click Install and wait for the flashing process to complete.</li>
-                <li>Once done, reset the device to start using the new firmware.</li>
+                <li>Connect the LILYGO T5-4.7-S3 Pro board to USB.</li>
+                <li>Click Connect and select the correct COM port.</li>
+                <li>Click the Install button and wait for the download to finish. (Never disconnect the cable during downloading, otherwise flash memory may be damaged.)</li>
+                <li>During flashing, try to stay on the download page, otherwise transfer speed may decrease.</li>
+                <li>After the download is complete, disconnect the board from USB and enjoy a high-quality MP3 player.</li>
             </ol>
         </div>
         <div id="three-container"></div>
