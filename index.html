@@ -170,11 +170,9 @@
         .github-btn {
             background: #ffffff;
             color: #000000;
-            border: 2px solid #000000;
         }
         .github-btn:hover {
-            background: #000000;
-            color: #ffffff;
+            background: #e0e0e0;
         }
 
         .banner-right {
@@ -184,12 +182,28 @@
             left: 65%;
             z-index: 2;
             pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .banner-right img {
             max-width: 600px;
             height: auto;
             filter: grayscale(1);
+        }
+
+        .banner-description {
+            margin-top: 20px;
+            background: rgba(0,0,0,0.6);
+            color: #ffffff;
+            padding: 15px 20px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            line-height: 1.4;
+            text-align: center;
+            max-width: 500px;
+            pointer-events: auto;
         }
 
         #three-container {
@@ -231,6 +245,11 @@
             .banner-right img {
                 max-width: 300px;
             }
+            .banner-description {
+                font-size: 0.9rem;
+                padding: 10px 15px;
+                max-width: 300px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -265,6 +284,11 @@
             .banner-right img {
                 max-width: 200px;
             }
+            .banner-description {
+                font-size: 0.8rem;
+                padding: 8px 10px;
+                max-width: 200px;
+            }
         }
     </style>
 </head>
@@ -291,6 +315,9 @@
         </div>
         <div class="banner-right">
             <img src="T5-4.7.png" alt="T5-4.7">
+            <div class="banner-description">
+                This is a portable multimedia player that supports downloading tracks over the Internet, playing MP3 and WAV files. An indispensable gadget for audiophiles and DIY electronics enthusiasts.
+            </div>
         </div>
         <div id="three-container"></div>
     </div>
