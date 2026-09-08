@@ -60,6 +60,8 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            cursor: default;
+            pointer-events: none;
         }
 
         .topbar .logo img {
@@ -171,7 +173,7 @@
 
         .banner-right {
             position: absolute;
-            top: 35%;
+            top: 55%;
             transform: translateY(-50%);
             left: 65%;
             z-index: 2;
@@ -182,13 +184,13 @@
         }
 
         .banner-right img {
-            max-width: 600px;
+            max-width: 700px;
             height: auto;
             filter: grayscale(1);
         }
 
         .banner-description {
-            margin-top: 20px;
+            margin-top: 40px;
             background: #ffffff;
             color: #000000;
             padding: 15px 20px;
@@ -234,15 +236,16 @@
             }
             .banner-right {
                 left: 55%;
-                top: 40%;
+                top: 55%;
             }
             .banner-right img {
-                max-width: 300px;
+                max-width: 350px;
             }
             .banner-description {
                 font-size: 0.9rem;
                 padding: 10px 15px;
                 max-width: 300px;
+                margin-top: 30px;
             }
         }
 
@@ -273,25 +276,26 @@
             }
             .banner-right {
                 left: 50%;
-                top: 35%;
+                top: 55%;
             }
             .banner-right img {
-                max-width: 200px;
+                max-width: 220px;
             }
             .banner-description {
                 font-size: 0.8rem;
                 padding: 8px 10px;
                 max-width: 200px;
+                margin-top: 20px;
             }
         }
     </style>
 </head>
 <body>
     <header class="topbar">
-        <a href="#" class="logo">
+        <div class="logo">
             <img src="Flock3.png" alt="Flock3+">
             <span>Flock3</span>
-        </a>
+        </div>
         <nav>
             <a href="#" class="active"><i class="fas fa-home"></i> Home</a>
             <a href="#"><i class="fas fa-download"></i> Install</a>
