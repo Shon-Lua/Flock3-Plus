@@ -204,6 +204,39 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
 
+        .banner-instructions {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 40px;
+            z-index: 2;
+            pointer-events: none;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            width: 320px;
+        }
+
+        .banner-instructions h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #000000;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .banner-instructions ol {
+            padding-left: 20px;
+            font-size: 1rem;
+            color: #000000;
+            line-height: 1.5;
+        }
+
+        .banner-instructions ol li {
+            margin-bottom: 8px;
+        }
+
         #three-container {
             position: absolute;
             top: 0;
@@ -211,6 +244,20 @@
             width: 100%;
             height: 100%;
             z-index: 1;
+        }
+
+        @media (max-width: 1024px) {
+            .banner-instructions {
+                width: 280px;
+                right: 20px;
+                padding: 15px;
+            }
+            .banner-instructions h2 {
+                font-size: 1.3rem;
+            }
+            .banner-right img {
+                max-width: 500px;
+            }
         }
 
         @media (max-width: 768px) {
@@ -242,13 +289,16 @@
                 transform: translate(-50%, -50%);
             }
             .banner-right img {
-                max-width: 400px;
+                max-width: 300px;
             }
             .banner-description {
                 font-size: 0.9rem;
                 padding: 10px 15px;
                 max-width: 300px;
                 margin-top: 15px;
+            }
+            .banner-instructions {
+                display: none;
             }
         }
 
@@ -283,7 +333,7 @@
                 transform: translate(-50%, -50%);
             }
             .banner-right img {
-                max-width: 250px;
+                max-width: 220px;
             }
             .banner-description {
                 font-size: 0.8rem;
@@ -319,8 +369,18 @@
         <div class="banner-right">
             <img src="T5-4.7.png" alt="T5-4.7">
             <div class="banner-description">
-                This is a portable multimedia player that supports downloading tracks over the Internet, playing MP3 and WAV files. An indispensable gadget for audiophiles and DIY electronics enthusiasts.
+                Flock3+ is a portable multimedia player that supports downloading tracks over the Internet, playing MP3 and WAV files. An indispensable gadget for audiophiles and DIY electronics enthusiasts.
             </div>
+        </div>
+        <div class="banner-instructions">
+            <h2>READ BEFORE INSTALLING</h2>
+            <ol>
+                <li>Connect the device via USB to your computer.</li>
+                <li>Hold the BOOT button and press RESET to enter bootloader mode.</li>
+                <li>Select the firmware file (.bin) in the Install section.</li>
+                <li>Click Install and wait for the flashing process to complete.</li>
+                <li>Once done, reset the device to start using the new firmware.</li>
+            </ol>
         </div>
         <div id="three-container"></div>
     </div>
