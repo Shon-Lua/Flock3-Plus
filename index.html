@@ -68,6 +68,12 @@
             filter: grayscale(1);
         }
 
+        .topbar .logo span {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #000000;
+        }
+
         .topbar nav {
             display: flex;
             gap: 10px;
@@ -123,7 +129,7 @@
             display: flex;
             flex-direction: column;
             gap: 5px;
-            background: rgba(0,0,0,0.5);
+            background: #ffffff;
             padding: 20px;
             border-radius: 8px;
         }
@@ -131,16 +137,14 @@
         .banner-left h1 {
             font-size: 4rem;
             font-weight: 700;
-            color: #ffffff;
+            color: #000000;
             line-height: 1.2;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
         }
 
         .banner-left p {
             font-size: 2rem;
-            color: #ffffff;
+            color: #000000;
             margin-top: 5px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
         }
 
         .install-btn, .github-btn {
@@ -155,24 +159,14 @@
             font-weight: 600;
             cursor: pointer;
             text-decoration: none;
-            transition: background 0.2s, color 0.2s;
+            transition: background 0.2s;
             margin-top: 15px;
-        }
-
-        .install-btn {
             background: #000000;
             color: #ffffff;
         }
-        .install-btn:hover {
-            background: #333333;
-        }
 
-        .github-btn {
-            background: #ffffff;
-            color: #000000;
-        }
-        .github-btn:hover {
-            background: #e0e0e0;
+        .install-btn:hover, .github-btn:hover {
+            background: #333333;
         }
 
         .banner-right {
@@ -195,8 +189,8 @@
 
         .banner-description {
             margin-top: 20px;
-            background: rgba(0,0,0,0.6);
-            color: #ffffff;
+            background: #ffffff;
+            color: #000000;
             padding: 15px 20px;
             border-radius: 8px;
             font-size: 1.1rem;
@@ -296,6 +290,7 @@
     <header class="topbar">
         <a href="#" class="logo">
             <img src="Flock3.png" alt="Flock3+">
+            <span>Flock3</span>
         </a>
         <nav>
             <a href="#" class="active"><i class="fas fa-home"></i> Home</a>
