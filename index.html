@@ -121,31 +121,31 @@
             overflow: hidden;
         }
 
+        .banner-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+            padding: 20px;
+            gap: 20px;
+            flex-wrap: nowrap;
+        }
+
         .banner-left,
         .banner-instructions {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 2;
-            pointer-events: none;
             background: #ffffff;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
             width: 360px;
             max-width: 90%;
-            min-height: 400px;
+            flex-shrink: 0;
             display: flex;
             flex-direction: column;
             justify-content: center;
-        }
-
-        .banner-left {
-            left: 40px;
-        }
-
-        .banner-instructions {
-            right: 40px;
+            pointer-events: none;
         }
 
         .banner-left h1 {
@@ -198,33 +198,31 @@
             background: #e0e0e0;
         }
 
-        .banner-right {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 2;
-            pointer-events: none;
+        .banner-center {
             display: flex;
             flex-direction: column;
             align-items: center;
+            flex: 1;
+            min-width: 0;
+            pointer-events: none;
+            text-align: center;
         }
 
-        .banner-right img {
-            max-width: 900px;
+        .banner-center img {
+            max-width: 100%;
             height: auto;
             filter: grayscale(1);
+            max-height: 55vh;
         }
 
         .banner-description {
-            margin-top: 30px;
+            margin-top: 20px;
             background: #ffffff;
             color: #000000;
             padding: 15px 20px;
             border-radius: 8px;
             font-size: 1.1rem;
             line-height: 1.4;
-            text-align: center;
             max-width: 500px;
             pointer-events: auto;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
@@ -262,18 +260,7 @@
             .banner-left,
             .banner-instructions {
                 width: 300px;
-            }
-            .banner-right img {
-                max-width: 600px;
-            }
-        }
-
-        @media (max-width: 992px) {
-            .banner-left,
-            .banner-instructions {
-                width: 260px;
                 padding: 15px;
-                min-height: 350px;
             }
             .banner-left h1 {
                 font-size: 3rem;
@@ -291,8 +278,17 @@
             .banner-instructions ol {
                 font-size: 0.9rem;
             }
-            .banner-right img {
-                max-width: 450px;
+        }
+
+        @media (max-width: 992px) {
+            .banner-instructions {
+                display: none;
+            }
+            .banner-content {
+                justify-content: center;
+            }
+            .banner-left {
+                width: 280px;
             }
         }
 
@@ -304,11 +300,17 @@
                 padding: 6px 10px;
                 font-size: 0.85rem;
             }
-            .banner-left,
-            .banner-instructions {
-                width: 220px;
+            .banner-content {
+                flex-direction: column;
+                justify-content: center;
+                gap: 10px;
+            }
+            .banner-left {
+                width: auto;
+                max-width: 90%;
                 padding: 10px;
-                min-height: 280px;
+                align-items: center;
+                text-align: center;
             }
             .banner-left h1 {
                 font-size: 2.5rem;
@@ -321,20 +323,14 @@
                 font-size: 0.9rem;
                 margin-top: 10px;
             }
-            .banner-instructions h2 {
-                font-size: 1.1rem;
-            }
-            .banner-instructions ol {
-                font-size: 0.8rem;
-            }
-            .banner-right img {
-                max-width: 300px;
+            .banner-center img {
+                max-height: 40vh;
             }
             .banner-description {
                 font-size: 0.9rem;
                 padding: 10px 15px;
-                max-width: 300px;
-                margin-top: 20px;
+                max-width: 90%;
+                margin-top: 10px;
             }
         }
 
@@ -353,29 +349,18 @@
                 flex-wrap: wrap;
                 justify-content: center;
             }
-            .banner-left,
-            .banner-instructions {
-                width: 180px;
-                padding: 8px;
-                min-height: 220px;
-            }
             .banner-left h1 {
                 font-size: 2rem;
             }
             .banner-left p {
                 font-size: 1rem;
             }
-            .banner-right img {
-                max-width: 250px;
+            .banner-center img {
+                max-height: 30vh;
             }
             .banner-description {
                 font-size: 0.8rem;
                 padding: 8px 10px;
-                max-width: 200px;
-                margin-top: 10px;
-            }
-            .banner-instructions {
-                display: none;
             }
         }
     </style>
@@ -396,28 +381,30 @@
     </header>
 
     <div class="banner">
-        <div class="banner-left">
-            <h1>Flock3+</h1>
-            <p>Multimedia player</p>
-            <a href="#" class="install-btn"><i class="fas fa-download"></i> Install</a>
-            <a href="#" class="github-btn"><i class="fab fa-github"></i> GitHub</a>
-            <a href="#" class="about-btn"><i class="fas fa-info-circle"></i> About</a>
-        </div>
-        <div class="banner-right">
-            <img src="T5-4.7.png" alt="T5-4.7">
-            <div class="banner-description">
-                Flock3+ is a portable multimedia player that supports downloading tracks over the Internet, playing MP3 and WAV files. An indispensable gadget for audiophiles and DIY electronics enthusiasts.
+        <div class="banner-content">
+            <div class="banner-left">
+                <h1>Flock3+</h1>
+                <p>Multimedia player</p>
+                <a href="#" class="install-btn"><i class="fas fa-download"></i> Install</a>
+                <a href="#" class="github-btn"><i class="fab fa-github"></i> GitHub</a>
+                <a href="#" class="about-btn"><i class="fas fa-info-circle"></i> About</a>
             </div>
-        </div>
-        <div class="banner-instructions">
-            <h2>READ BEFORE INSTALLING</h2>
-            <ol>
-                <li>Connect the LILYGO T5-4.7-S3 Pro board to USB.</li>
-                <li>Click Connect and select the correct COM port.</li>
-                <li>Click the Install button and wait for the download to finish. (Never disconnect the cable during downloading, otherwise flash memory may be damaged.)</li>
-                <li>During flashing, try to stay on the download page, otherwise transfer speed may decrease.</li>
-                <li>After the download is complete, disconnect the board from USB and enjoy a high-quality MP3 player.</li>
-            </ol>
+            <div class="banner-center">
+                <img src="T5-4.7.png" alt="T5-4.7">
+                <div class="banner-description">
+                    Flock3+ is a portable multimedia player that supports downloading tracks over the Internet, playing MP3 and WAV files. An indispensable gadget for audiophiles and DIY electronics enthusiasts.
+                </div>
+            </div>
+            <div class="banner-instructions">
+                <h2>READ BEFORE INSTALLING</h2>
+                <ol>
+                    <li>Connect the LILYGO T5-4.7-S3 Pro board to USB.</li>
+                    <li>Click Connect and select the correct COM port.</li>
+                    <li>Click the Install button and wait for the download to finish. (Never disconnect the cable during downloading, otherwise flash memory may be damaged.)</li>
+                    <li>During flashing, try to stay on the download page, otherwise transfer speed may decrease.</li>
+                    <li>After the download is complete, disconnect the board from USB and enjoy a high-quality MP3 player.</li>
+                </ol>
+            </div>
         </div>
         <div id="three-container"></div>
     </div>
