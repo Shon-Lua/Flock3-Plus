@@ -115,13 +115,16 @@
 
         .banner-left {
             position: absolute;
-            top: 30px;
-            left: 30px;
+            top: 40px;
+            left: 40px;
             z-index: 2;
             pointer-events: none;
             display: flex;
             flex-direction: column;
             gap: 5px;
+            background: rgba(0,0,0,0.5);
+            padding: 20px;
+            border-radius: 8px;
         }
 
         .banner-left h1 {
@@ -129,12 +132,14 @@
             font-weight: 700;
             color: #ffffff;
             line-height: 1.2;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
         }
 
         .banner-left p {
             font-size: 2rem;
             color: #ffffff;
             margin-top: 5px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
         }
 
         .install-btn, .github-btn {
@@ -173,7 +178,7 @@
 
         .banner-right {
             position: absolute;
-            top: 50%;
+            top: 35%;
             transform: translateY(-50%);
             left: 70%;
             z-index: 2;
@@ -181,7 +186,7 @@
         }
 
         .banner-right img {
-            max-width: 480px;
+            max-width: 600px;
             height: auto;
             filter: grayscale(1);
         }
@@ -206,6 +211,7 @@
             .banner-left {
                 top: 20px;
                 left: 20px;
+                padding: 10px;
             }
             .banner-left h1 {
                 font-size: 2.5rem;
@@ -220,6 +226,7 @@
             }
             .banner-right {
                 left: 60%;
+                top: 40%;
             }
             .banner-right img {
                 max-width: 300px;
@@ -244,12 +251,17 @@
             .banner-left {
                 top: 10px;
                 left: 10px;
+                padding: 5px;
             }
             .banner-left h1 {
                 font-size: 2rem;
             }
             .banner-left p {
                 font-size: 1rem;
+            }
+            .banner-right {
+                left: 50%;
+                top: 35%;
             }
             .banner-right img {
                 max-width: 200px;
@@ -315,10 +327,10 @@
             scene.add(ambientLight);
 
             const geometry = new THREE.PlaneGeometry(80, 48, 150, 100);
-            const material = new THREE.MeshStandardMaterial({
-                color: 0x888888,
-                roughness: 0.3,
-                metalness: 0.7,
+            const material = new THREE.MeshPhongMaterial({
+                color: 0x666666,
+                specular: 0xaaaaaa,
+                shininess: 30,
                 side: THREE.DoubleSide,
                 flatShading: true
             });
@@ -333,7 +345,7 @@
                 for (let i = 0; i < positions.length; i += 3) {
                     const x = positions[i];
                     const y = positions[i + 1];
-                    positions[i + 2] = Math.sin(x * 1.8 + time) * 0.5 + Math.cos(y * 1.4 + time * 0.8) * 0.4;
+                    positions[i + 2] = Math.sin(x * 1.2 + time) * 0.6 + Math.cos(y * 1.5 + time * 0.9) * 0.5 + Math.sin((x + y) * 0.8 + time * 0.5) * 0.3;
                 }
                 geometry.attributes.position.needsUpdate = true;
                 geometry.computeVertexNormals();
