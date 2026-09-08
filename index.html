@@ -123,7 +123,7 @@
 
         .banner-left {
             position: absolute;
-            top: 40%;
+            top: 50%;
             transform: translateY(-50%);
             left: 40px;
             z-index: 2;
@@ -134,6 +134,7 @@
             background: #ffffff;
             padding: 20px;
             border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
 
         .banner-left h1 {
@@ -175,7 +176,7 @@
             position: absolute;
             top: 45%;
             transform: translateY(-50%);
-            left: 60%;
+            left: 65%;
             z-index: 2;
             pointer-events: none;
             display: flex;
@@ -184,13 +185,13 @@
         }
 
         .banner-right img {
-            max-width: 750px;
+            max-width: 800px;
             height: auto;
             filter: grayscale(1);
         }
 
         .banner-description {
-            margin-top: 80px;
+            margin-top: 20px;
             background: #ffffff;
             color: #000000;
             padding: 15px 20px;
@@ -198,8 +199,9 @@
             font-size: 1.1rem;
             line-height: 1.4;
             text-align: center;
-            max-width: 600px;
+            max-width: 500px;
             pointer-events: auto;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
 
         #three-container {
@@ -211,18 +213,6 @@
             z-index: 1;
         }
 
-        @media (max-width: 1200px) {
-            .banner-right {
-                left: 55%;
-            }
-            .banner-right img {
-                max-width: 600px;
-            }
-            .banner-left {
-                left: 20px;
-            }
-        }
-
         @media (max-width: 768px) {
             .topbar {
                 padding: 0 10px;
@@ -232,9 +222,8 @@
                 font-size: 0.85rem;
             }
             .banner-left {
-                left: 10px;
+                left: 20px;
                 padding: 10px;
-                top: 40%;
             }
             .banner-left h1 {
                 font-size: 2.5rem;
@@ -248,8 +237,8 @@
                 margin-top: 10px;
             }
             .banner-right {
-                left: 50%;
-                top: 50%;
+                left: 55%;
+                top: 45%;
             }
             .banner-right img {
                 max-width: 350px;
@@ -258,7 +247,7 @@
                 font-size: 0.9rem;
                 padding: 10px 15px;
                 max-width: 300px;
-                margin-top: 40px;
+                margin-top: 15px;
             }
         }
 
@@ -278,9 +267,8 @@
                 justify-content: center;
             }
             .banner-left {
-                left: 5px;
+                left: 10px;
                 padding: 5px;
-                top: 35%;
             }
             .banner-left h1 {
                 font-size: 2rem;
@@ -290,16 +278,16 @@
             }
             .banner-right {
                 left: 50%;
-                top: 50%;
+                top: 45%;
             }
             .banner-right img {
-                max-width: 200px;
+                max-width: 220px;
             }
             .banner-description {
                 font-size: 0.8rem;
                 padding: 8px 10px;
                 max-width: 200px;
-                margin-top: 20px;
+                margin-top: 10px;
             }
         }
     </style>
