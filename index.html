@@ -25,12 +25,18 @@
             padding: 0;
         }
 
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+
         body {
             font-family: 'Segoe UI', 'Roboto', system-ui, sans-serif;
             background: var(--bg);
             color: var(--text);
             line-height: 1.6;
-            padding: 0;
+            display: flex;
+            flex-direction: column;
             min-height: 100vh;
         }
 
@@ -38,13 +44,12 @@
             background: var(--topbar-bg);
             box-shadow: var(--shadow);
             padding: 0 20px;
-            position: sticky;
-            top: 0;
             z-index: 100;
             display: flex;
             align-items: center;
             justify-content: space-between;
             height: 60px;
+            flex-shrink: 0;
         }
 
         .topbar .logo {
@@ -101,8 +106,8 @@
         }
 
         .banner {
-            width: 100%;
-            height: 400px;
+            flex: 1;
+            min-height: 0;
             background: #e0e0e0;
             position: relative;
             overflow: hidden;
@@ -193,22 +198,26 @@
 
         @media (max-width: 768px) {
             .topbar {
-                flex-direction: column;
-                height: auto;
-                padding: 10px;
+                padding: 0 10px;
             }
-            .topbar nav {
-                flex-wrap: wrap;
-                justify-content: center;
+            .topbar nav a {
+                padding: 6px 10px;
+                font-size: 0.85rem;
             }
-            .banner {
-                height: 250px;
+            .banner-left {
+                top: 20px;
+                left: 20px;
             }
             .banner-left h1 {
-                font-size: 2rem;
+                font-size: 2.5rem;
             }
             .banner-left p {
+                font-size: 1.2rem;
+            }
+            .install-btn, .github-btn {
+                padding: 10px 20px;
                 font-size: 1rem;
+                margin-top: 10px;
             }
             .banner-right {
                 left: 50%;
@@ -216,9 +225,35 @@
             .banner-right img {
                 max-width: 250px;
             }
-            .install-btn, .github-btn {
-                padding: 8px 16px;
-                font-size: 0.9rem;
+        }
+
+        @media (max-width: 480px) {
+            .topbar {
+                height: auto;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 5px;
+                padding: 5px;
+            }
+            .topbar .logo {
+                margin-right: auto;
+            }
+            .topbar nav {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .banner-left {
+                top: 10px;
+                left: 10px;
+            }
+            .banner-left h1 {
+                font-size: 2rem;
+            }
+            .banner-left p {
+                font-size: 1rem;
+            }
+            .banner-right img {
+                max-width: 180px;
             }
         }
     </style>
