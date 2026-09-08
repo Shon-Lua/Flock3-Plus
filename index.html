@@ -134,13 +134,14 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
             width: 360px;
             max-width: 90%;
+            min-height: 340px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .banner-left {
             left: 40px;
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
         }
 
         .banner-instructions {
@@ -160,7 +161,7 @@
             margin-top: 5px;
         }
 
-        .install-btn, .github-btn {
+        .install-btn, .github-btn, .about-btn {
             pointer-events: auto;
             display: inline-flex;
             align-items: center;
@@ -178,8 +179,23 @@
             color: #ffffff;
         }
 
-        .install-btn:hover, .github-btn:hover {
+        .install-btn {
+            background: #000000;
+            color: #ffffff;
+        }
+
+        .install-btn:hover {
             background: #333333;
+        }
+
+        .github-btn, .about-btn {
+            background: #ffffff;
+            color: #000000;
+            border: 2px solid #000000;
+        }
+
+        .github-btn:hover, .about-btn:hover {
+            background: #e0e0e0;
         }
 
         .banner-right {
@@ -257,6 +273,7 @@
             .banner-instructions {
                 width: 260px;
                 padding: 15px;
+                min-height: 300px;
             }
             .banner-left h1 {
                 font-size: 3rem;
@@ -264,7 +281,7 @@
             .banner-left p {
                 font-size: 1.5rem;
             }
-            .install-btn, .github-btn {
+            .install-btn, .github-btn, .about-btn {
                 padding: 10px 20px;
                 font-size: 1rem;
             }
@@ -291,6 +308,7 @@
             .banner-instructions {
                 width: 220px;
                 padding: 10px;
+                min-height: 260px;
             }
             .banner-left h1 {
                 font-size: 2.5rem;
@@ -298,7 +316,7 @@
             .banner-left p {
                 font-size: 1.2rem;
             }
-            .install-btn, .github-btn {
+            .install-btn, .github-btn, .about-btn {
                 padding: 10px 16px;
                 font-size: 0.9rem;
                 margin-top: 10px;
@@ -344,6 +362,7 @@
             .banner-instructions {
                 width: 180px;
                 padding: 8px;
+                min-height: 220px;
             }
             .banner-left h1 {
                 font-size: 2rem;
@@ -392,6 +411,7 @@
             <p>Multimedia player</p>
             <a href="#" class="install-btn"><i class="fas fa-download"></i> Install</a>
             <a href="#" class="github-btn"><i class="fab fa-github"></i> GitHub</a>
+            <a href="#" class="about-btn"><i class="fas fa-info-circle"></i> About</a>
         </div>
         <div class="banner-right">
             <img src="T5-4.7.png" alt="T5-4.7">
