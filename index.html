@@ -40,6 +40,41 @@
             min-height: 100vh;
         }
 
+        /* Preloader */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            transition: opacity 0.3s ease;
+        }
+
+        #preloader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        #preloader img {
+            max-width: 200px;
+            height: auto;
+            filter: grayscale(1);
+        }
+
+        #preloader .loader-text {
+            position: absolute;
+            bottom: 30px;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #000000;
+        }
+
         .topbar {
             background: var(--topbar-bg);
             box-shadow: var(--shadow);
@@ -366,6 +401,12 @@
     </style>
 </head>
 <body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <img src="Flock3.png" alt="Flock3">
+        <div class="loader-text">Flock3</div>
+    </div>
+
     <header class="topbar">
         <div class="logo">
             <img src="Flock3.png" alt="Flock3+">
@@ -412,6 +453,20 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
         (function() {
+            // Preloader hide after window load or after a short delay
+            window.addEventListener('load', function() {
+                setTimeout(function() {
+                    const preloader = document.getElementById('preloader');
+                    if (preloader) {
+                        preloader.classList.add('hidden');
+                        setTimeout(function() {
+                            preloader.style.display = 'none';
+                        }, 300);
+                    }
+                }, 500);
+            });
+
+            // Three.js scene
             const container = document.getElementById('three-container');
             if (!container) return;
             const width = container.clientWidth;
