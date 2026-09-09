@@ -23,26 +23,15 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            user-select: none;
+            /* убрали user-select: none */
+        }
+
+        /* Запрещаем выделение только для изображений */
+        img {
             -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
-        }
-
-        .banner-description,
-        .banner-description *,
-        .banner-instructions,
-        .banner-instructions *,
-        #about-page .docs-content,
-        #about-page .docs-content * {
-            user-select: text;
-            -webkit-user-select: text;
-            -moz-user-select: text;
-            -ms-user-select: text;
-        }
-
-        .banner-instructions {
-            pointer-events: auto;
+            user-select: none;
         }
 
         html, body {
