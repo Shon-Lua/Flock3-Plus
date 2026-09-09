@@ -30,12 +30,19 @@
         }
 
         .banner-description,
+        .banner-description *,
         .banner-instructions,
-        #about-page .docs-content {
+        .banner-instructions *,
+        #about-page .docs-content,
+        #about-page .docs-content * {
             user-select: text;
             -webkit-user-select: text;
             -moz-user-select: text;
             -ms-user-select: text;
+        }
+
+        .banner-instructions {
+            pointer-events: auto;
         }
 
         html, body {
