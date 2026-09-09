@@ -303,63 +303,6 @@
             display: block;
         }
 
-        .docs-content {
-            max-width: 900px;
-            margin: 0 auto;
-            color: #222222;
-        }
-
-        .docs-content h1 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #000;
-            padding-bottom: 10px;
-        }
-
-        .docs-content h2 {
-            font-size: 1.8rem;
-            margin: 25px 0 15px;
-            border-bottom: 1px solid #ccc;
-            padding-bottom: 5px;
-        }
-
-        .docs-content h3 {
-            font-size: 1.4rem;
-            margin: 20px 0 10px;
-        }
-
-        .docs-content p {
-            margin-bottom: 15px;
-            line-height: 1.7;
-        }
-
-        .docs-content ul, .docs-content ol {
-            margin-left: 30px;
-            margin-bottom: 15px;
-        }
-
-        .docs-content li {
-            margin-bottom: 8px;
-        }
-
-        .docs-content table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            background: #f9f9f9;
-        }
-
-        .docs-content th, .docs-content td {
-            border: 1px solid #ddd;
-            padding: 10px;
-            text-align: left;
-        }
-
-        .docs-content th {
-            background: #f0f0f0;
-            font-weight: 600;
-        }
-
         @media (max-width: 1200px) {
             .banner-left,
             .banner-instructions {
@@ -436,12 +379,6 @@
                 max-width: 90%;
                 margin-top: 10px;
             }
-            .docs-content {
-                padding: 15px;
-            }
-            .docs-content h1 {
-                font-size: 2rem;
-            }
         }
 
         @media (max-width: 480px) {
@@ -472,12 +409,6 @@
                 font-size: 0.8rem;
                 padding: 8px 10px;
             }
-            .docs-content h1 {
-                font-size: 1.5rem;
-            }
-            .docs-content h2 {
-                font-size: 1.3rem;
-            }
         }
     </style>
 </head>
@@ -495,7 +426,7 @@
         <nav>
             <a href="#" class="active" data-page="home"><i class="fas fa-home"></i> Home</a>
             <a href="#" data-page="install"><i class="fas fa-download"></i> Install</a>
-            <a href="#" data-page="docs"><i class="fas fa-book"></i> Docs</a>
+            <a href="https://wiki.lilygo.cc/products/t5-series/t5-e-paper-s3-pro/" target="_blank" rel="noopener noreferrer"><i class="fas fa-book"></i> Docs</a>
             <a href="https://github.com/Shon-Lua/Flock3-Plus" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> GitHub</a>
             <a href="#" data-page="about"><i class="fas fa-info-circle"></i> About</a>
         </nav>
@@ -530,57 +461,15 @@
         <div id="three-container"></div>
     </div>
 
-    <div class="page" id="docs-page">
-        <div class="docs-content">
-            <h1>Documentation</h1>
-
-            <h2>Overview</h2>
-            <p>Flock3+ is a multimedia player firmware designed for the LILYGO T5-4.7-S3 Pro board. It provides a simple interface for playing audio files from a microSD card or streaming them over the internet.</p>
-
-            <h2>Board Specifications</h2>
-            <table>
-                <tr><th>Component</th><th>Specification</th></tr>
-                <tr><td>MCU</td><td>ESP32-S3R8 dual-core Xtensa LX7 up to 240 MHz</td></tr>
-                <tr><td>Display</td><td>4.7-inch E-Ink, 600×448, 16 gray levels</td></tr>
-                <tr><td>Wireless</td><td>Wi-Fi 802.11 b/g/n, Bluetooth 5 (LE)</td></tr>
-                <tr><td>LoRa</td><td>SX1262 (optional) 868/915 MHz</td></tr>
-                <tr><td>Flash</td><td>16 MB</td></tr>
-                <tr><td>PSRAM</td><td>8 MB</td></tr>
-                <tr><td>Storage</td><td>microSD card slot</td></tr>
-                <tr><td>Audio</td><td>I2S audio codec (MAX98357A), 3.5 mm headphone jack</td></tr>
-                <tr><td>Battery</td><td>LiPo charger, JST connector</td></tr>
-                <tr><td>USB</td><td>USB-C for power and programming</td></tr>
-                <tr><td>Buttons</td><td>BOOT, RESET, Power</td></tr>
-                <tr><td>Interfaces</td><td>UART, I2C, SPI, GPIO</td></tr>
-                <tr><td>Antenna</td><td>LoRa antenna connector (IPEX)</td></tr>
-            </table>
-
-            <h2>Bluetooth Audio</h2>
-            <p>The firmware includes Bluetooth transmitter support, allowing you to pair wireless speakers or headphones. This feature uses the built-in Bluetooth capabilities of the ESP32-S3 to stream audio to compatible devices.</p>
-
-            <h2>Internet Connectivity</h2>
-            <p>Flock3+ can connect to Wi-Fi networks and download tracks online. You can browse and play music directly from the internet without needing to transfer files manually.</p>
-
-            <h2>Flashing Instructions</h2>
-            <ol>
-                <li>Connect the board to your computer via USB-C.</li>
-                <li>Enter bootloader mode: hold BOOT, press RESET, release BOOT.</li>
-                <li>Open the Install page and follow the on‑screen steps.</li>
-                <li>Select your firmware file (.bin) and wait for completion.</li>
-                <li>Reboot the device after flashing.</li>
-            </ol>
-        </div>
-    </div>
-
     <div class="page" id="install-page">
-        <div class="docs-content">
+        <div>
             <h1>Install Firmware</h1>
             <p>Please use the installer on the main page or click the Install button to begin flashing your device.</p>
         </div>
     </div>
 
     <div class="page" id="about-page">
-        <div class="docs-content">
+        <div>
             <h1>About Flock3+</h1>
             <p>Flock3+ is a multimedia player project based on the LILYGO T5-4.7-S3 Pro board. It aims to provide a simple, low-power device for playing MP3 and WAV files with internet streaming capabilities.</p>
         </div>
@@ -604,7 +493,6 @@
             const navLinks = document.querySelectorAll('.topbar nav a[data-page]');
             const pages = {
                 home: document.getElementById('home-page'),
-                docs: document.getElementById('docs-page'),
                 install: document.getElementById('install-page'),
                 about: document.getElementById('about-page')
             };
