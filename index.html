@@ -23,11 +23,18 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            /* убрали user-select: none */
         }
 
-        /* Запрещаем выделение только для изображений */
         img {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .install-btn, .github-btn, .about-btn,
+        .topbar nav a,
+        .logo {
             -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
