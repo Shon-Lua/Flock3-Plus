@@ -342,6 +342,24 @@
             margin-bottom: 8px;
         }
 
+        .docs-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: #f9f9f9;
+        }
+
+        .docs-content th, .docs-content td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .docs-content th {
+            background: #f0f0f0;
+            font-weight: 600;
+        }
+
         @media (max-width: 1200px) {
             .banner-left,
             .banner-instructions {
@@ -518,6 +536,21 @@
 
             <h2>Overview</h2>
             <p>Flock3+ is a multimedia player firmware designed for the LILYGO T5-4.7-S3 Pro board. It provides a simple interface for playing audio files from a microSD card or streaming them over the internet.</p>
+
+            <h2>Board Specifications</h2>
+            <table>
+                <tr><th>Component</th><th>Specification</th></tr>
+                <tr><td>MCU</td><td>ESP32-S3 dual-core Xtensa LX7 up to 240 MHz</td></tr>
+                <tr><td>Display</td><td>4.7-inch E-Ink, 960×540, 16 gray levels</td></tr>
+                <tr><td>Wireless</td><td>Wi-Fi 802.11 b/g/n, Bluetooth 5 (LE)</td></tr>
+                <tr><td>Flash</td><td>16 MB</td></tr>
+                <tr><td>PSRAM</td><td>8 MB</td></tr>
+                <tr><td>Storage</td><td>microSD card slot</td></tr>
+                <tr><td>Audio</td><td>I2S audio output, 3.5 mm headphone jack</td></tr>
+                <tr><td>Battery</td><td>LiPo charger, JST connector</td></tr>
+                <tr><td>USB</td><td>USB-C for power and programming</td></tr>
+                <tr><td>Buttons</td><td>BOOT, RESET</td></tr>
+            </table>
 
             <h2>Bluetooth Audio</h2>
             <p>The firmware includes Bluetooth transmitter support, allowing you to pair wireless speakers or headphones. This feature uses the built-in Bluetooth capabilities of the ESP32-S3 to stream audio to compatible devices.</p>
