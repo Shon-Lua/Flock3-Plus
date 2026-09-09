@@ -93,8 +93,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            cursor: default;
-            pointer-events: none;
+            cursor: pointer;
         }
 
         .topbar .logo img {
@@ -465,7 +464,7 @@
     </div>
 
     <header class="topbar">
-        <div class="logo">
+        <div class="logo" data-page="home">
             <img src="Flock3.png" alt="Flock3+">
             <span>Flock3</span>
         </div>
@@ -483,9 +482,9 @@
             <div class="banner-left">
                 <h1>Flock3+</h1>
                 <p>Multimedia player</p>
-                <a href="#" class="install-btn"><i class="fas fa-download"></i> Install</a>
+                <a href="#" class="install-btn" data-page="install"><i class="fas fa-download"></i> Install</a>
                 <a href="https://github.com/Shon-Lua/Flock3-Plus" target="_blank" rel="noopener noreferrer" class="github-btn"><i class="fab fa-github"></i> GitHub</a>
-                <a href="#" class="about-btn"><i class="fas fa-info-circle"></i> About</a>
+                <a href="#" class="about-btn" data-page="about"><i class="fas fa-info-circle"></i> About</a>
             </div>
             <div class="banner-center">
                 <img src="T5-4.7.png" alt="T5-4.7">
@@ -518,11 +517,23 @@
         <div class="docs-content">
             <h1>About Flock3+</h1>
             <p>Flock3+ is a versatile multimedia player designed for the LILYGO T5-4.7-S3 Pro board. The firmware provides a rich set of features that turn the board into a full-featured music player.</p>
+
+            <h2>ID3v2 Tag Support</h2>
             <p>The player includes a custom library for extracting ID3v2 tags from MP3 files and displaying them on the e-ink screen. This allows you to see track titles, artist names, album names, and album art (if available) directly on the display.</p>
+
+            <h2>Internet Search and Streaming</h2>
             <p>Flock3+ can search for tracks over the internet, allowing you to find and play music online without needing to store files locally. It supports streaming from various online sources and can download tracks for offline playback.</p>
+
+            <h2>Bluetooth Audio Output</h2>
             <p>Bluetooth audio output is fully supported. You can pair wireless speakers or headphones and enjoy your music without cables. The player acts as a Bluetooth transmitter, streaming audio to any compatible device.</p>
+
+            <h2>Backlight Control</h2>
             <p>The device features adjustable backlight control for the display, so you can set the brightness according to your environment. This is especially useful in low-light conditions or outdoors.</p>
+
+            <h2>Landscape Orientation</h2>
             <p>Flock3+ also supports landscape orientation, giving you the flexibility to use the player in a horizontal layout. This is ideal for album art display and a more traditional media player interface.</p>
+
+            <h2>Customization</h2>
             <p>Customization is a key aspect of the firmware. You can modify the user interface, change color schemes, adjust playback settings, and even add new functionality through configuration files or by editing the source code.</p>
         </div>
     </div>
@@ -542,12 +553,14 @@
                 }, 500);
             });
 
-            const navLinks = document.querySelectorAll('.topbar nav a[data-page]');
             const pages = {
                 home: document.getElementById('home-page'),
                 install: document.getElementById('install-page'),
                 about: document.getElementById('about-page')
             };
+
+            const topbarLinks = document.querySelectorAll('.topbar nav a[data-page]');
+            const allPageElements = document.querySelectorAll('[data-page]');
 
             function showPage(pageId) {
                 for (const key in pages) {
@@ -560,7 +573,7 @@
                     pages[pageId].classList.add('active');
                     pages[pageId].style.display = 'block';
                 }
-                navLinks.forEach(link => {
+                topbarLinks.forEach(link => {
                     link.classList.remove('active');
                     if (link.dataset.page === pageId) {
                         link.classList.add('active');
@@ -568,11 +581,13 @@
                 });
             }
 
-            navLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
+            allPageElements.forEach(el => {
+                el.addEventListener('click', function(e) {
                     e.preventDefault();
                     const pageId = this.dataset.page;
-                    showPage(pageId);
+                    if (pageId && pages[pageId]) {
+                        showPage(pageId);
+                    }
                 });
             });
 
