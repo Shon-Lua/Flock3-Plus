@@ -352,6 +352,19 @@
             margin-bottom: 8px;
         }
 
+        /* Docs iframe page */
+        #docs-page {
+            padding: 0;
+            background: #ffffff;
+        }
+
+        #docs-page iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+
         @media (max-width: 1200px) {
             .banner-left,
             .banner-instructions {
@@ -487,12 +500,13 @@
         <nav>
             <a href="#" class="active" data-page="home"><i class="fas fa-home"></i> Home</a>
             <a href="#" data-page="install"><i class="fas fa-download"></i> Install</a>
-            <a href="https://wiki.lilygo.cc/products/t5-series/t5-e-paper-s3-pro/" target="_blank" rel="noopener noreferrer"><i class="fas fa-book"></i> Docs</a>
+            <a href="#" data-page="docs"><i class="fas fa-book"></i> Docs</a>
             <a href="https://github.com/Shon-Lua/Flock3-Plus" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> GitHub</a>
             <a href="#" data-page="about"><i class="fas fa-info-circle"></i> About</a>
         </nav>
     </header>
 
+    <!-- Home page -->
     <div class="banner" id="home-page">
         <div class="banner-content">
             <div class="banner-left">
@@ -522,6 +536,12 @@
         <div id="three-container"></div>
     </div>
 
+    <!-- Docs page (iframe) -->
+    <div class="page" id="docs-page">
+        <iframe src="https://wiki.lilygo.cc/products/t5-series/t5-e-paper-s3-pro/" title="Documentation"></iframe>
+    </div>
+
+    <!-- Install page -->
     <div class="page" id="install-page">
         <div class="docs-content">
             <h1>Install Firmware</h1>
@@ -529,6 +549,7 @@
         </div>
     </div>
 
+    <!-- About page -->
     <div class="page" id="about-page">
         <div class="docs-content">
             <h1>About Flock3+</h1>
@@ -572,7 +593,8 @@
             const pages = {
                 home: document.getElementById('home-page'),
                 install: document.getElementById('install-page'),
-                about: document.getElementById('about-page')
+                about: document.getElementById('about-page'),
+                docs: document.getElementById('docs-page')
             };
 
             const topbarLinks = document.querySelectorAll('.topbar nav a[data-page]');
