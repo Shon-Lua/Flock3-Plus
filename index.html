@@ -303,6 +303,33 @@
             display: block;
         }
 
+        .page-content {
+            max-width: 900px;
+            margin: 0 auto;
+            color: #222222;
+        }
+
+        .page-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #000;
+            padding-bottom: 10px;
+        }
+
+        .page-content p {
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+
+        .page-content ul {
+            margin-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        .page-content li {
+            margin-bottom: 8px;
+        }
+
         @media (max-width: 1200px) {
             .banner-left,
             .banner-instructions {
@@ -379,6 +406,9 @@
                 max-width: 90%;
                 margin-top: 10px;
             }
+            .page-content h1 {
+                font-size: 2rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -408,6 +438,9 @@
             .banner-description {
                 font-size: 0.8rem;
                 padding: 8px 10px;
+            }
+            .page-content h1 {
+                font-size: 1.5rem;
             }
         }
     </style>
@@ -462,16 +495,26 @@
     </div>
 
     <div class="page" id="install-page">
-        <div>
+        <div class="page-content">
             <h1>Install Firmware</h1>
             <p>Please use the installer on the main page or click the Install button to begin flashing your device.</p>
         </div>
     </div>
 
     <div class="page" id="about-page">
-        <div>
+        <div class="page-content">
             <h1>About Flock3+</h1>
-            <p>Flock3+ is a multimedia player project based on the LILYGO T5-4.7-S3 Pro board. It aims to provide a simple, low-power device for playing MP3 and WAV files with internet streaming capabilities.</p>
+            <p>Flock3+ is a feature-rich multimedia player firmware designed for the LILYGO T5-4.7-S3 Pro board. It transforms the board into a versatile audio device with an e-ink display, offering a unique blend of low power consumption and high functionality.</p>
+            
+            <p>The firmware includes a custom library for reading ID3v2 tags from MP3 files. This allows the player to extract metadata such as song title, artist, album, and cover art, and display them elegantly on the e-ink screen. The interface is optimized for readability and provides all essential track information at a glance.</p>
+            
+            <p>Flock3+ supports online track searching and downloading. With Wi-Fi connectivity, users can search for songs directly from the device, stream them, or save them locally for offline playback. The built-in web interface allows control and content management from a computer or smartphone.</p>
+            
+            <p>Bluetooth audio output is supported, enabling wireless connection to speakers or headphones. The player uses the ESP32-S3's Bluetooth capabilities to deliver high-quality audio streaming without cables.</p>
+            
+            <p>The firmware also provides backlight control for the display, allowing adjustment of brightness and automatic sleep modes to extend battery life. Users can customize the interface color scheme, font sizes, and button mappings to suit their preferences. Album art orientation is fully supported, and the screen automatically rotates between portrait and landscape modes based on the track's embedded cover image.</p>
+            
+            <p>With its modular architecture, Flock3+ is easily customizable. Advanced users can modify the source code to add new features, change the UI, or integrate additional hardware. The project is open‑source and welcomes contributions.</p>
         </div>
     </div>
 
