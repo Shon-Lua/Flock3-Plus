@@ -127,6 +127,7 @@
             align-items: center;
             gap: 6px;
             font-size: 0.95rem;
+            cursor: pointer;
         }
 
         .topbar nav a i {
@@ -290,6 +291,94 @@
             z-index: 1;
         }
 
+        /* Docs Page */
+        .page {
+            flex: 1;
+            min-height: 0;
+            overflow-y: auto;
+            background: #ffffff;
+            padding: 30px;
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .docs-content {
+            max-width: 900px;
+            margin: 0 auto;
+            color: #222222;
+        }
+
+        .docs-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #000;
+            padding-bottom: 10px;
+        }
+
+        .docs-content h2 {
+            font-size: 1.8rem;
+            margin: 25px 0 15px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+
+        .docs-content h3 {
+            font-size: 1.4rem;
+            margin: 20px 0 10px;
+        }
+
+        .docs-content p {
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+
+        .docs-content ul, .docs-content ol {
+            margin-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        .docs-content li {
+            margin-bottom: 8px;
+        }
+
+        .docs-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: #f9f9f9;
+        }
+
+        .docs-content th, .docs-content td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .docs-content th {
+            background: #f0f0f0;
+            font-weight: 600;
+        }
+
+        .docs-content .back-button {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background: #000;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .docs-content .back-button:hover {
+            background: #333;
+        }
+
         @media (max-width: 1200px) {
             .banner-left,
             .banner-instructions {
@@ -366,6 +455,12 @@
                 max-width: 90%;
                 margin-top: 10px;
             }
+            .docs-content {
+                padding: 15px;
+            }
+            .docs-content h1 {
+                font-size: 2rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -396,6 +491,12 @@
                 font-size: 0.8rem;
                 padding: 8px 10px;
             }
+            .docs-content h1 {
+                font-size: 1.5rem;
+            }
+            .docs-content h2 {
+                font-size: 1.3rem;
+            }
         }
     </style>
 </head>
@@ -412,15 +513,16 @@
             <span>Flock3</span>
         </div>
         <nav>
-            <a href="#" class="active"><i class="fas fa-home"></i> Home</a>
-            <a href="#"><i class="fas fa-download"></i> Install</a>
-            <a href="#"><i class="fas fa-book"></i> Docs</a>
+            <a href="#" class="active" data-page="home"><i class="fas fa-home"></i> Home</a>
+            <a href="#" data-page="install"><i class="fas fa-download"></i> Install</a>
+            <a href="#" data-page="docs"><i class="fas fa-book"></i> Docs</a>
             <a href="https://github.com/Shon-Lua/Flock3-Plus" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> GitHub</a>
-            <a href="#"><i class="fas fa-info-circle"></i> About</a>
+            <a href="#" data-page="about"><i class="fas fa-info-circle"></i> About</a>
         </nav>
     </header>
 
-    <div class="banner">
+    <!-- Главная страница -->
+    <div class="banner" id="home-page">
         <div class="banner-content">
             <div class="banner-left">
                 <h1>Flock3+</h1>
@@ -449,6 +551,73 @@
         <div id="three-container"></div>
     </div>
 
+    <!-- Страница документации -->
+    <div class="page" id="docs-page">
+        <div class="docs-content">
+            <button class="back-button" onclick="showPage('home')"><i class="fas fa-arrow-left"></i> Back to Home</button>
+            <h1>Documentation</h1>
+
+            <h2>About the LILYGO T5-4.7-S3 Pro</h2>
+            <p>The LILYGO T5-4.7-S3 Pro is a versatile development board built around the ESP32-S3 microcontroller, featuring a 4.7-inch E-Ink display. It is designed for low-power, high-visibility applications such as e-readers, information displays, and portable multimedia devices.</p>
+
+            <h3>Key Features</h3>
+            <ul>
+                <li><strong>MCU:</strong> ESP32-S3 dual-core Xtensa LX7 processor up to 240 MHz</li>
+                <li><strong>Display:</strong> 4.7-inch E-Ink panel with 16-level grayscale, resolution 960×540</li>
+                <li><strong>Wireless:</strong> Wi-Fi 802.11 b/g/n and Bluetooth 5 (LE)</li>
+                <li><strong>Memory:</strong> 8 MB PSRAM and 16 MB Flash</li>
+                <li><strong>Storage:</strong> microSD card slot for additional storage</li>
+                <li><strong>Audio:</strong> I2S audio codec with headphone amplifier and speaker output</li>
+                <li><strong>Battery:</strong> Onboard LiPo battery charger and connector</li>
+                <li><strong>Interfaces:</strong> USB-C for power and programming, UART, I2C, SPI, GPIOs</li>
+            </ul>
+
+            <h2>Board Layout</h2>
+            <p>The board includes the following connectors and buttons:</p>
+            <table>
+                <tr><th>Component</th><th>Description</th></tr>
+                <tr><td>USB-C port</td><td>For power, programming and serial communication</td></tr>
+                <tr><td>BOOT button</td><td>Hold during reset to enter download mode</td></tr>
+                <tr><td>RESET button</td><td>Resets the microcontroller</td></tr>
+                <tr><td>microSD slot</td><td>For removable storage (up to 32 GB supported)</td></tr>
+                <tr><td>3.5 mm audio jack</td><td>Headphone output</td></tr>
+                <tr><td>Speaker connector</td><td>2-pin header for speaker</td></tr>
+                <tr><td>Battery connector</td><td>JST PH 2.0 for LiPo battery</td></tr>
+            </table>
+
+            <h2>Flashing Firmware</h2>
+            <p>To flash custom firmware onto the board, follow these steps:</p>
+            <ol>
+                <li>Connect the board to your computer via USB-C.</li>
+                <li>Enter bootloader mode: hold the BOOT button, press RESET, release BOOT.</li>
+                <li>Open the Flock3+ Install page in a Web Serial compatible browser (Chrome, Edge).</li>
+                <li>Click "Connect" and select the correct COM port.</li>
+                <li>Choose the firmware file (.bin) and click "Install".</li>
+                <li>Wait for the process to complete. Do not disconnect the cable during flashing.</li>
+            </ol>
+
+            <h2>Additional Resources</h2>
+            <p>For more detailed technical information, refer to the official <a href="https://github.com/Shon-Lua/Flock3-Plus" target="_blank" rel="noopener noreferrer">GitHub repository</a>.</p>
+        </div>
+    </div>
+
+    <!-- Заглушки для Install и About -->
+    <div class="page" id="install-page">
+        <div class="docs-content">
+            <button class="back-button" onclick="showPage('home')"><i class="fas fa-arrow-left"></i> Back to Home</button>
+            <h1>Install Firmware</h1>
+            <p>Please use the installer on the main page or click the Install button to begin flashing your device.</p>
+        </div>
+    </div>
+
+    <div class="page" id="about-page">
+        <div class="docs-content">
+            <button class="back-button" onclick="showPage('home')"><i class="fas fa-arrow-left"></i> Back to Home</button>
+            <h1>About Flock3+</h1>
+            <p>Flock3+ is a multimedia player project based on the LILYGO T5-4.7-S3 Pro board. It aims to provide a simple, low-power device for playing MP3 and WAV files with internet streaming capabilities.</p>
+        </div>
+    </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
         (function() {
@@ -465,7 +634,56 @@
                 }, 500);
             });
 
-            // Three.js scene
+            // Navigation between pages
+            const navLinks = document.querySelectorAll('.topbar nav a[data-page]');
+            const pages = {
+                home: document.getElementById('home-page'),
+                docs: document.getElementById('docs-page'),
+                install: document.getElementById('install-page'),
+                about: document.getElementById('about-page')
+            };
+
+            function showPage(pageId) {
+                // Hide all pages
+                for (const key in pages) {
+                    if (pages[key]) {
+                        pages[key].classList.remove('active');
+                        pages[key].style.display = 'none';
+                    }
+                }
+                // Show selected page
+                if (pages[pageId]) {
+                    pages[pageId].classList.add('active');
+                    pages[pageId].style.display = 'block';
+                    if (pageId === 'home') {
+                        pages[pageId].style.display = 'block'; // ensure banner visible
+                    }
+                }
+
+                // Update active nav link
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.dataset.page === pageId) {
+                        link.classList.add('active');
+                    }
+                });
+
+                // If page is home, restart animation (optional)
+                if (pageId === 'home') {
+                    // Restart three.js if needed (but animation continues)
+                }
+            }
+
+            // Add click listeners to nav links
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const pageId = this.dataset.page;
+                    showPage(pageId);
+                });
+            });
+
+            // Three.js scene (initial)
             const container = document.getElementById('three-container');
             if (!container) return;
             const width = container.clientWidth;
