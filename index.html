@@ -40,7 +40,6 @@
             min-height: 100vh;
         }
 
-        /* Preloader */
         #preloader {
             position: fixed;
             top: 0;
@@ -291,7 +290,6 @@
             z-index: 1;
         }
 
-        /* Docs Page */
         .page {
             flex: 1;
             min-height: 0;
@@ -342,41 +340,6 @@
 
         .docs-content li {
             margin-bottom: 8px;
-        }
-
-        .docs-content table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            background: #f9f9f9;
-        }
-
-        .docs-content th, .docs-content td {
-            border: 1px solid #ddd;
-            padding: 10px;
-            text-align: left;
-        }
-
-        .docs-content th {
-            background: #f0f0f0;
-            font-weight: 600;
-        }
-
-        .docs-content .back-button {
-            display: inline-block;
-            margin-bottom: 20px;
-            padding: 8px 16px;
-            background: #000;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 4px;
-            cursor: pointer;
-            border: none;
-            font-size: 1rem;
-        }
-
-        .docs-content .back-button:hover {
-            background: #333;
         }
 
         @media (max-width: 1200px) {
@@ -501,7 +464,6 @@
     </style>
 </head>
 <body>
-    <!-- Preloader -->
     <div id="preloader">
         <img src="Flock3.png" alt="Flock3">
         <div class="loader-text">Flock3</div>
@@ -521,7 +483,6 @@
         </nav>
     </header>
 
-    <!-- Главная страница -->
     <div class="banner" id="home-page">
         <div class="banner-content">
             <div class="banner-left">
@@ -551,60 +512,32 @@
         <div id="three-container"></div>
     </div>
 
-    <!-- Страница документации -->
     <div class="page" id="docs-page">
         <div class="docs-content">
-            <button class="back-button" onclick="showPage('home')"><i class="fas fa-arrow-left"></i> Back to Home</button>
             <h1>Documentation</h1>
 
-            <h2>About the LILYGO T5-4.7-S3 Pro</h2>
-            <p>The LILYGO T5-4.7-S3 Pro is a versatile development board built around the ESP32-S3 microcontroller, featuring a 4.7-inch E-Ink display. It is designed for low-power, high-visibility applications such as e-readers, information displays, and portable multimedia devices.</p>
+            <h2>Overview</h2>
+            <p>Flock3+ is a multimedia player firmware designed for the LILYGO T5-4.7-S3 Pro board. It provides a simple interface for playing audio files from a microSD card or streaming them over the internet.</p>
 
-            <h3>Key Features</h3>
-            <ul>
-                <li><strong>MCU:</strong> ESP32-S3 dual-core Xtensa LX7 processor up to 240 MHz</li>
-                <li><strong>Display:</strong> 4.7-inch E-Ink panel with 16-level grayscale, resolution 960×540</li>
-                <li><strong>Wireless:</strong> Wi-Fi 802.11 b/g/n and Bluetooth 5 (LE)</li>
-                <li><strong>Memory:</strong> 8 MB PSRAM and 16 MB Flash</li>
-                <li><strong>Storage:</strong> microSD card slot for additional storage</li>
-                <li><strong>Audio:</strong> I2S audio codec with headphone amplifier and speaker output</li>
-                <li><strong>Battery:</strong> Onboard LiPo battery charger and connector</li>
-                <li><strong>Interfaces:</strong> USB-C for power and programming, UART, I2C, SPI, GPIOs</li>
-            </ul>
+            <h2>Bluetooth Audio</h2>
+            <p>The firmware includes Bluetooth transmitter support, allowing you to pair wireless speakers or headphones. This feature uses the built-in Bluetooth capabilities of the ESP32-S3 to stream audio to compatible devices.</p>
 
-            <h2>Board Layout</h2>
-            <p>The board includes the following connectors and buttons:</p>
-            <table>
-                <tr><th>Component</th><th>Description</th></tr>
-                <tr><td>USB-C port</td><td>For power, programming and serial communication</td></tr>
-                <tr><td>BOOT button</td><td>Hold during reset to enter download mode</td></tr>
-                <tr><td>RESET button</td><td>Resets the microcontroller</td></tr>
-                <tr><td>microSD slot</td><td>For removable storage (up to 32 GB supported)</td></tr>
-                <tr><td>3.5 mm audio jack</td><td>Headphone output</td></tr>
-                <tr><td>Speaker connector</td><td>2-pin header for speaker</td></tr>
-                <tr><td>Battery connector</td><td>JST PH 2.0 for LiPo battery</td></tr>
-            </table>
+            <h2>Internet Connectivity</h2>
+            <p>Flock3+ can connect to Wi-Fi networks and download tracks online. You can browse and play music directly from the internet without needing to transfer files manually.</p>
 
-            <h2>Flashing Firmware</h2>
-            <p>To flash custom firmware onto the board, follow these steps:</p>
+            <h2>Flashing Instructions</h2>
             <ol>
                 <li>Connect the board to your computer via USB-C.</li>
-                <li>Enter bootloader mode: hold the BOOT button, press RESET, release BOOT.</li>
-                <li>Open the Flock3+ Install page in a Web Serial compatible browser (Chrome, Edge).</li>
-                <li>Click "Connect" and select the correct COM port.</li>
-                <li>Choose the firmware file (.bin) and click "Install".</li>
-                <li>Wait for the process to complete. Do not disconnect the cable during flashing.</li>
+                <li>Enter bootloader mode: hold BOOT, press RESET, release BOOT.</li>
+                <li>Open the Install page and follow the on‑screen steps.</li>
+                <li>Select your firmware file (.bin) and wait for completion.</li>
+                <li>Reboot the device after flashing.</li>
             </ol>
-
-            <h2>Additional Resources</h2>
-            <p>For more detailed technical information, refer to the official <a href="https://github.com/Shon-Lua/Flock3-Plus" target="_blank" rel="noopener noreferrer">GitHub repository</a>.</p>
         </div>
     </div>
 
-    <!-- Заглушки для Install и About -->
     <div class="page" id="install-page">
         <div class="docs-content">
-            <button class="back-button" onclick="showPage('home')"><i class="fas fa-arrow-left"></i> Back to Home</button>
             <h1>Install Firmware</h1>
             <p>Please use the installer on the main page or click the Install button to begin flashing your device.</p>
         </div>
@@ -612,7 +545,6 @@
 
     <div class="page" id="about-page">
         <div class="docs-content">
-            <button class="back-button" onclick="showPage('home')"><i class="fas fa-arrow-left"></i> Back to Home</button>
             <h1>About Flock3+</h1>
             <p>Flock3+ is a multimedia player project based on the LILYGO T5-4.7-S3 Pro board. It aims to provide a simple, low-power device for playing MP3 and WAV files with internet streaming capabilities.</p>
         </div>
@@ -621,7 +553,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
         (function() {
-            // Preloader hide after window load or after a short delay
             window.addEventListener('load', function() {
                 setTimeout(function() {
                     const preloader = document.getElementById('preloader');
@@ -634,7 +565,6 @@
                 }, 500);
             });
 
-            // Navigation between pages
             const navLinks = document.querySelectorAll('.topbar nav a[data-page]');
             const pages = {
                 home: document.getElementById('home-page'),
@@ -644,37 +574,24 @@
             };
 
             function showPage(pageId) {
-                // Hide all pages
                 for (const key in pages) {
                     if (pages[key]) {
                         pages[key].classList.remove('active');
                         pages[key].style.display = 'none';
                     }
                 }
-                // Show selected page
                 if (pages[pageId]) {
                     pages[pageId].classList.add('active');
                     pages[pageId].style.display = 'block';
-                    if (pageId === 'home') {
-                        pages[pageId].style.display = 'block'; // ensure banner visible
-                    }
                 }
-
-                // Update active nav link
                 navLinks.forEach(link => {
                     link.classList.remove('active');
                     if (link.dataset.page === pageId) {
                         link.classList.add('active');
                     }
                 });
-
-                // If page is home, restart animation (optional)
-                if (pageId === 'home') {
-                    // Restart three.js if needed (but animation continues)
-                }
             }
 
-            // Add click listeners to nav links
             navLinks.forEach(link => {
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
@@ -683,7 +600,6 @@
                 });
             });
 
-            // Three.js scene (initial)
             const container = document.getElementById('three-container');
             if (!container) return;
             const width = container.clientWidth;
