@@ -159,24 +159,16 @@
             cursor: pointer;
             white-space: nowrap;
             flex-shrink: 0;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .topbar nav a i {
             font-size: 1rem;
         }
 
-        .topbar nav a:hover {
-            background: #e0e0e0;
-            color: var(--accent);
-        }
-
         .topbar nav a.active {
             background: var(--accent);
             color: #ffffff;
-        }
-
-        .topbar nav a.active:hover {
-            background: var(--accent-hover);
         }
 
         .banner {
@@ -244,6 +236,7 @@
             margin-top: 12px;
             background: #000000;
             color: #ffffff;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .install-btn {
@@ -251,18 +244,10 @@
             color: #ffffff;
         }
 
-        .install-btn:hover {
-            background: #333333;
-        }
-
         .github-btn, .about-btn {
             background: #ffffff;
             color: #000000;
             border: 2px solid #000000;
-        }
-
-        .github-btn:hover, .about-btn:hover {
-            background: #e0e0e0;
         }
 
         .banner-center {
@@ -427,15 +412,14 @@
             gap: 8px;
             text-decoration: none;
             min-height: 44px;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .btn-primary {
             background: #000000;
             color: #ffffff;
         }
-        .btn-primary:hover {
-            background: #333333;
-        }
+
         .btn-primary:disabled {
             background: #999999;
             cursor: not-allowed;
@@ -445,9 +429,6 @@
             background: #ffffff;
             color: #000000;
             border: 2px solid #000000;
-        }
-        .btn-outline:hover {
-            background: #e0e0e0;
         }
 
         .status-indicator {
@@ -500,6 +481,28 @@
 
         .mobile-instructions ol li {
             margin-bottom: 8px;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .topbar nav a:hover {
+                background: #e0e0e0;
+                color: var(--accent);
+            }
+            .topbar nav a.active:hover {
+                background: var(--accent-hover);
+            }
+            .install-btn:hover {
+                background: #333333;
+            }
+            .github-btn:hover, .about-btn:hover {
+                background: #e0e0e0;
+            }
+            .btn-primary:hover:not(:disabled) {
+                background: #333333;
+            }
+            .btn-outline:hover {
+                background: #e0e0e0;
+            }
         }
 
         @media (max-width: 1200px) {
@@ -905,19 +908,51 @@
             let camera = null;
             let plane = null;
             let geometry = null;
+            let material = null;
             let animationId = null;
             let isContextLost = false;
-            let isPageVisible = true;
             let lastFrameTime = 0;
+            let contextCheckCounter = 0;
             const isMobile = /Android|iPhone|iPad|iPod|Mobile|Opera Mini|IEMobile/i.test(navigator.userAgent) || window.innerWidth < 768;
             const targetFPS = isMobile ? 30 : 60;
             const frameInterval = 1000 / targetFPS;
+            const segX = isMobile ? 40 : 150;
+            const segY = isMobile ? 25 : 100;
+
+            function disposeThree() {
+                if (animationId) {
+                    cancelAnimationFrame(animationId);
+                    animationId = null;
+                }
+                if (geometry) {
+                    geometry.dispose();
+                    geometry = null;
+                }
+                if (material) {
+                    material.dispose();
+                    material = null;
+                }
+                if (plane && scene) {
+                    scene.remove(plane);
+                    plane = null;
+                }
+                if (renderer) {
+                    renderer.dispose();
+                    if (renderer.domElement && renderer.domElement.parentNode) {
+                        renderer.domElement.parentNode.removeChild(renderer.domElement);
+                    }
+                    renderer = null;
+                }
+                scene = null;
+                camera = null;
+            }
 
             function initThree() {
                 if (!container) return;
+                if (!window.THREE) return;
 
-                const width = container.clientWidth;
-                const height = container.clientHeight;
+                const width = container.clientWidth || 1;
+                const height = container.clientHeight || 1;
 
                 scene = new THREE.Scene();
                 scene.background = new THREE.Color(0xd0d0d0);
@@ -926,12 +961,18 @@
                 camera.position.set(0, 2, 12);
                 camera.lookAt(0, 0, 0);
 
-                renderer = new THREE.WebGLRenderer({
-                    antialias: !isMobile,
-                    powerPreference: 'default',
-                    alpha: false,
-                    preserveDrawingBuffer: false
-                });
+                try {
+                    renderer = new THREE.WebGLRenderer({
+                        antialias: !isMobile,
+                        powerPreference: isMobile ? 'low-power' : 'default',
+                        alpha: false,
+                        preserveDrawingBuffer: false,
+                        failIfMajorPerformanceCaveat: false
+                    });
+                } catch (e) {
+                    console.warn('Renderer init failed', e);
+                    return;
+                }
 
                 const maxPixelRatio = isMobile ? 1 : 2;
                 renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, maxPixelRatio));
@@ -954,7 +995,10 @@
 
                 renderer.domElement.addEventListener('webglcontextrestored', function() {
                     isContextLost = false;
-                    rebuildScene();
+                    disposeThree();
+                    setTimeout(function() {
+                        initThree();
+                    }, 50);
                 }, false);
 
                 const light = new THREE.DirectionalLight(0xffffff, 1.2);
@@ -968,11 +1012,8 @@
                 const ambientLight = new THREE.AmbientLight(0x404040);
                 scene.add(ambientLight);
 
-                const segX = isMobile ? 60 : 150;
-                const segY = isMobile ? 40 : 100;
-
                 geometry = new THREE.PlaneGeometry(80, 48, segX, segY);
-                const material = new THREE.MeshStandardMaterial({
+                material = new THREE.MeshStandardMaterial({
                     color: 0x444444,
                     roughness: 0.2,
                     metalness: 0.85,
@@ -986,24 +1027,34 @@
                 startAnimation();
             }
 
-            function rebuildScene() {
-                if (container) {
-                    container.innerHTML = '';
-                }
-                initThree();
-            }
-
             function startAnimation() {
                 if (animationId) {
                     cancelAnimationFrame(animationId);
+                    animationId = null;
                 }
                 lastFrameTime = performance.now();
                 function animate(now) {
                     animationId = requestAnimationFrame(animate);
+                    if (isContextLost) return;
                     const delta = now - lastFrameTime;
                     if (delta < frameInterval) return;
                     lastFrameTime = now - (delta % frameInterval);
-                    if (isContextLost || !isPageVisible) return;
+                    contextCheckCounter++;
+                    if (contextCheckCounter > 300) {
+                        contextCheckCounter = 0;
+                        if (renderer && renderer.getContext) {
+                            const ctx = renderer.getContext();
+                            if (ctx && ctx.isContextLost && ctx.isContextLost()) {
+                                isContextLost = true;
+                                disposeThree();
+                                setTimeout(function() {
+                                    isContextLost = false;
+                                    initThree();
+                                }, 100);
+                                return;
+                            }
+                        }
+                    }
                     if (!geometry || !plane || !renderer || !scene || !camera) return;
                     const time = Date.now() * 0.001;
                     const positions = geometry.attributes.position.array;
@@ -1032,10 +1083,6 @@
                     renderer.setSize(w, h, false);
                 });
 
-                document.addEventListener('visibilitychange', function() {
-                    isPageVisible = !document.hidden;
-                });
-
                 window.addEventListener('orientationchange', function() {
                     setTimeout(function() {
                         if (!container || !renderer || !camera) return;
@@ -1057,10 +1104,6 @@
             let transport = null;
             let esptool = null;
 
-            function log(message) {
-                console.log(message);
-            }
-
             function updateConnectionStatus(connected) {
                 if (connected) {
                     connectionStatus.innerHTML = '<i class="fas fa-circle"></i> Connected';
@@ -1079,22 +1122,16 @@
                 connectBtn.addEventListener('click', async () => {
                     try {
                         if (!navigator.serial) {
-                            log('Web Serial API is not supported in this browser.');
                             alert('Web Serial API is not supported. Please use Chrome or Edge.');
                             return;
                         }
-                        log('Requesting serial port access...');
                         device = await navigator.serial.requestPort();
                         await device.open({ baudRate: 115200 });
                         transport = new ESPSerialTransport(device);
                         esptool = new ESPTool(transport);
-                        log('Port opened, initializing esptool...');
                         await esptool.initialize();
-                        const chipName = esptool.chipName || 'ESP32';
-                        log('Chip detected: ' + chipName);
                         updateConnectionStatus(true);
                     } catch (error) {
-                        log('Connection error: ' + error.message);
                         updateConnectionStatus(false);
                     }
                 });
@@ -1105,11 +1142,8 @@
                     try {
                         if (device) {
                             await device.close();
-                            log('Port closed');
                         }
-                    } catch (e) {
-                        log('Error closing port: ' + e.message);
-                    }
+                    } catch (e) {}
                     device = null;
                     transport = null;
                     esptool = null;
