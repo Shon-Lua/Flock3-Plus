@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Flock3+</title>
     <link rel="icon" href="Flock3.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -25,12 +25,11 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            -webkit-tap-highlight-color: transparent;
         }
 
         img {
             -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
             user-select: none;
         }
 
@@ -39,24 +38,25 @@
         .logo,
         .btn {
             -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
             user-select: none;
         }
 
         html, body {
             height: 100%;
+            width: 100%;
             overflow: hidden;
+            overscroll-behavior: none;
         }
 
         body {
-            font-family: 'Segoe UI', 'Roboto', system-ui, sans-serif;
+            font-family: 'Segoe UI', 'Roboto', system-ui, -apple-system, sans-serif;
             background: #e0e0e0;
             color: var(--text);
             line-height: 1.6;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            -webkit-text-size-adjust: 100%;
         }
 
         #preloader {
@@ -113,7 +113,7 @@
             align-items: center;
             gap: 8px;
             cursor: pointer;
-            flex-shrink: 0;
+            min-height: 44px;
         }
 
         .topbar .logo img {
@@ -130,14 +130,14 @@
 
         .topbar nav {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             align-items: center;
         }
 
         .topbar nav a {
             color: var(--topbar-text);
             text-decoration: none;
-            padding: 8px 12px;
+            padding: 10px 12px;
             border-radius: 6px;
             font-weight: 500;
             transition: background 0.2s, color 0.2s;
@@ -146,7 +146,7 @@
             gap: 6px;
             font-size: 0.95rem;
             cursor: pointer;
-            white-space: nowrap;
+            min-height: 44px;
         }
 
         .topbar nav a i {
@@ -161,10 +161,6 @@
         .topbar nav a.active {
             background: var(--accent);
             color: #ffffff;
-        }
-
-        .topbar nav a.active:hover {
-            background: var(--accent-hover);
         }
 
         .banner {
@@ -219,6 +215,7 @@
             pointer-events: auto;
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 8px;
             border: none;
             padding: 14px 28px;
@@ -231,7 +228,7 @@
             margin-top: 15px;
             background: #000000;
             color: #ffffff;
-            justify-content: center;
+            min-height: 48px;
         }
 
         .install-btn {
@@ -239,18 +236,10 @@
             color: #ffffff;
         }
 
-        .install-btn:hover {
-            background: #333333;
-        }
-
         .github-btn, .about-btn {
             background: #ffffff;
             color: #000000;
             border: 2px solid #000000;
-        }
-
-        .github-btn:hover, .about-btn:hover {
-            background: #e0e0e0;
         }
 
         .banner-center {
@@ -315,6 +304,7 @@
             flex: 1;
             min-height: 0;
             overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
             background: #ffffff;
             padding: 30px;
             display: none;
@@ -379,6 +369,13 @@
             margin: 0 auto;
         }
 
+        .install-container h1 {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #000;
+            padding-bottom: 10px;
+        }
+
         .install-section {
             background: #fafafa;
             border: 1px solid #e0e0e0;
@@ -411,8 +408,8 @@
         .form-group label {
             display: block;
             font-weight: 500;
-            margin-bottom: 6px;
-            font-size: 0.9rem;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
             display: flex;
             align-items: center;
             gap: 6px;
@@ -428,12 +425,14 @@
         select,
         input[type="text"] {
             width: 100%;
-            padding: 10px 12px;
+            padding: 12px 14px;
             border: 1px solid var(--border);
             border-radius: 4px;
-            font-size: 0.95rem;
+            font-size: 1rem;
             background: #ffffff;
             transition: border-color 0.2s;
+            min-height: 48px;
+            font-family: inherit;
         }
 
         input[type="file"]:focus,
@@ -454,7 +453,7 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 12px 24px;
+            padding: 14px 24px;
             border: none;
             border-radius: 4px;
             font-size: 1rem;
@@ -463,6 +462,7 @@
             transition: all 0.2s;
             gap: 8px;
             text-decoration: none;
+            min-height: 48px;
         }
 
         .btn-primary {
@@ -481,9 +481,6 @@
             background: #ffffff;
             color: #000000;
             border: 2px solid #000000;
-        }
-        .btn-outline:hover {
-            background: #e0e0e0;
         }
 
         .progress-container {
@@ -531,6 +528,7 @@
             white-space: pre-wrap;
             margin-top: 15px;
             display: none;
+            word-break: break-all;
         }
 
         .log.visible {
@@ -542,7 +540,6 @@
             align-items: center;
             gap: 6px;
             font-weight: 500;
-            margin-left: 10px;
             font-size: 0.9rem;
         }
 
@@ -565,17 +562,19 @@
             font-size: 0.85rem;
             background: #f0f0f0;
             border-left: 4px solid #000000;
-            padding: 10px 15px;
+            padding: 12px 15px;
             border-radius: 4px;
             margin-top: 15px;
             display: flex;
             align-items: flex-start;
             gap: 8px;
+            line-height: 1.5;
         }
 
         .note i {
-            margin-top: 2px;
+            margin-top: 3px;
             color: #000000;
+            flex-shrink: 0;
         }
 
         @media (max-width: 1200px) {
@@ -591,8 +590,8 @@
                 font-size: 1.5rem;
             }
             .install-btn, .github-btn, .about-btn {
-                padding: 10px 20px;
-                font-size: 1rem;
+                padding: 12px 20px;
+                font-size: 1.1rem;
             }
             .banner-instructions h2 {
                 font-size: 1.3rem;
@@ -615,251 +614,191 @@
         }
 
         @media (max-width: 768px) {
-            html, body {
-                overflow: auto;
-                height: auto;
-            }
-
-            body {
-                min-height: 100vh;
-            }
-
             .topbar {
-                padding: 10px 12px;
+                padding: 0 12px;
                 height: auto;
+                min-height: 60px;
                 flex-wrap: wrap;
-                justify-content: center;
                 gap: 8px;
+                padding-top: 8px;
+                padding-bottom: 8px;
             }
-
-            .topbar .logo img {
-                height: 32px;
+            .topbar .logo {
+                margin-right: auto;
             }
-
-            .topbar .logo span {
-                font-size: 1rem;
-            }
-
             .topbar nav {
                 flex-wrap: wrap;
                 justify-content: center;
                 gap: 4px;
                 width: 100%;
             }
-
             .topbar nav a {
-                padding: 6px 10px;
-                font-size: 0.8rem;
-                gap: 4px;
-            }
-
-            .topbar nav a i {
+                padding: 8px 10px;
                 font-size: 0.85rem;
+                min-height: 40px;
             }
-
-            .banner {
-                flex: none;
-                height: auto;
-                min-height: calc(100vh - 120px);
-                overflow: visible;
+            .topbar nav a i {
+                font-size: 0.9rem;
             }
-
             .banner-content {
                 flex-direction: column;
-                justify-content: flex-start;
-                height: auto;
-                padding: 16px;
-                gap: 16px;
-                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+                padding: 15px;
+                overflow-y: auto;
             }
-
             .banner-left {
                 width: 100%;
                 max-width: 100%;
-                padding: 16px;
+                padding: 15px;
                 align-items: center;
                 text-align: center;
-                order: 2;
             }
-
             .banner-left h1 {
                 font-size: 2.5rem;
             }
-
             .banner-left p {
-                font-size: 1.2rem;
+                font-size: 1.3rem;
             }
-
             .install-btn, .github-btn, .about-btn {
-                padding: 10px 20px;
+                padding: 12px 20px;
                 font-size: 1rem;
                 margin-top: 10px;
                 width: 100%;
+                max-width: 320px;
             }
-
             .banner-center {
-                order: 1;
                 width: 100%;
             }
-
             .banner-center img {
-                max-height: 30vh;
+                max-height: 35vh;
             }
-
             .banner-description {
-                font-size: 0.9rem;
+                font-size: 0.95rem;
                 padding: 12px 15px;
                 max-width: 100%;
-                margin-top: 12px;
+                margin-top: 15px;
             }
-
-            .banner-instructions {
-                display: flex;
-                order: 3;
-                width: 100%;
-                max-width: 100%;
-                padding: 16px;
-                pointer-events: auto;
+            .docs-content {
+                padding: 0;
             }
-
-            .banner-instructions h2 {
-                font-size: 1.2rem;
-            }
-
-            .banner-instructions ol {
-                font-size: 0.85rem;
-                padding-left: 18px;
-            }
-
-            .banner-instructions ol li {
-                margin-bottom: 6px;
-            }
-
-            .page {
-                padding: 20px 15px;
-            }
-
             .docs-content h1 {
                 font-size: 1.8rem;
             }
-
             .docs-content h2 {
                 font-size: 1.4rem;
             }
-
-            .docs-content p, .docs-content li {
-                font-size: 0.95rem;
+            .docs-content ul, .docs-content ol {
+                margin-left: 20px;
             }
-
+            .page {
+                padding: 20px 15px;
+            }
             #install-page {
                 padding: 20px 15px;
             }
-
+            .install-container h1 {
+                font-size: 1.8rem;
+            }
             .install-section {
-                padding: 16px;
+                padding: 15px;
             }
-
-            .install-section h3 {
-                font-size: 1.05rem;
-            }
-
             .flash-options {
                 grid-template-columns: 1fr;
-                gap: 12px;
             }
-
             .install-actions {
                 flex-direction: column;
                 align-items: stretch;
             }
-
             .install-actions .btn {
                 width: 100%;
             }
-
-            .status-indicator {
-                margin-left: 0;
+            .install-actions .status-indicator {
                 justify-content: center;
-                width: 100%;
-            }
-
-            .btn {
-                padding: 10px 18px;
-                font-size: 0.95rem;
+                padding: 8px 0;
             }
         }
 
         @media (max-width: 480px) {
-            #preloader .loader-text {
-                font-size: 2.5rem;
-            }
-
-            #preloader img {
-                max-width: 140px;
-            }
-
             .topbar {
                 padding: 8px;
             }
-
             .topbar .logo img {
-                height: 28px;
+                height: 32px;
             }
-
             .topbar .logo span {
-                font-size: 0.9rem;
+                font-size: 1rem;
             }
-
             .topbar nav a {
-                padding: 5px 8px;
-                font-size: 0.75rem;
+                padding: 6px 8px;
+                font-size: 0.78rem;
+                gap: 4px;
+                min-height: 36px;
             }
-
             .topbar nav a i {
                 font-size: 0.8rem;
             }
-
             .banner-left h1 {
                 font-size: 2rem;
             }
-
             .banner-left p {
-                font-size: 1rem;
+                font-size: 1.1rem;
             }
-
+            .install-btn, .github-btn, .about-btn {
+                font-size: 0.95rem;
+                padding: 10px 16px;
+                min-height: 44px;
+            }
             .banner-center img {
-                max-height: 25vh;
+                max-height: 28vh;
             }
-
             .banner-description {
-                font-size: 0.8rem;
+                font-size: 0.85rem;
                 padding: 10px 12px;
             }
-
-            .banner-instructions h2 {
-                font-size: 1.05rem;
-            }
-
-            .banner-instructions ol {
-                font-size: 0.8rem;
-            }
-
-            .install-btn, .github-btn, .about-btn {
-                padding: 10px 14px;
-                font-size: 0.9rem;
-            }
-
             .docs-content h1 {
                 font-size: 1.5rem;
             }
-
             .docs-content h2 {
                 font-size: 1.2rem;
             }
+            .install-container h1 {
+                font-size: 1.5rem;
+            }
+            .install-section h3 {
+                font-size: 1rem;
+            }
+            .form-group label {
+                font-size: 0.9rem;
+            }
+            input[type="file"],
+            select,
+            input[type="text"] {
+                font-size: 0.95rem;
+                padding: 10px 12px;
+            }
+            .btn {
+                font-size: 0.95rem;
+                padding: 12px 20px;
+            }
+            #preloader .loader-text {
+                font-size: 3rem;
+            }
+            #preloader img {
+                max-width: 160px;
+            }
+        }
 
-            .log {
-                font-size: 0.75rem;
-                padding: 10px;
+        @media (max-width: 360px) {
+            .topbar nav a {
+                padding: 6px 6px;
+                font-size: 0.72rem;
+            }
+            .banner-left h1 {
+                font-size: 1.7rem;
+            }
+            .banner-left p {
+                font-size: 0.95rem;
             }
         }
     </style>
@@ -886,18 +825,18 @@
 
     <div class="banner" id="home-page">
         <div class="banner-content">
-            <div class="banner-center">
-                <img src="T5-4.7.png" alt="T5-4.7">
-                <div class="banner-description">
-                    Flock3+ is a portable multimedia player that supports downloading tracks over the Internet, playing MP3 and WAV files. An indispensable gadget for audiophiles and DIY electronics enthusiasts.
-                </div>
-            </div>
             <div class="banner-left">
                 <h1>Flock3+</h1>
                 <p>Multimedia player</p>
                 <a href="#" class="install-btn" data-page="install"><i class="fas fa-download"></i> Install</a>
                 <a href="https://github.com/Shon-Lua/Flock3-Plus" target="_blank" rel="noopener noreferrer" class="github-btn"><i class="fab fa-github"></i> GitHub</a>
                 <a href="#" class="about-btn" data-page="about"><i class="fas fa-info-circle"></i> About</a>
+            </div>
+            <div class="banner-center">
+                <img src="T5-4.7.png" alt="T5-4.7">
+                <div class="banner-description">
+                    Flock3+ is a portable multimedia player that supports downloading tracks over the Internet, playing MP3 and WAV files. An indispensable gadget for audiophiles and DIY electronics enthusiasts.
+                </div>
             </div>
             <div class="banner-instructions">
                 <h2>READ BEFORE INSTALLING</h2>
@@ -1070,7 +1009,6 @@
                         link.classList.add('active');
                     }
                 });
-                window.scrollTo(0, 0);
             }
 
             allPageElements.forEach(el => {
@@ -1084,7 +1022,7 @@
             });
 
             const container = document.getElementById('three-container');
-            if (container) {
+            if (container && typeof THREE !== 'undefined') {
                 const width = container.clientWidth;
                 const height = container.clientHeight;
                 const scene = new THREE.Scene();
@@ -1096,7 +1034,7 @@
 
                 const renderer = new THREE.WebGLRenderer({ antialias: true });
                 renderer.setSize(width, height);
-                renderer.setPixelRatio(window.devicePixelRatio || 1);
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
                 container.appendChild(renderer.domElement);
 
                 const light = new THREE.DirectionalLight(0xffffff, 1.2);
@@ -1143,6 +1081,16 @@
                     camera.aspect = w / h;
                     camera.updateProjectionMatrix();
                     renderer.setSize(w, h);
+                });
+
+                window.addEventListener('orientationchange', () => {
+                    setTimeout(() => {
+                        const w = container.clientWidth;
+                        const h = container.clientHeight;
+                        camera.aspect = w / h;
+                        camera.updateProjectionMatrix();
+                        renderer.setSize(w, h);
+                    }, 300);
                 });
             }
 
@@ -1261,13 +1209,6 @@
                     const address = parseInt(flashAddressInput.value, 16) || 0;
                     const flashSize = flashSizeSelect.value;
                     const flashMode = flashModeSelect.value;
-                    const flashSizeMap = {
-                        '4MB': 4 * 1024 * 1024,
-                        '8MB': 8 * 1024 * 1024,
-                        '16MB': 16 * 1024 * 1024,
-                        '32MB': 32 * 1024 * 1024
-                    };
-                    const flashSizeBytes = flashSizeMap[flashSize] || 16 * 1024 * 1024;
                     try {
                         log('Starting flashing...');
                         progressContainer.classList.add('visible');
@@ -1281,7 +1222,7 @@
                                 data: uint8Data,
                                 address: address
                             }],
-                            flashSize: flashSizeBytes,
+                            flashSize: flashSize,
                             flashMode: flashMode,
                             flashFreq: '40m',
                             eraseAll: false,
