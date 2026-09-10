@@ -352,13 +352,15 @@
             margin-bottom: 8px;
         }
 
-        /* Docs iframe page */
-        #docs-page {
+        /* Iframe pages */
+        #docs-page,
+        #github-page {
             padding: 0;
             background: #ffffff;
         }
 
-        #docs-page iframe {
+        #docs-page iframe,
+        #github-page iframe {
             width: 100%;
             height: 100%;
             border: none;
@@ -501,7 +503,7 @@
             <a href="#" class="active" data-page="home"><i class="fas fa-home"></i> Home</a>
             <a href="#" data-page="install"><i class="fas fa-download"></i> Install</a>
             <a href="#" data-page="docs"><i class="fas fa-book"></i> Docs</a>
-            <a href="https://github.com/Shon-Lua/Flock3-Plus" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> GitHub</a>
+            <a href="#" data-page="github"><i class="fab fa-github"></i> GitHub</a>
             <a href="#" data-page="about"><i class="fas fa-info-circle"></i> About</a>
         </nav>
     </header>
@@ -513,7 +515,7 @@
                 <h1>Flock3+</h1>
                 <p>Multimedia player</p>
                 <a href="#" class="install-btn" data-page="install"><i class="fas fa-download"></i> Install</a>
-                <a href="https://github.com/Shon-Lua/Flock3-Plus" target="_blank" rel="noopener noreferrer" class="github-btn"><i class="fab fa-github"></i> GitHub</a>
+                <a href="#" class="github-btn" data-page="github"><i class="fab fa-github"></i> GitHub</a>
                 <a href="#" class="about-btn" data-page="about"><i class="fas fa-info-circle"></i> About</a>
             </div>
             <div class="banner-center">
@@ -539,6 +541,11 @@
     <!-- Docs page (iframe) -->
     <div class="page" id="docs-page">
         <iframe src="https://wiki.lilygo.cc/products/t5-series/t5-e-paper-s3-pro/" title="Documentation"></iframe>
+    </div>
+
+    <!-- GitHub page (iframe) -->
+    <div class="page" id="github-page">
+        <iframe src="https://github.com/Shon-Lua/Flock3-Plus" title="GitHub Repository"></iframe>
     </div>
 
     <!-- Install page -->
@@ -594,7 +601,8 @@
                 home: document.getElementById('home-page'),
                 install: document.getElementById('install-page'),
                 about: document.getElementById('about-page'),
-                docs: document.getElementById('docs-page')
+                docs: document.getElementById('docs-page'),
+                github: document.getElementById('github-page')
             };
 
             const topbarLinks = document.querySelectorAll('.topbar nav a[data-page]');
