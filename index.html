@@ -369,18 +369,6 @@
             margin-bottom: 8px;
         }
 
-        #docs-page {
-            padding: 0;
-            background: #ffffff;
-        }
-
-        #docs-page iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            display: block;
-        }
-
         #install-page {
             padding: 30px 20px;
         }
@@ -676,7 +664,7 @@
                 height: 32px;
             }
             .topbar .logo span {
-                font-size: 1rem;
+                display: none;
             }
             .topbar nav {
                 width: 100%;
@@ -693,9 +681,9 @@
             }
             .banner-content {
                 flex-direction: column;
-                justify-content: center;
-                padding: 15px;
-                gap: 15px;
+                justify-content: flex-end;
+                padding: 10px 15px 30px;
+                gap: 10px;
             }
             .banner-left {
                 display: none;
@@ -706,17 +694,19 @@
             .banner-center {
                 width: 100%;
                 max-width: 100%;
-                flex: 1;
+                flex: 0 0 auto;
                 justify-content: center;
+                padding-bottom: 10px;
             }
             .banner-center img {
-                max-height: 35vh;
-                max-width: 85%;
+                max-height: 45vh;
+                max-width: 95%;
             }
             .banner-description {
                 font-size: 0.9rem;
                 padding: 12px 15px;
-                margin-top: 15px;
+                margin-top: 20px;
+                margin-bottom: 0;
                 max-width: 100%;
             }
             .docs-content {
@@ -776,9 +766,6 @@
             .topbar .logo img {
                 height: 28px;
             }
-            .topbar .logo span {
-                font-size: 0.9rem;
-            }
             .topbar nav a {
                 padding: 6px 8px;
                 font-size: 0.78rem;
@@ -787,11 +774,13 @@
                 font-size: 0.85rem;
             }
             .banner-center img {
-                max-height: 30vh;
+                max-height: 50vh;
+                max-width: 100%;
             }
             .banner-description {
-                font-size: 0.82rem;
-                padding: 10px 12px;
+                font-size: 0.85rem;
+                padding: 12px 15px;
+                margin-top: 25px;
             }
             .docs-content h1 {
                 font-size: 1.4rem;
@@ -829,7 +818,7 @@
                 gap: 8px;
             }
             .banner-center img {
-                max-height: 45vh;
+                max-height: 55vh;
             }
         }
     </style>
@@ -848,7 +837,6 @@
         <nav>
             <a href="#" class="active" data-page="home"><i class="fas fa-home"></i> Home</a>
             <a href="#" data-page="install"><i class="fas fa-download"></i> Install</a>
-            <a href="#" data-page="docs"><i class="fas fa-book"></i> Docs</a>
             <a href="https://github.com/Shon-Lua/Flock3-Plus" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> GitHub</a>
             <a href="#" data-page="about"><i class="fas fa-info-circle"></i> About</a>
         </nav>
@@ -881,10 +869,6 @@
             </div>
         </div>
         <div id="three-container"></div>
-    </div>
-
-    <div class="page" id="docs-page">
-        <iframe src="https://wiki.lilygo.cc/products/t5-series/t5-e-paper-s3-pro/" title="Documentation"></iframe>
     </div>
 
     <div class="page" id="install-page">
@@ -1016,8 +1000,7 @@
             const pages = {
                 home: document.getElementById('home-page'),
                 install: document.getElementById('install-page'),
-                about: document.getElementById('about-page'),
-                docs: document.getElementById('docs-page')
+                about: document.getElementById('about-page')
             };
 
             const topbarLinks = document.querySelectorAll('.topbar nav a[data-page]');
@@ -1061,8 +1044,10 @@
             let animationId = null;
             let isContextLost = false;
             let isPageVisible = true;
-
+            let lastFrameTime = 0;
             const isMobile = /Android|iPhone|iPad|iPod|Mobile|Opera Mini|IEMobile/i.test(navigator.userAgent) || window.innerWidth < 768;
+            const targetFPS = isMobile ? 30 : 60;
+            const frameInterval = 1000 / targetFPS;
 
             function initThree() {
                 if (!container) return;
@@ -1121,8 +1106,8 @@
                 const ambientLight = new THREE.AmbientLight(0x404040);
                 scene.add(ambientLight);
 
-                const segX = isMobile ? 80 : 150;
-                const segY = isMobile ? 50 : 100;
+                const segX = isMobile ? 60 : 150;
+                const segY = isMobile ? 40 : 100;
 
                 geometry = new THREE.PlaneGeometry(80, 48, segX, segY);
                 const material = new THREE.MeshStandardMaterial({
@@ -1150,14 +1135,15 @@
                 if (animationId) {
                     cancelAnimationFrame(animationId);
                 }
-                function animate() {
-                    if (isContextLost || !isPageVisible) {
-                        animationId = requestAnimationFrame(animate);
-                        return;
-                    }
+                lastFrameTime = performance.now();
+                function animate(now) {
                     animationId = requestAnimationFrame(animate);
+                    const delta = now - lastFrameTime;
+                    if (delta < frameInterval) return;
+                    lastFrameTime = now - (delta % frameInterval);
+                    if (isContextLost || !isPageVisible) return;
+                    if (!geometry || !plane || !renderer || !scene || !camera) return;
                     const time = Date.now() * 0.001;
-                    if (!geometry || !plane) return;
                     const positions = geometry.attributes.position.array;
                     for (let i = 0; i < positions.length; i += 3) {
                         const x = positions[i];
@@ -1168,7 +1154,7 @@
                     geometry.computeVertexNormals();
                     renderer.render(scene, camera);
                 }
-                animate();
+                animationId = requestAnimationFrame(animate);
             }
 
             if (container) {
