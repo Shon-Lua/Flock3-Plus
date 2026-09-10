@@ -373,23 +373,11 @@
 
         #install-page {
             padding: 30px 20px;
-            display: none;
-        }
-
-        #install-page.active {
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
         .install-container {
             max-width: 720px;
-            width: 100%;
             margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
         }
 
         .install-container > h1 {
@@ -397,14 +385,11 @@
             margin-bottom: 10px;
             border-bottom: 2px solid #000;
             padding-bottom: 10px;
-            text-align: center;
-            width: 100%;
         }
 
         .install-container > p {
             margin-bottom: 20px;
             color: #444;
-            text-align: center;
         }
 
         .install-section {
@@ -413,7 +398,6 @@
             border-radius: 8px;
             padding: 20px;
             margin-bottom: 20px;
-            width: 100%;
         }
 
         .install-section h3 {
@@ -429,79 +413,20 @@
             color: #000000;
         }
 
-        .form-group {
-            margin-bottom: 18px;
-        }
-
-        .form-group:last-child {
-            margin-bottom: 0;
-        }
-
-        .form-group label {
-            display: block;
-            font-weight: 500;
-            margin-bottom: 6px;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .form-group label i {
-            width: 18px;
-            text-align: center;
-            color: #000000;
-        }
-
-        input[type="file"],
-        select,
-        input[type="text"] {
-            width: 100%;
-            padding: 12px 12px;
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            font-size: 1rem;
-            background: #ffffff;
-            transition: border-color 0.2s;
-            -webkit-appearance: none;
-            appearance: none;
-        }
-
-        select {
-            background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
-            background-repeat: no-repeat;
-            background-position: right 8px center;
-            padding-right: 36px;
-        }
-
-        input[type="file"]:focus,
-        select:focus,
-        input[type="text"]:focus {
-            outline: none;
-            border-color: #000000;
-            box-shadow: 0 0 0 2px rgba(0,0,0,0.1);
-        }
-
-        .flash-options {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-
         .btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 14px 28px;
+            padding: 12px 24px;
             border: none;
             border-radius: 4px;
-            font-size: 1.05rem;
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
             gap: 8px;
             text-decoration: none;
-            min-height: 48px;
+            min-height: 44px;
         }
 
         .btn-primary {
@@ -525,59 +450,6 @@
             background: #e0e0e0;
         }
 
-        .progress-container {
-            margin-top: 20px;
-            display: none;
-        }
-
-        .progress-container.visible {
-            display: block;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 20px;
-            background: #e9ecef;
-            border-radius: 4px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: #000000;
-            width: 0%;
-            transition: width 0.3s ease;
-            border-radius: 4px;
-        }
-
-        .progress-text {
-            text-align: center;
-            margin-top: 8px;
-            font-weight: 500;
-            font-size: 0.9rem;
-        }
-
-        .log {
-            background: var(--log-bg);
-            color: var(--log-text);
-            border-radius: 4px;
-            padding: 15px;
-            font-family: 'Courier New', monospace;
-            font-size: 0.8rem;
-            max-height: 200px;
-            overflow-y: auto;
-            white-space: pre-wrap;
-            margin-top: 15px;
-            display: none;
-            word-break: break-all;
-            width: 100%;
-        }
-
-        .log.visible {
-            display: block;
-        }
-
         .status-indicator {
             display: inline-flex;
             align-items: center;
@@ -599,55 +471,35 @@
             align-items: center;
             flex-wrap: wrap;
             gap: 10px;
-            justify-content: center;
         }
 
-        .install-instructions-mobile {
+        .mobile-instructions {
             display: none;
-            background: #fafafa;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            padding: 20px;
             margin-top: 20px;
-            width: 100%;
+            background: #ffffff;
+            color: #000000;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
 
-        .install-instructions-mobile h2 {
-            font-size: 1.3rem;
+        .mobile-instructions h2 {
+            font-size: 1.15rem;
             font-weight: 700;
             color: #000000;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             text-align: center;
         }
 
-        .install-instructions-mobile ol {
+        .mobile-instructions ol {
             padding-left: 20px;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             color: #000000;
             line-height: 1.5;
         }
 
-        .install-instructions-mobile ol li {
+        .mobile-instructions ol li {
             margin-bottom: 8px;
-        }
-
-        .note {
-            font-size: 0.85rem;
-            background: #f0f0f0;
-            border-left: 4px solid #000000;
-            padding: 10px 15px;
-            border-radius: 4px;
-            margin-top: 15px;
-            display: flex;
-            align-items: flex-start;
-            gap: 8px;
-            width: 100%;
-        }
-
-        .note i {
-            margin-top: 2px;
-            color: #000000;
-            flex-shrink: 0;
         }
 
         @media (max-width: 1200px) {
@@ -708,7 +560,7 @@
                 min-height: 48px;
             }
             .topbar .logo img {
-                height: 30px;
+                height: 28px;
             }
             .topbar .logo span {
                 display: none;
@@ -722,13 +574,10 @@
             }
             .topbar nav a {
                 padding: 5px 8px;
-                font-size: 0.8rem;
+                font-size: 0.75rem;
             }
             .topbar nav a i {
-                font-size: 0.9rem;
-            }
-            .topbar nav a span {
-                display: none;
+                font-size: 0.85rem;
             }
             .banner-content {
                 flex-direction: column;
@@ -773,28 +622,20 @@
                 font-size: 0.95rem;
             }
             #install-page {
-                padding: 20px 15px;
-            }
-            .install-container {
-                gap: 15px;
+                padding: 20px 12px;
             }
             .install-container > h1 {
                 font-size: 1.5rem;
-                margin-bottom: 0;
             }
             .install-container > p {
                 font-size: 0.9rem;
-                margin-bottom: 0;
             }
             .install-section {
                 padding: 15px;
-                margin-bottom: 0;
+                margin-bottom: 15px;
             }
             .install-section h3 {
                 font-size: 1rem;
-            }
-            .flash-options {
-                grid-template-columns: 1fr;
             }
             .page {
                 padding: 20px 15px;
@@ -810,11 +651,8 @@
                 margin-left: 0;
                 justify-content: center;
             }
-            .install-instructions-mobile {
+            .mobile-instructions {
                 display: block;
-            }
-            .install-section.hide-on-mobile {
-                display: none;
             }
         }
 
@@ -830,14 +668,14 @@
                 min-height: 44px;
             }
             .topbar .logo img {
-                height: 26px;
+                height: 24px;
             }
             .topbar nav a {
-                padding: 4px 6px;
-                font-size: 0.75rem;
+                padding: 5px 6px;
+                font-size: 0.72rem;
             }
             .topbar nav a i {
-                font-size: 0.85rem;
+                font-size: 0.8rem;
             }
             .banner-center img {
                 max-height: 50vh;
@@ -867,20 +705,14 @@
                 font-size: 0.95rem;
             }
             .btn {
-                font-size: 0.95rem;
-                padding: 12px 20px;
+                font-size: 0.9rem;
+                padding: 10px 18px;
             }
-            .log {
-                font-size: 0.72rem;
+            .mobile-instructions h2 {
+                font-size: 1rem;
             }
-            .note {
-                font-size: 0.78rem;
-            }
-            .install-instructions-mobile h2 {
-                font-size: 1.1rem;
-            }
-            .install-instructions-mobile ol {
-                font-size: 0.85rem;
+            .mobile-instructions ol {
+                font-size: 0.8rem;
             }
         }
 
@@ -889,10 +721,10 @@
                 padding: 4px 5px;
             }
             .topbar nav a i {
-                font-size: 0.8rem;
+                font-size: 0.78rem;
             }
             .topbar .logo img {
-                height: 24px;
+                height: 22px;
             }
         }
 
@@ -919,10 +751,10 @@
             <span>Flock3</span>
         </div>
         <nav>
-            <a href="#" class="active" data-page="home"><i class="fas fa-home"></i> <span>Home</span></a>
-            <a href="#" data-page="install"><i class="fas fa-download"></i> <span>Install</span></a>
-            <a href="https://github.com/Shon-Lua/Flock3-Plus" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> <span>GitHub</span></a>
-            <a href="#" data-page="about"><i class="fas fa-info-circle"></i> <span>About</span></a>
+            <a href="#" class="active" data-page="home"><i class="fas fa-home"></i> Home</a>
+            <a href="#" data-page="install"><i class="fas fa-download"></i> Install</a>
+            <a href="https://github.com/Shon-Lua/Flock3-Plus" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> GitHub</a>
+            <a href="#" data-page="about"><i class="fas fa-info-circle"></i> About</a>
         </nav>
     </header>
 
@@ -958,10 +790,10 @@
     <div class="page" id="install-page">
         <div class="install-container">
             <h1>Install Firmware</h1>
+            <p>Click the Connect button below to link your LILYGO T5-4.7-S3 Pro board and start flashing the Flock3+ firmware.</p>
 
             <div class="install-section">
                 <h3><i class="fas fa-plug"></i> Device Connection</h3>
-                <p style="margin-bottom: 15px; font-size: 0.9rem;">Connect the board to your computer via USB. To enter bootloader mode: hold BOOT, press RESET, then release BOOT.</p>
                 <div class="install-actions">
                     <button id="connectBtn" class="btn btn-primary">
                         <i class="fas fa-plug"></i> Connect
@@ -975,7 +807,7 @@
                 </div>
             </div>
 
-            <div class="install-instructions-mobile">
+            <div class="mobile-instructions">
                 <h2>READ BEFORE INSTALLING</h2>
                 <ol>
                     <li>Connect the LILYGO T5-4.7-S3 Pro board to USB.</li>
@@ -984,13 +816,6 @@
                     <li>During flashing, try to stay on the download page, otherwise transfer speed may decrease.</li>
                     <li>After the download is complete, disconnect the board from USB and enjoy a high-quality MP3 player.</li>
                 </ol>
-            </div>
-
-            <div id="log" class="log"></div>
-
-            <div class="note">
-                <i class="fas fa-exclamation-triangle"></i>
-                <span><strong>Important:</strong> Requires a browser with Web Serial support (Chrome, Edge, Opera). The page must be served over HTTPS or on localhost. If the board is not detected, check USB-UART drivers (usually CP2102 or CH340).</span>
             </div>
         </div>
     </div>
@@ -1054,11 +879,7 @@
                 }
                 if (pages[pageId]) {
                     pages[pageId].classList.add('active');
-                    if (pageId === 'home') {
-                        pages[pageId].style.display = 'block';
-                    } else {
-                        pages[pageId].style.display = 'block';
-                    }
+                    pages[pageId].style.display = 'block';
                 }
                 topbarLinks.forEach(link => {
                     link.classList.remove('active');
@@ -1129,12 +950,10 @@
                         cancelAnimationFrame(animationId);
                         animationId = null;
                     }
-                    console.warn('WebGL context lost');
                 }, false);
 
                 renderer.domElement.addEventListener('webglcontextrestored', function() {
                     isContextLost = false;
-                    console.warn('WebGL context restored');
                     rebuildScene();
                 }, false);
 
@@ -1232,24 +1051,17 @@
 
             const connectBtn = document.getElementById('connectBtn');
             const disconnectBtn = document.getElementById('disconnectBtn');
-            const logElement = document.getElementById('log');
             const connectionStatus = document.getElementById('connectionStatus');
 
             let device = null;
             let transport = null;
             let esptool = null;
-            let isConnected = false;
 
             function log(message) {
-                if (!logElement) return;
-                logElement.classList.add('visible');
-                logElement.textContent += message + '\n';
-                logElement.scrollTop = logElement.scrollHeight;
                 console.log(message);
             }
 
             function updateConnectionStatus(connected) {
-                isConnected = connected;
                 if (connected) {
                     connectionStatus.innerHTML = '<i class="fas fa-circle"></i> Connected';
                     connectionStatus.className = 'status-indicator connected';
@@ -1312,8 +1124,6 @@
                     } catch (e) {}
                 }
             });
-
-            log('Welcome! Connect the device to begin.');
         })();
     </script>
 </body>
