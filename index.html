@@ -113,6 +113,7 @@
             align-items: center;
             gap: 8px;
             cursor: pointer;
+            flex-shrink: 0;
         }
 
         .topbar .logo img {
@@ -145,6 +146,7 @@
             gap: 6px;
             font-size: 0.95rem;
             cursor: pointer;
+            white-space: nowrap;
         }
 
         .topbar nav a i {
@@ -229,6 +231,7 @@
             margin-top: 15px;
             background: #000000;
             color: #ffffff;
+            justify-content: center;
         }
 
         .install-btn {
@@ -367,7 +370,6 @@
             display: block;
         }
 
-        /* Install page */
         #install-page {
             padding: 40px 30px;
         }
@@ -613,92 +615,251 @@
         }
 
         @media (max-width: 768px) {
-            .topbar {
-                padding: 0 10px;
+            html, body {
+                overflow: auto;
+                height: auto;
             }
+
+            body {
+                min-height: 100vh;
+            }
+
+            .topbar {
+                padding: 10px 12px;
+                height: auto;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 8px;
+            }
+
+            .topbar .logo img {
+                height: 32px;
+            }
+
+            .topbar .logo span {
+                font-size: 1rem;
+            }
+
+            .topbar nav {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 4px;
+                width: 100%;
+            }
+
             .topbar nav a {
                 padding: 6px 10px;
+                font-size: 0.8rem;
+                gap: 4px;
+            }
+
+            .topbar nav a i {
                 font-size: 0.85rem;
             }
+
+            .banner {
+                flex: none;
+                height: auto;
+                min-height: calc(100vh - 120px);
+                overflow: visible;
+            }
+
             .banner-content {
                 flex-direction: column;
-                justify-content: center;
-                gap: 10px;
+                justify-content: flex-start;
+                height: auto;
+                padding: 16px;
+                gap: 16px;
+                flex-wrap: wrap;
             }
+
             .banner-left {
-                width: auto;
-                max-width: 90%;
-                padding: 10px;
+                width: 100%;
+                max-width: 100%;
+                padding: 16px;
                 align-items: center;
                 text-align: center;
+                order: 2;
             }
+
             .banner-left h1 {
                 font-size: 2.5rem;
             }
+
             .banner-left p {
                 font-size: 1.2rem;
             }
+
             .install-btn, .github-btn, .about-btn {
-                padding: 10px 16px;
-                font-size: 0.9rem;
+                padding: 10px 20px;
+                font-size: 1rem;
                 margin-top: 10px;
+                width: 100%;
             }
+
+            .banner-center {
+                order: 1;
+                width: 100%;
+            }
+
             .banner-center img {
-                max-height: 40vh;
+                max-height: 30vh;
             }
+
             .banner-description {
                 font-size: 0.9rem;
-                padding: 10px 15px;
-                max-width: 90%;
-                margin-top: 10px;
+                padding: 12px 15px;
+                max-width: 100%;
+                margin-top: 12px;
             }
-            .docs-content {
-                padding: 15px;
+
+            .banner-instructions {
+                display: flex;
+                order: 3;
+                width: 100%;
+                max-width: 100%;
+                padding: 16px;
+                pointer-events: auto;
             }
+
+            .banner-instructions h2 {
+                font-size: 1.2rem;
+            }
+
+            .banner-instructions ol {
+                font-size: 0.85rem;
+                padding-left: 18px;
+            }
+
+            .banner-instructions ol li {
+                margin-bottom: 6px;
+            }
+
+            .page {
+                padding: 20px 15px;
+            }
+
             .docs-content h1 {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
-            .flash-options {
-                grid-template-columns: 1fr;
+
+            .docs-content h2 {
+                font-size: 1.4rem;
             }
+
+            .docs-content p, .docs-content li {
+                font-size: 0.95rem;
+            }
+
             #install-page {
                 padding: 20px 15px;
+            }
+
+            .install-section {
+                padding: 16px;
+            }
+
+            .install-section h3 {
+                font-size: 1.05rem;
+            }
+
+            .flash-options {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .install-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .install-actions .btn {
+                width: 100%;
+            }
+
+            .status-indicator {
+                margin-left: 0;
+                justify-content: center;
+                width: 100%;
+            }
+
+            .btn {
+                padding: 10px 18px;
+                font-size: 0.95rem;
             }
         }
 
         @media (max-width: 480px) {
+            #preloader .loader-text {
+                font-size: 2.5rem;
+            }
+
+            #preloader img {
+                max-width: 140px;
+            }
+
             .topbar {
-                height: auto;
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 5px;
-                padding: 5px;
+                padding: 8px;
             }
-            .topbar .logo {
-                margin-right: auto;
+
+            .topbar .logo img {
+                height: 28px;
             }
-            .topbar nav {
-                flex-wrap: wrap;
-                justify-content: center;
+
+            .topbar .logo span {
+                font-size: 0.9rem;
             }
+
+            .topbar nav a {
+                padding: 5px 8px;
+                font-size: 0.75rem;
+            }
+
+            .topbar nav a i {
+                font-size: 0.8rem;
+            }
+
             .banner-left h1 {
                 font-size: 2rem;
             }
+
             .banner-left p {
                 font-size: 1rem;
             }
+
             .banner-center img {
-                max-height: 30vh;
+                max-height: 25vh;
             }
+
             .banner-description {
                 font-size: 0.8rem;
-                padding: 8px 10px;
+                padding: 10px 12px;
             }
+
+            .banner-instructions h2 {
+                font-size: 1.05rem;
+            }
+
+            .banner-instructions ol {
+                font-size: 0.8rem;
+            }
+
+            .install-btn, .github-btn, .about-btn {
+                padding: 10px 14px;
+                font-size: 0.9rem;
+            }
+
             .docs-content h1 {
                 font-size: 1.5rem;
             }
+
             .docs-content h2 {
-                font-size: 1.3rem;
+                font-size: 1.2rem;
+            }
+
+            .log {
+                font-size: 0.75rem;
+                padding: 10px;
             }
         }
     </style>
@@ -723,21 +884,20 @@
         </nav>
     </header>
 
-    <!-- Home page -->
     <div class="banner" id="home-page">
         <div class="banner-content">
+            <div class="banner-center">
+                <img src="T5-4.7.png" alt="T5-4.7">
+                <div class="banner-description">
+                    Flock3+ is a portable multimedia player that supports downloading tracks over the Internet, playing MP3 and WAV files. An indispensable gadget for audiophiles and DIY electronics enthusiasts.
+                </div>
+            </div>
             <div class="banner-left">
                 <h1>Flock3+</h1>
                 <p>Multimedia player</p>
                 <a href="#" class="install-btn" data-page="install"><i class="fas fa-download"></i> Install</a>
                 <a href="https://github.com/Shon-Lua/Flock3-Plus" target="_blank" rel="noopener noreferrer" class="github-btn"><i class="fab fa-github"></i> GitHub</a>
                 <a href="#" class="about-btn" data-page="about"><i class="fas fa-info-circle"></i> About</a>
-            </div>
-            <div class="banner-center">
-                <img src="T5-4.7.png" alt="T5-4.7">
-                <div class="banner-description">
-                    Flock3+ is a portable multimedia player that supports downloading tracks over the Internet, playing MP3 and WAV files. An indispensable gadget for audiophiles and DIY electronics enthusiasts.
-                </div>
             </div>
             <div class="banner-instructions">
                 <h2>READ BEFORE INSTALLING</h2>
@@ -753,12 +913,10 @@
         <div id="three-container"></div>
     </div>
 
-    <!-- Docs page (iframe) -->
     <div class="page" id="docs-page">
         <iframe src="https://wiki.lilygo.cc/products/t5-series/t5-e-paper-s3-pro/" title="Documentation"></iframe>
     </div>
 
-    <!-- Install page -->
     <div class="page" id="install-page">
         <div class="install-container">
             <h1>Install Firmware</h1>
@@ -844,7 +1002,6 @@
         </div>
     </div>
 
-    <!-- About page -->
     <div class="page" id="about-page">
         <div class="docs-content">
             <h1>About Flock3+</h1>
@@ -913,6 +1070,7 @@
                         link.classList.add('active');
                     }
                 });
+                window.scrollTo(0, 0);
             }
 
             allPageElements.forEach(el => {
@@ -925,7 +1083,6 @@
                 });
             });
 
-            // ========== Three.js scene ==========
             const container = document.getElementById('three-container');
             if (container) {
                 const width = container.clientWidth;
@@ -989,7 +1146,6 @@
                 });
             }
 
-            // ========== Firmware flashing ==========
             const connectBtn = document.getElementById('connectBtn');
             const disconnectBtn = document.getElementById('disconnectBtn');
             const flashBtn = document.getElementById('flashBtn');
