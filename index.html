@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Flock3+</title>
     <link rel="icon" href="Flock3.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -25,11 +25,12 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            -webkit-tap-highlight-color: transparent;
         }
 
         img {
             -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
             user-select: none;
         }
 
@@ -38,25 +39,25 @@
         .logo,
         .btn {
             -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
             user-select: none;
         }
 
         html, body {
             height: 100%;
-            width: 100%;
             overflow: hidden;
-            overscroll-behavior: none;
         }
 
         body {
-            font-family: 'Segoe UI', 'Roboto', system-ui, -apple-system, sans-serif;
+            font-family: 'Segoe UI', 'Roboto', system-ui, sans-serif;
             background: #e0e0e0;
             color: var(--text);
             line-height: 1.6;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            -webkit-text-size-adjust: 100%;
+            min-height: 100dvh;
         }
 
         #preloader {
@@ -81,13 +82,13 @@
         }
 
         #preloader img {
-            max-width: 200px;
+            max-width: 180px;
             height: auto;
             filter: grayscale(1);
         }
 
         #preloader .loader-text {
-            font-size: 4rem;
+            font-size: 3rem;
             font-weight: 700;
             color: #000000;
         }
@@ -95,17 +96,18 @@
         .topbar {
             background: var(--topbar-bg);
             box-shadow: var(--shadow);
-            padding: 0 20px;
+            padding: 0 16px;
             z-index: 100;
             display: flex;
             align-items: center;
             justify-content: space-between;
             height: 60px;
             flex-shrink: 0;
+            gap: 8px;
         }
 
         .topbar .logo {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             font-weight: 700;
             color: var(--accent);
             text-decoration: none;
@@ -113,40 +115,48 @@
             align-items: center;
             gap: 8px;
             cursor: pointer;
-            min-height: 44px;
+            flex-shrink: 0;
         }
 
         .topbar .logo img {
-            height: 40px;
+            height: 36px;
             width: auto;
             filter: grayscale(1);
         }
 
         .topbar .logo span {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 600;
             color: #000000;
         }
 
         .topbar nav {
             display: flex;
-            gap: 8px;
+            gap: 4px;
             align-items: center;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+
+        .topbar nav::-webkit-scrollbar {
+            display: none;
         }
 
         .topbar nav a {
             color: var(--topbar-text);
             text-decoration: none;
-            padding: 10px 12px;
+            padding: 8px 12px;
             border-radius: 6px;
             font-weight: 500;
             transition: background 0.2s, color 0.2s;
             display: flex;
             align-items: center;
             gap: 6px;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             cursor: pointer;
-            min-height: 44px;
+            white-space: nowrap;
+            flex-shrink: 0;
         }
 
         .topbar nav a i {
@@ -161,6 +171,10 @@
         .topbar nav a.active {
             background: var(--accent);
             color: #ffffff;
+        }
+
+        .topbar nav a.active:hover {
+            background: var(--accent-hover);
         }
 
         .banner {
@@ -189,7 +203,7 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            width: 360px;
+            width: 340px;
             max-width: 90%;
             flex-shrink: 0;
             display: flex;
@@ -199,14 +213,14 @@
         }
 
         .banner-left h1 {
-            font-size: 4rem;
+            font-size: 3.5rem;
             font-weight: 700;
             color: #000000;
             line-height: 1.2;
         }
 
         .banner-left p {
-            font-size: 2rem;
+            font-size: 1.8rem;
             color: #000000;
             margin-top: 5px;
         }
@@ -218,17 +232,16 @@
             justify-content: center;
             gap: 8px;
             border: none;
-            padding: 14px 28px;
+            padding: 12px 24px;
             border-radius: 4px;
-            font-size: 1.3rem;
+            font-size: 1.15rem;
             font-weight: 600;
             cursor: pointer;
             text-decoration: none;
             transition: background 0.2s;
-            margin-top: 15px;
+            margin-top: 12px;
             background: #000000;
             color: #ffffff;
-            min-height: 48px;
         }
 
         .install-btn {
@@ -236,10 +249,18 @@
             color: #ffffff;
         }
 
+        .install-btn:hover {
+            background: #333333;
+        }
+
         .github-btn, .about-btn {
             background: #ffffff;
             color: #000000;
             border: 2px solid #000000;
+        }
+
+        .github-btn:hover, .about-btn:hover {
+            background: #e0e0e0;
         }
 
         .banner-center {
@@ -265,7 +286,7 @@
             color: #000000;
             padding: 15px 20px;
             border-radius: 8px;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             line-height: 1.4;
             max-width: 500px;
             pointer-events: auto;
@@ -273,7 +294,7 @@
         }
 
         .banner-instructions h2 {
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             font-weight: 700;
             color: #000000;
             margin-bottom: 15px;
@@ -282,7 +303,7 @@
 
         .banner-instructions ol {
             padding-left: 20px;
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: #000000;
             line-height: 1.5;
         }
@@ -304,10 +325,10 @@
             flex: 1;
             min-height: 0;
             overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
             background: #ffffff;
             padding: 30px;
             display: none;
+            -webkit-overflow-scrolling: touch;
         }
 
         .page.active {
@@ -361,7 +382,7 @@
         }
 
         #install-page {
-            padding: 40px 30px;
+            padding: 30px 20px;
         }
 
         .install-container {
@@ -369,11 +390,16 @@
             margin: 0 auto;
         }
 
-        .install-container h1 {
-            font-size: 2.2rem;
-            margin-bottom: 15px;
+        .install-container > h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
             border-bottom: 2px solid #000;
             padding-bottom: 10px;
+        }
+
+        .install-container > p {
+            margin-bottom: 20px;
+            color: #444;
         }
 
         .install-section {
@@ -385,7 +411,7 @@
         }
 
         .install-section h3 {
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             margin-bottom: 15px;
             color: #000000;
             display: flex;
@@ -408,8 +434,8 @@
         .form-group label {
             display: block;
             font-weight: 500;
-            margin-bottom: 8px;
-            font-size: 0.95rem;
+            margin-bottom: 6px;
+            font-size: 0.9rem;
             display: flex;
             align-items: center;
             gap: 6px;
@@ -425,14 +451,21 @@
         select,
         input[type="text"] {
             width: 100%;
-            padding: 12px 14px;
+            padding: 12px 12px;
             border: 1px solid var(--border);
             border-radius: 4px;
             font-size: 1rem;
             background: #ffffff;
             transition: border-color 0.2s;
-            min-height: 48px;
-            font-family: inherit;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        select {
+            background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+            background-repeat: no-repeat;
+            background-position: right 8px center;
+            padding-right: 36px;
         }
 
         input[type="file"]:focus,
@@ -453,7 +486,7 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 14px 24px;
+            padding: 12px 24px;
             border: none;
             border-radius: 4px;
             font-size: 1rem;
@@ -462,7 +495,7 @@
             transition: all 0.2s;
             gap: 8px;
             text-decoration: none;
-            min-height: 48px;
+            min-height: 44px;
         }
 
         .btn-primary {
@@ -481,6 +514,9 @@
             background: #ffffff;
             color: #000000;
             border: 2px solid #000000;
+        }
+        .btn-outline:hover {
+            background: #e0e0e0;
         }
 
         .progress-container {
@@ -522,7 +558,7 @@
             border-radius: 4px;
             padding: 15px;
             font-family: 'Courier New', monospace;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             max-height: 200px;
             overflow-y: auto;
             white-space: pre-wrap;
@@ -562,17 +598,16 @@
             font-size: 0.85rem;
             background: #f0f0f0;
             border-left: 4px solid #000000;
-            padding: 12px 15px;
+            padding: 10px 15px;
             border-radius: 4px;
             margin-top: 15px;
             display: flex;
             align-items: flex-start;
             gap: 8px;
-            line-height: 1.5;
         }
 
         .note i {
-            margin-top: 3px;
+            margin-top: 2px;
             color: #000000;
             flex-shrink: 0;
         }
@@ -584,75 +619,43 @@
                 padding: 15px;
             }
             .banner-left h1 {
-                font-size: 3rem;
+                font-size: 2.8rem;
             }
             .banner-left p {
-                font-size: 1.5rem;
+                font-size: 1.4rem;
             }
             .install-btn, .github-btn, .about-btn {
-                padding: 12px 20px;
-                font-size: 1.1rem;
+                padding: 10px 18px;
+                font-size: 1rem;
             }
             .banner-instructions h2 {
-                font-size: 1.3rem;
+                font-size: 1.2rem;
             }
             .banner-instructions ol {
-                font-size: 0.9rem;
+                font-size: 0.85rem;
             }
         }
 
         @media (max-width: 992px) {
-            .banner-instructions {
-                display: none;
-            }
             .banner-content {
                 justify-content: center;
-            }
-            .banner-left {
-                width: 280px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .topbar {
-                padding: 0 12px;
-                height: auto;
-                min-height: 60px;
-                flex-wrap: wrap;
-                gap: 8px;
-                padding-top: 8px;
-                padding-bottom: 8px;
-            }
-            .topbar .logo {
-                margin-right: auto;
-            }
-            .topbar nav {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 4px;
-                width: 100%;
-            }
-            .topbar nav a {
-                padding: 8px 10px;
-                font-size: 0.85rem;
-                min-height: 40px;
-            }
-            .topbar nav a i {
-                font-size: 0.9rem;
-            }
-            .banner-content {
                 flex-direction: column;
-                justify-content: center;
-                gap: 15px;
                 padding: 15px;
+                gap: 15px;
                 overflow-y: auto;
             }
             .banner-left {
                 width: 100%;
-                max-width: 100%;
-                padding: 15px;
+                max-width: 500px;
                 align-items: center;
                 text-align: center;
+                padding: 15px;
+                margin-top: auto;
+            }
+            .banner-instructions {
+                width: 100%;
+                max-width: 500px;
+                margin-bottom: auto;
             }
             .banner-left h1 {
                 font-size: 2.5rem;
@@ -660,24 +663,71 @@
             .banner-left p {
                 font-size: 1.3rem;
             }
-            .install-btn, .github-btn, .about-btn {
-                padding: 12px 20px;
-                font-size: 1rem;
-                margin-top: 10px;
-                width: 100%;
-                max-width: 320px;
-            }
             .banner-center {
                 width: 100%;
+                max-width: 500px;
             }
             .banner-center img {
-                max-height: 35vh;
+                max-height: 30vh;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .topbar {
+                padding: 0 8px;
+                height: auto;
+                min-height: 56px;
+                flex-wrap: wrap;
+                padding-top: 6px;
+                padding-bottom: 6px;
+            }
+            .topbar .logo img {
+                height: 32px;
+            }
+            .topbar .logo span {
+                font-size: 1rem;
+            }
+            .topbar nav {
+                width: 100%;
+                justify-content: flex-start;
+                padding-bottom: 4px;
+                gap: 2px;
+            }
+            .topbar nav a {
+                padding: 6px 10px;
+                font-size: 0.85rem;
+            }
+            .topbar nav a i {
+                font-size: 0.9rem;
+            }
+            .banner-left {
+                padding: 12px;
+            }
+            .banner-left h1 {
+                font-size: 2rem;
+            }
+            .banner-left p {
+                font-size: 1.1rem;
+            }
+            .install-btn, .github-btn, .about-btn {
+                padding: 10px 16px;
+                font-size: 0.9rem;
+                margin-top: 8px;
+                width: 100%;
+                max-width: 280px;
             }
             .banner-description {
-                font-size: 0.95rem;
+                font-size: 0.9rem;
                 padding: 12px 15px;
+                margin-top: 12px;
                 max-width: 100%;
-                margin-top: 15px;
+            }
+            .banner-instructions h2 {
+                font-size: 1.1rem;
+            }
+            .banner-instructions ol {
+                font-size: 0.85rem;
+                padding-left: 18px;
             }
             .docs-content {
                 padding: 0;
@@ -688,23 +738,30 @@
             .docs-content h2 {
                 font-size: 1.4rem;
             }
-            .docs-content ul, .docs-content ol {
-                margin-left: 20px;
-            }
-            .page {
-                padding: 20px 15px;
+            .docs-content p {
+                font-size: 0.95rem;
             }
             #install-page {
-                padding: 20px 15px;
+                padding: 20px 12px;
             }
-            .install-container h1 {
-                font-size: 1.8rem;
+            .install-container > h1 {
+                font-size: 1.5rem;
+            }
+            .install-container > p {
+                font-size: 0.9rem;
             }
             .install-section {
                 padding: 15px;
+                margin-bottom: 15px;
+            }
+            .install-section h3 {
+                font-size: 1rem;
             }
             .flash-options {
                 grid-template-columns: 1fr;
+            }
+            .page {
+                padding: 20px 15px;
             }
             .install-actions {
                 flex-direction: column;
@@ -713,92 +770,101 @@
             .install-actions .btn {
                 width: 100%;
             }
-            .install-actions .status-indicator {
+            .status-indicator {
+                margin-left: 0;
                 justify-content: center;
-                padding: 8px 0;
             }
         }
 
         @media (max-width: 480px) {
-            .topbar {
-                padding: 8px;
+            #preloader .loader-text {
+                font-size: 2.2rem;
+            }
+            #preloader img {
+                max-width: 140px;
             }
             .topbar .logo img {
-                height: 32px;
+                height: 28px;
             }
             .topbar .logo span {
-                font-size: 1rem;
+                font-size: 0.9rem;
             }
             .topbar nav a {
                 padding: 6px 8px;
                 font-size: 0.78rem;
-                gap: 4px;
-                min-height: 36px;
             }
             .topbar nav a i {
-                font-size: 0.8rem;
+                font-size: 0.85rem;
             }
             .banner-left h1 {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
             .banner-left p {
-                font-size: 1.1rem;
-            }
-            .install-btn, .github-btn, .about-btn {
-                font-size: 0.95rem;
-                padding: 10px 16px;
-                min-height: 44px;
+                font-size: 1rem;
             }
             .banner-center img {
-                max-height: 28vh;
+                max-height: 25vh;
             }
             .banner-description {
-                font-size: 0.85rem;
+                font-size: 0.82rem;
                 padding: 10px 12px;
             }
             .docs-content h1 {
-                font-size: 1.5rem;
+                font-size: 1.4rem;
             }
             .docs-content h2 {
-                font-size: 1.2rem;
+                font-size: 1.15rem;
             }
-            .install-container h1 {
-                font-size: 1.5rem;
-            }
-            .install-section h3 {
-                font-size: 1rem;
-            }
-            .form-group label {
+            .docs-content p {
                 font-size: 0.9rem;
             }
-            input[type="file"],
-            select,
-            input[type="text"] {
+            .install-container > h1 {
+                font-size: 1.3rem;
+            }
+            .install-section {
+                padding: 12px;
+            }
+            .install-section h3 {
                 font-size: 0.95rem;
-                padding: 10px 12px;
             }
             .btn {
-                font-size: 0.95rem;
-                padding: 12px 20px;
+                font-size: 0.9rem;
+                padding: 10px 18px;
             }
-            #preloader .loader-text {
-                font-size: 3rem;
+            .log {
+                font-size: 0.72rem;
             }
-            #preloader img {
-                max-width: 160px;
+            .note {
+                font-size: 0.78rem;
             }
         }
 
-        @media (max-width: 360px) {
-            .topbar nav a {
-                padding: 6px 6px;
-                font-size: 0.72rem;
+        @media (max-height: 500px) and (orientation: landscape) {
+            .banner-content {
+                padding: 8px;
+                gap: 8px;
+            }
+            .banner-left {
+                padding: 8px;
             }
             .banner-left h1 {
-                font-size: 1.7rem;
+                font-size: 1.5rem;
             }
             .banner-left p {
-                font-size: 0.95rem;
+                font-size: 0.9rem;
+            }
+            .banner-center img {
+                max-height: 40vh;
+            }
+            .banner-instructions {
+                padding: 8px;
+            }
+            .banner-instructions h2 {
+                font-size: 0.9rem;
+                margin-bottom: 6px;
+            }
+            .banner-instructions ol {
+                font-size: 0.7rem;
             }
         }
     </style>
@@ -859,11 +925,11 @@
     <div class="page" id="install-page">
         <div class="install-container">
             <h1>Install Firmware</h1>
-            <p style="margin-bottom: 20px;">Follow the steps below to flash the Flock3+ firmware to your LILYGO T5-4.7-S3 Pro board.</p>
+            <p>Follow the steps below to flash the Flock3+ firmware to your LILYGO T5-4.7-S3 Pro board.</p>
 
             <div class="install-section">
                 <h3><i class="fas fa-plug"></i> 1. Device Connection</h3>
-                <p style="margin-bottom: 15px; font-size: 0.95rem;">Connect the board to your computer via USB. To enter bootloader mode: hold BOOT, press RESET, then release BOOT.</p>
+                <p style="margin-bottom: 15px; font-size: 0.9rem;">Connect the board to your computer via USB. To enter bootloader mode: hold BOOT, press RESET, then release BOOT.</p>
                 <div class="install-actions">
                     <button id="connectBtn" class="btn btn-primary">
                         <i class="fas fa-plug"></i> Connect
@@ -921,7 +987,7 @@
 
             <div class="install-section">
                 <h3><i class="fas fa-bolt"></i> 3. Flash Firmware</h3>
-                <button id="flashBtn" class="btn btn-primary" disabled>
+                <button id="flashBtn" class="btn btn-primary" disabled style="width: 100%;">
                     <i class="fas fa-bolt"></i> Start Flashing
                 </button>
                 <div class="progress-container" id="progressContainer">
@@ -1022,7 +1088,7 @@
             });
 
             const container = document.getElementById('three-container');
-            if (container && typeof THREE !== 'undefined') {
+            if (container) {
                 const width = container.clientWidth;
                 const height = container.clientHeight;
                 const scene = new THREE.Scene();
@@ -1034,7 +1100,7 @@
 
                 const renderer = new THREE.WebGLRenderer({ antialias: true });
                 renderer.setSize(width, height);
-                renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+                renderer.setPixelRatio(window.devicePixelRatio || 1);
                 container.appendChild(renderer.domElement);
 
                 const light = new THREE.DirectionalLight(0xffffff, 1.2);
@@ -1081,16 +1147,6 @@
                     camera.aspect = w / h;
                     camera.updateProjectionMatrix();
                     renderer.setSize(w, h);
-                });
-
-                window.addEventListener('orientationchange', () => {
-                    setTimeout(() => {
-                        const w = container.clientWidth;
-                        const h = container.clientHeight;
-                        camera.aspect = w / h;
-                        camera.updateProjectionMatrix();
-                        renderer.setSize(w, h);
-                    }, 300);
                 });
             }
 
@@ -1209,6 +1265,13 @@
                     const address = parseInt(flashAddressInput.value, 16) || 0;
                     const flashSize = flashSizeSelect.value;
                     const flashMode = flashModeSelect.value;
+                    const flashSizeMap = {
+                        '4MB': 4 * 1024 * 1024,
+                        '8MB': 8 * 1024 * 1024,
+                        '16MB': 16 * 1024 * 1024,
+                        '32MB': 32 * 1024 * 1024
+                    };
+                    const flashSizeBytes = flashSizeMap[flashSize] || 16 * 1024 * 1024;
                     try {
                         log('Starting flashing...');
                         progressContainer.classList.add('visible');
@@ -1222,7 +1285,7 @@
                                 data: uint8Data,
                                 address: address
                             }],
-                            flashSize: flashSize,
+                            flashSize: flashSizeBytes,
                             flashMode: flashMode,
                             flashFreq: '40m',
                             eraseAll: false,
