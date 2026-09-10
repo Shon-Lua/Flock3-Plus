@@ -17,6 +17,8 @@
             --topbar-bg: #ffffff;
             --topbar-text: #222222;
             --topbar-active: #000000;
+            --log-bg: #222222;
+            --log-text: #f0f0f0;
         }
 
         * {
@@ -34,7 +36,8 @@
 
         .install-btn, .github-btn, .about-btn,
         .topbar nav a,
-        .logo {
+        .logo,
+        .btn {
             -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
@@ -352,19 +355,225 @@
             margin-bottom: 8px;
         }
 
-        /* Iframe pages */
-        #docs-page,
-        #github-page {
+        #docs-page {
             padding: 0;
             background: #ffffff;
         }
 
-        #docs-page iframe,
-        #github-page iframe {
+        #docs-page iframe {
             width: 100%;
             height: 100%;
             border: none;
             display: block;
+        }
+
+        /* Install page */
+        #install-page {
+            padding: 40px 30px;
+        }
+
+        .install-container {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .install-section {
+            background: #fafafa;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .install-section h3 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #000000;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .install-section h3 i {
+            color: #000000;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 6px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .form-group label i {
+            width: 18px;
+            text-align: center;
+            color: #000000;
+        }
+
+        input[type="file"],
+        select,
+        input[type="text"] {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-size: 0.95rem;
+            background: #ffffff;
+            transition: border-color 0.2s;
+        }
+
+        input[type="file"]:focus,
+        select:focus,
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #000000;
+            box-shadow: 0 0 0 2px rgba(0,0,0,0.1);
+        }
+
+        .flash-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: #000000;
+            color: #ffffff;
+        }
+        .btn-primary:hover {
+            background: #333333;
+        }
+        .btn-primary:disabled {
+            background: #999999;
+            cursor: not-allowed;
+        }
+
+        .btn-outline {
+            background: #ffffff;
+            color: #000000;
+            border: 2px solid #000000;
+        }
+        .btn-outline:hover {
+            background: #e0e0e0;
+        }
+
+        .progress-container {
+            margin-top: 20px;
+            display: none;
+        }
+
+        .progress-container.visible {
+            display: block;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #000000;
+            width: 0%;
+            transition: width 0.3s ease;
+            border-radius: 4px;
+        }
+
+        .progress-text {
+            text-align: center;
+            margin-top: 8px;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .log {
+            background: var(--log-bg);
+            color: var(--log-text);
+            border-radius: 4px;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            max-height: 200px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            margin-top: 15px;
+            display: none;
+        }
+
+        .log.visible {
+            display: block;
+        }
+
+        .status-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 500;
+            margin-left: 10px;
+            font-size: 0.9rem;
+        }
+
+        .status-indicator.connected {
+            color: #1a1a1a;
+        }
+
+        .status-indicator.disconnected {
+            color: #555555;
+        }
+
+        .install-actions {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .note {
+            font-size: 0.85rem;
+            background: #f0f0f0;
+            border-left: 4px solid #000000;
+            padding: 10px 15px;
+            border-radius: 4px;
+            margin-top: 15px;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .note i {
+            margin-top: 2px;
+            color: #000000;
         }
 
         @media (max-width: 1200px) {
@@ -449,6 +658,12 @@
             .docs-content h1 {
                 font-size: 2rem;
             }
+            .flash-options {
+                grid-template-columns: 1fr;
+            }
+            #install-page {
+                padding: 20px 15px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -503,7 +718,7 @@
             <a href="#" class="active" data-page="home"><i class="fas fa-home"></i> Home</a>
             <a href="#" data-page="install"><i class="fas fa-download"></i> Install</a>
             <a href="#" data-page="docs"><i class="fas fa-book"></i> Docs</a>
-            <a href="#" data-page="github"><i class="fab fa-github"></i> GitHub</a>
+            <a href="https://github.com/Shon-Lua/Flock3-Plus" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> GitHub</a>
             <a href="#" data-page="about"><i class="fas fa-info-circle"></i> About</a>
         </nav>
     </header>
@@ -515,7 +730,7 @@
                 <h1>Flock3+</h1>
                 <p>Multimedia player</p>
                 <a href="#" class="install-btn" data-page="install"><i class="fas fa-download"></i> Install</a>
-                <a href="#" class="github-btn" data-page="github"><i class="fab fa-github"></i> GitHub</a>
+                <a href="https://github.com/Shon-Lua/Flock3-Plus" target="_blank" rel="noopener noreferrer" class="github-btn"><i class="fab fa-github"></i> GitHub</a>
                 <a href="#" class="about-btn" data-page="about"><i class="fas fa-info-circle"></i> About</a>
             </div>
             <div class="banner-center">
@@ -543,16 +758,89 @@
         <iframe src="https://wiki.lilygo.cc/products/t5-series/t5-e-paper-s3-pro/" title="Documentation"></iframe>
     </div>
 
-    <!-- GitHub page (iframe) -->
-    <div class="page" id="github-page">
-        <iframe src="https://github.com/Shon-Lua/Flock3-Plus" title="GitHub Repository"></iframe>
-    </div>
-
     <!-- Install page -->
     <div class="page" id="install-page">
-        <div class="docs-content">
+        <div class="install-container">
             <h1>Install Firmware</h1>
-            <p>Please use the installer on the main page or click the Install button to begin flashing your device.</p>
+            <p style="margin-bottom: 20px;">Follow the steps below to flash the Flock3+ firmware to your LILYGO T5-4.7-S3 Pro board.</p>
+
+            <div class="install-section">
+                <h3><i class="fas fa-plug"></i> 1. Device Connection</h3>
+                <p style="margin-bottom: 15px; font-size: 0.95rem;">Connect the board to your computer via USB. To enter bootloader mode: hold BOOT, press RESET, then release BOOT.</p>
+                <div class="install-actions">
+                    <button id="connectBtn" class="btn btn-primary">
+                        <i class="fas fa-plug"></i> Connect
+                    </button>
+                    <button id="disconnectBtn" class="btn btn-outline" style="display: none;">
+                        <i class="fas fa-unlink"></i> Disconnect
+                    </button>
+                    <span id="connectionStatus" class="status-indicator disconnected">
+                        <i class="fas fa-circle"></i> Not connected
+                    </span>
+                </div>
+            </div>
+
+            <div class="install-section">
+                <h3><i class="fas fa-file-upload"></i> 2. Firmware File</h3>
+                <div class="form-group">
+                    <label for="firmwareFile"><i class="fas fa-file"></i> Firmware file (.bin)</label>
+                    <input type="file" id="firmwareFile" accept=".bin" />
+                </div>
+                <div class="flash-options">
+                    <div class="form-group">
+                        <label for="flashAddress"><i class="fas fa-map-pin"></i> Flash address</label>
+                        <input type="text" id="flashAddress" value="0x0" placeholder="0x0" />
+                    </div>
+                    <div class="form-group">
+                        <label for="baudRate"><i class="fas fa-tachometer-alt"></i> Baud rate</label>
+                        <select id="baudRate">
+                            <option value="115200">115200</option>
+                            <option value="230400">230400</option>
+                            <option value="460800" selected>460800</option>
+                            <option value="921600">921600</option>
+                            <option value="1500000">1500000</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="flashSize"><i class="fas fa-memory"></i> Flash size</label>
+                        <select id="flashSize">
+                            <option value="4MB">4MB</option>
+                            <option value="8MB">8MB</option>
+                            <option value="16MB" selected>16MB</option>
+                            <option value="32MB">32MB</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="flashMode"><i class="fas fa-cog"></i> Flash mode</label>
+                        <select id="flashMode">
+                            <option value="dio" selected>DIO</option>
+                            <option value="qio">QIO</option>
+                            <option value="dout">DOUT</option>
+                            <option value="qout">QOUT</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="install-section">
+                <h3><i class="fas fa-bolt"></i> 3. Flash Firmware</h3>
+                <button id="flashBtn" class="btn btn-primary" disabled>
+                    <i class="fas fa-bolt"></i> Start Flashing
+                </button>
+                <div class="progress-container" id="progressContainer">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="progress-text" id="progressText">0%</div>
+                </div>
+            </div>
+
+            <div id="log" class="log"></div>
+
+            <div class="note">
+                <i class="fas fa-exclamation-triangle"></i>
+                <span><strong>Important:</strong> Requires a browser with Web Serial support (Chrome, Edge, Opera). The page must be served over HTTPS or on localhost. If the board is not detected, check USB-UART drivers (usually CP2102 or CH340).</span>
+            </div>
         </div>
     </div>
 
@@ -582,6 +870,7 @@
         </div>
     </div>
 
+    <script src="https://unpkg.com/esptool-js@0.4.1/bundle.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
         (function() {
@@ -601,8 +890,7 @@
                 home: document.getElementById('home-page'),
                 install: document.getElementById('install-page'),
                 about: document.getElementById('about-page'),
-                docs: document.getElementById('docs-page'),
-                github: document.getElementById('github-page')
+                docs: document.getElementById('docs-page')
             };
 
             const topbarLinks = document.querySelectorAll('.topbar nav a[data-page]');
@@ -637,67 +925,240 @@
                 });
             });
 
+            // ========== Three.js scene ==========
             const container = document.getElementById('three-container');
-            if (!container) return;
-            const width = container.clientWidth;
-            const height = container.clientHeight;
-            const scene = new THREE.Scene();
-            scene.background = new THREE.Color(0xd0d0d0);
+            if (container) {
+                const width = container.clientWidth;
+                const height = container.clientHeight;
+                const scene = new THREE.Scene();
+                scene.background = new THREE.Color(0xd0d0d0);
 
-            const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
-            camera.position.set(0, 2, 12);
-            camera.lookAt(0, 0, 0);
+                const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
+                camera.position.set(0, 2, 12);
+                camera.lookAt(0, 0, 0);
 
-            const renderer = new THREE.WebGLRenderer({ antialias: true });
-            renderer.setSize(width, height);
-            renderer.setPixelRatio(window.devicePixelRatio || 1);
-            container.appendChild(renderer.domElement);
+                const renderer = new THREE.WebGLRenderer({ antialias: true });
+                renderer.setSize(width, height);
+                renderer.setPixelRatio(window.devicePixelRatio || 1);
+                container.appendChild(renderer.domElement);
 
-            const light = new THREE.DirectionalLight(0xffffff, 1.2);
-            light.position.set(1, 2, 1);
-            scene.add(light);
+                const light = new THREE.DirectionalLight(0xffffff, 1.2);
+                light.position.set(1, 2, 1);
+                scene.add(light);
 
-            const pointLight = new THREE.PointLight(0xffffff, 0.9);
-            pointLight.position.set(-2, 1, 3);
-            scene.add(pointLight);
+                const pointLight = new THREE.PointLight(0xffffff, 0.9);
+                pointLight.position.set(-2, 1, 3);
+                scene.add(pointLight);
 
-            const ambientLight = new THREE.AmbientLight(0x404040);
-            scene.add(ambientLight);
+                const ambientLight = new THREE.AmbientLight(0x404040);
+                scene.add(ambientLight);
 
-            const geometry = new THREE.PlaneGeometry(80, 48, 150, 100);
-            const material = new THREE.MeshStandardMaterial({
-                color: 0x444444,
-                roughness: 0.2,
-                metalness: 0.85,
-                side: THREE.DoubleSide,
-                flatShading: true
-            });
-            const plane = new THREE.Mesh(geometry, material);
-            plane.rotation.x = -0.5;
-            scene.add(plane);
+                const geometry = new THREE.PlaneGeometry(80, 48, 150, 100);
+                const material = new THREE.MeshStandardMaterial({
+                    color: 0x444444,
+                    roughness: 0.2,
+                    metalness: 0.85,
+                    side: THREE.DoubleSide,
+                    flatShading: true
+                });
+                const plane = new THREE.Mesh(geometry, material);
+                plane.rotation.x = -0.5;
+                scene.add(plane);
 
-            function animate() {
-                requestAnimationFrame(animate);
-                const time = Date.now() * 0.001;
-                const positions = geometry.attributes.position.array;
-                for (let i = 0; i < positions.length; i += 3) {
-                    const x = positions[i];
-                    const y = positions[i + 1];
-                    positions[i + 2] = Math.sin(x * 1.5 + time) * 0.7 + Math.cos(y * 1.8 + time * 0.9) * 0.6 + Math.sin((x + y) * 0.9 + time * 0.6) * 0.4;
+                function animate() {
+                    requestAnimationFrame(animate);
+                    const time = Date.now() * 0.001;
+                    const positions = geometry.attributes.position.array;
+                    for (let i = 0; i < positions.length; i += 3) {
+                        const x = positions[i];
+                        const y = positions[i + 1];
+                        positions[i + 2] = Math.sin(x * 1.5 + time) * 0.7 + Math.cos(y * 1.8 + time * 0.9) * 0.6 + Math.sin((x + y) * 0.9 + time * 0.6) * 0.4;
+                    }
+                    geometry.attributes.position.needsUpdate = true;
+                    geometry.computeVertexNormals();
+                    renderer.render(scene, camera);
                 }
-                geometry.attributes.position.needsUpdate = true;
-                geometry.computeVertexNormals();
-                renderer.render(scene, camera);
-            }
-            animate();
+                animate();
 
-            window.addEventListener('resize', () => {
-                const w = container.clientWidth;
-                const h = container.clientHeight;
-                camera.aspect = w / h;
-                camera.updateProjectionMatrix();
-                renderer.setSize(w, h);
+                window.addEventListener('resize', () => {
+                    const w = container.clientWidth;
+                    const h = container.clientHeight;
+                    camera.aspect = w / h;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(w, h);
+                });
+            }
+
+            // ========== Firmware flashing ==========
+            const connectBtn = document.getElementById('connectBtn');
+            const disconnectBtn = document.getElementById('disconnectBtn');
+            const flashBtn = document.getElementById('flashBtn');
+            const firmwareFileInput = document.getElementById('firmwareFile');
+            const flashAddressInput = document.getElementById('flashAddress');
+            const baudRateSelect = document.getElementById('baudRate');
+            const flashSizeSelect = document.getElementById('flashSize');
+            const flashModeSelect = document.getElementById('flashMode');
+            const progressContainer = document.getElementById('progressContainer');
+            const progressFill = document.getElementById('progressFill');
+            const progressText = document.getElementById('progressText');
+            const logElement = document.getElementById('log');
+            const connectionStatus = document.getElementById('connectionStatus');
+
+            let device = null;
+            let transport = null;
+            let esptool = null;
+            let isConnected = false;
+
+            function log(message) {
+                if (!logElement) return;
+                logElement.classList.add('visible');
+                logElement.textContent += message + '\n';
+                logElement.scrollTop = logElement.scrollHeight;
+                console.log(message);
+            }
+
+            function updateConnectionStatus(connected) {
+                isConnected = connected;
+                if (connected) {
+                    connectionStatus.innerHTML = '<i class="fas fa-circle"></i> Connected';
+                    connectionStatus.className = 'status-indicator connected';
+                    connectBtn.style.display = 'none';
+                    disconnectBtn.style.display = 'inline-flex';
+                    flashBtn.disabled = false;
+                } else {
+                    connectionStatus.innerHTML = '<i class="fas fa-circle"></i> Not connected';
+                    connectionStatus.className = 'status-indicator disconnected';
+                    connectBtn.style.display = 'inline-flex';
+                    disconnectBtn.style.display = 'none';
+                    flashBtn.disabled = true;
+                }
+            }
+
+            function updateProgress(value) {
+                const percent = Math.round(value * 100);
+                progressFill.style.width = percent + '%';
+                progressText.textContent = percent + '%';
+            }
+
+            if (connectBtn) {
+                connectBtn.addEventListener('click', async () => {
+                    try {
+                        if (!navigator.serial) {
+                            log('Web Serial API is not supported in this browser.');
+                            alert('Web Serial API is not supported. Please use Chrome or Edge.');
+                            return;
+                        }
+                        log('Requesting serial port access...');
+                        device = await navigator.serial.requestPort();
+                        await device.open({ baudRate: 115200 });
+                        transport = new ESPSerialTransport(device);
+                        esptool = new ESPTool(transport);
+                        log('Port opened, initializing esptool...');
+                        await esptool.initialize();
+                        const chipName = esptool.chipName || 'ESP32';
+                        log('Chip detected: ' + chipName);
+                        updateConnectionStatus(true);
+                    } catch (error) {
+                        log('Connection error: ' + error.message);
+                        updateConnectionStatus(false);
+                    }
+                });
+            }
+
+            if (disconnectBtn) {
+                disconnectBtn.addEventListener('click', async () => {
+                    try {
+                        if (device) {
+                            await device.close();
+                            log('Port closed');
+                        }
+                    } catch (e) {
+                        log('Error closing port: ' + e.message);
+                    }
+                    device = null;
+                    transport = null;
+                    esptool = null;
+                    updateConnectionStatus(false);
+                    flashBtn.disabled = true;
+                });
+            }
+
+            if (firmwareFileInput) {
+                firmwareFileInput.addEventListener('change', () => {
+                    if (firmwareFileInput.files.length > 0) {
+                        log('Selected file: ' + firmwareFileInput.files[0].name + ' (' + firmwareFileInput.files[0].size + ' bytes)');
+                    }
+                });
+            }
+
+            if (flashBtn) {
+                flashBtn.addEventListener('click', async () => {
+                    if (!isConnected || !esptool) {
+                        alert('Please connect the device first!');
+                        return;
+                    }
+                    const file = firmwareFileInput.files[0];
+                    if (!file) {
+                        alert('Please select a firmware file!');
+                        return;
+                    }
+                    const address = parseInt(flashAddressInput.value, 16) || 0;
+                    const flashSize = flashSizeSelect.value;
+                    const flashMode = flashModeSelect.value;
+                    const flashSizeMap = {
+                        '4MB': 4 * 1024 * 1024,
+                        '8MB': 8 * 1024 * 1024,
+                        '16MB': 16 * 1024 * 1024,
+                        '32MB': 32 * 1024 * 1024
+                    };
+                    const flashSizeBytes = flashSizeMap[flashSize] || 16 * 1024 * 1024;
+                    try {
+                        log('Starting flashing...');
+                        progressContainer.classList.add('visible');
+                        updateProgress(0);
+                        flashBtn.disabled = true;
+                        const fileData = await file.arrayBuffer();
+                        const uint8Data = new Uint8Array(fileData);
+                        log('Writing ' + uint8Data.length + ' bytes at address 0x' + address.toString(16) + '...');
+                        await esptool.writeFlash({
+                            fileArray: [{
+                                data: uint8Data,
+                                address: address
+                            }],
+                            flashSize: flashSizeBytes,
+                            flashMode: flashMode,
+                            flashFreq: '40m',
+                            eraseAll: false,
+                            compress: true,
+                            reportProgress: (fileIndex, written, total) => {
+                                const progress = written / total;
+                                updateProgress(progress);
+                                if (written % 8192 === 0 || written === total) {
+                                    log('Progress: ' + written + '/' + total + ' bytes (' + Math.round(progress * 100) + '%)');
+                                }
+                            }
+                        });
+                        log('Flashing completed successfully!');
+                        updateProgress(1);
+                        alert('Firmware installed successfully!');
+                    } catch (error) {
+                        log('Flashing error: ' + error.message);
+                        alert('Flashing error: ' + error.message);
+                    } finally {
+                        flashBtn.disabled = false;
+                    }
+                });
+            }
+
+            window.addEventListener('beforeunload', async () => {
+                if (device) {
+                    try {
+                        await device.close();
+                    } catch (e) {}
+                }
             });
+
+            log('Welcome! Connect the device and select a firmware file.');
         })();
     </script>
 </body>
