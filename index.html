@@ -96,14 +96,15 @@
         .topbar {
             background: var(--topbar-bg);
             box-shadow: var(--shadow);
-            padding: 0 16px;
+            padding: 0 12px;
             z-index: 100;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            height: 60px;
+            height: 56px;
             flex-shrink: 0;
-            gap: 8px;
+            gap: 6px;
+            overflow: hidden;
         }
 
         .topbar .logo {
@@ -119,7 +120,7 @@
         }
 
         .topbar .logo img {
-            height: 36px;
+            height: 34px;
             width: auto;
             filter: grayscale(1);
         }
@@ -132,11 +133,14 @@
 
         .topbar nav {
             display: flex;
-            gap: 4px;
+            gap: 2px;
             align-items: center;
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
             scrollbar-width: none;
+            flex: 1;
+            justify-content: flex-end;
+            min-width: 0;
         }
 
         .topbar nav::-webkit-scrollbar {
@@ -146,21 +150,21 @@
         .topbar nav a {
             color: var(--topbar-text);
             text-decoration: none;
-            padding: 8px 12px;
+            padding: 6px 10px;
             border-radius: 6px;
             font-weight: 500;
             transition: background 0.2s, color 0.2s;
             display: flex;
             align-items: center;
             gap: 6px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             cursor: pointer;
             white-space: nowrap;
             flex-shrink: 0;
         }
 
         .topbar nav a i {
-            font-size: 1rem;
+            font-size: 0.95rem;
         }
 
         .topbar nav a:hover {
@@ -654,30 +658,25 @@
         @media (max-width: 768px) {
             .topbar {
                 padding: 0 8px;
-                height: auto;
-                min-height: 56px;
-                flex-wrap: wrap;
-                padding-top: 6px;
-                padding-bottom: 6px;
+                height: 52px;
             }
             .topbar .logo img {
-                height: 32px;
+                height: 30px;
             }
             .topbar .logo span {
                 display: none;
             }
             .topbar nav {
-                width: 100%;
-                justify-content: flex-start;
-                padding-bottom: 4px;
-                gap: 2px;
+                gap: 0;
+                justify-content: flex-end;
             }
             .topbar nav a {
-                padding: 6px 10px;
-                font-size: 0.85rem;
+                padding: 6px 8px;
+                font-size: 0.78rem;
+                gap: 4px;
             }
             .topbar nav a i {
-                font-size: 0.9rem;
+                font-size: 0.85rem;
             }
             .banner-content {
                 flex-direction: column;
@@ -763,15 +762,20 @@
             #preloader img {
                 max-width: 140px;
             }
+            .topbar {
+                padding: 0 6px;
+                gap: 4px;
+            }
             .topbar .logo img {
-                height: 28px;
+                height: 26px;
             }
             .topbar nav a {
-                padding: 6px 8px;
-                font-size: 0.78rem;
+                padding: 5px 6px;
+                font-size: 0.72rem;
+                gap: 3px;
             }
             .topbar nav a i {
-                font-size: 0.85rem;
+                font-size: 0.78rem;
             }
             .banner-center img {
                 max-height: 50vh;
@@ -809,6 +813,17 @@
             }
             .note {
                 font-size: 0.78rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .topbar nav a {
+                padding: 5px 5px;
+                font-size: 0.68rem;
+                gap: 2px;
+            }
+            .topbar nav a i {
+                font-size: 0.72rem;
             }
         }
 
