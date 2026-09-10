@@ -639,23 +639,15 @@
         @media (max-width: 992px) {
             .banner-content {
                 justify-content: center;
-                flex-direction: column;
                 padding: 15px;
                 gap: 15px;
-                overflow-y: auto;
-            }
-            .banner-left {
-                width: 100%;
-                max-width: 500px;
-                align-items: center;
-                text-align: center;
-                padding: 15px;
-                margin-top: auto;
             }
             .banner-instructions {
-                width: 100%;
-                max-width: 500px;
-                margin-bottom: auto;
+                display: none;
+            }
+            .banner-left {
+                width: 300px;
+                padding: 15px;
             }
             .banner-left h1 {
                 font-size: 2.5rem;
@@ -664,11 +656,10 @@
                 font-size: 1.3rem;
             }
             .banner-center {
-                width: 100%;
                 max-width: 500px;
             }
             .banner-center img {
-                max-height: 30vh;
+                max-height: 40vh;
             }
         }
 
@@ -700,34 +691,33 @@
             .topbar nav a i {
                 font-size: 0.9rem;
             }
+            .banner-content {
+                flex-direction: column;
+                justify-content: center;
+                padding: 15px;
+                gap: 15px;
+            }
             .banner-left {
-                padding: 12px;
+                display: none;
             }
-            .banner-left h1 {
-                font-size: 2rem;
+            .banner-instructions {
+                display: none;
             }
-            .banner-left p {
-                font-size: 1.1rem;
-            }
-            .install-btn, .github-btn, .about-btn {
-                padding: 10px 16px;
-                font-size: 0.9rem;
-                margin-top: 8px;
+            .banner-center {
                 width: 100%;
-                max-width: 280px;
+                max-width: 100%;
+                flex: 1;
+                justify-content: center;
+            }
+            .banner-center img {
+                max-height: 35vh;
+                max-width: 85%;
             }
             .banner-description {
                 font-size: 0.9rem;
                 padding: 12px 15px;
-                margin-top: 12px;
+                margin-top: 15px;
                 max-width: 100%;
-            }
-            .banner-instructions h2 {
-                font-size: 1.1rem;
-            }
-            .banner-instructions ol {
-                font-size: 0.85rem;
-                padding-left: 18px;
             }
             .docs-content {
                 padding: 0;
@@ -796,14 +786,8 @@
             .topbar nav a i {
                 font-size: 0.85rem;
             }
-            .banner-left h1 {
-                font-size: 1.8rem;
-            }
-            .banner-left p {
-                font-size: 1rem;
-            }
             .banner-center img {
-                max-height: 25vh;
+                max-height: 30vh;
             }
             .banner-description {
                 font-size: 0.82rem;
@@ -844,27 +828,8 @@
                 padding: 8px;
                 gap: 8px;
             }
-            .banner-left {
-                padding: 8px;
-            }
-            .banner-left h1 {
-                font-size: 1.5rem;
-            }
-            .banner-left p {
-                font-size: 0.9rem;
-            }
             .banner-center img {
-                max-height: 40vh;
-            }
-            .banner-instructions {
-                padding: 8px;
-            }
-            .banner-instructions h2 {
-                font-size: 0.9rem;
-                margin-bottom: 6px;
-            }
-            .banner-instructions ol {
-                font-size: 0.7rem;
+                max-height: 45vh;
             }
         }
     </style>
@@ -1088,20 +1053,62 @@
             });
 
             const container = document.getElementById('three-container');
-            if (container) {
+            let renderer = null;
+            let scene = null;
+            let camera = null;
+            let plane = null;
+            let geometry = null;
+            let animationId = null;
+            let isContextLost = false;
+            let isPageVisible = true;
+
+            const isMobile = /Android|iPhone|iPad|iPod|Mobile|Opera Mini|IEMobile/i.test(navigator.userAgent) || window.innerWidth < 768;
+
+            function initThree() {
+                if (!container) return;
+
                 const width = container.clientWidth;
                 const height = container.clientHeight;
-                const scene = new THREE.Scene();
+
+                scene = new THREE.Scene();
                 scene.background = new THREE.Color(0xd0d0d0);
 
-                const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
+                camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
                 camera.position.set(0, 2, 12);
                 camera.lookAt(0, 0, 0);
 
-                const renderer = new THREE.WebGLRenderer({ antialias: true });
-                renderer.setSize(width, height);
-                renderer.setPixelRatio(window.devicePixelRatio || 1);
+                renderer = new THREE.WebGLRenderer({
+                    antialias: !isMobile,
+                    powerPreference: 'default',
+                    alpha: false,
+                    preserveDrawingBuffer: false
+                });
+
+                const maxPixelRatio = isMobile ? 1 : 2;
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, maxPixelRatio));
+                renderer.setSize(width, height, false);
+                renderer.domElement.style.width = '100%';
+                renderer.domElement.style.height = '100%';
+                renderer.domElement.style.display = 'block';
+
+                container.innerHTML = '';
                 container.appendChild(renderer.domElement);
+
+                renderer.domElement.addEventListener('webglcontextlost', function(e) {
+                    e.preventDefault();
+                    isContextLost = true;
+                    if (animationId) {
+                        cancelAnimationFrame(animationId);
+                        animationId = null;
+                    }
+                    console.warn('WebGL context lost');
+                }, false);
+
+                renderer.domElement.addEventListener('webglcontextrestored', function() {
+                    isContextLost = false;
+                    console.warn('WebGL context restored');
+                    rebuildScene();
+                }, false);
 
                 const light = new THREE.DirectionalLight(0xffffff, 1.2);
                 light.position.set(1, 2, 1);
@@ -1114,7 +1121,10 @@
                 const ambientLight = new THREE.AmbientLight(0x404040);
                 scene.add(ambientLight);
 
-                const geometry = new THREE.PlaneGeometry(80, 48, 150, 100);
+                const segX = isMobile ? 80 : 150;
+                const segY = isMobile ? 50 : 100;
+
+                geometry = new THREE.PlaneGeometry(80, 48, segX, segY);
                 const material = new THREE.MeshStandardMaterial({
                     color: 0x444444,
                     roughness: 0.2,
@@ -1122,13 +1132,32 @@
                     side: THREE.DoubleSide,
                     flatShading: true
                 });
-                const plane = new THREE.Mesh(geometry, material);
+                plane = new THREE.Mesh(geometry, material);
                 plane.rotation.x = -0.5;
                 scene.add(plane);
 
+                startAnimation();
+            }
+
+            function rebuildScene() {
+                if (container) {
+                    container.innerHTML = '';
+                }
+                initThree();
+            }
+
+            function startAnimation() {
+                if (animationId) {
+                    cancelAnimationFrame(animationId);
+                }
                 function animate() {
-                    requestAnimationFrame(animate);
+                    if (isContextLost || !isPageVisible) {
+                        animationId = requestAnimationFrame(animate);
+                        return;
+                    }
+                    animationId = requestAnimationFrame(animate);
                     const time = Date.now() * 0.001;
+                    if (!geometry || !plane) return;
                     const positions = geometry.attributes.position.array;
                     for (let i = 0; i < positions.length; i += 3) {
                         const x = positions[i];
@@ -1140,13 +1169,35 @@
                     renderer.render(scene, camera);
                 }
                 animate();
+            }
 
-                window.addEventListener('resize', () => {
+            if (container) {
+                initThree();
+
+                window.addEventListener('resize', function() {
+                    if (!container || !renderer || !camera) return;
                     const w = container.clientWidth;
                     const h = container.clientHeight;
+                    if (w === 0 || h === 0) return;
                     camera.aspect = w / h;
                     camera.updateProjectionMatrix();
-                    renderer.setSize(w, h);
+                    renderer.setSize(w, h, false);
+                });
+
+                document.addEventListener('visibilitychange', function() {
+                    isPageVisible = !document.hidden;
+                });
+
+                window.addEventListener('orientationchange', function() {
+                    setTimeout(function() {
+                        if (!container || !renderer || !camera) return;
+                        const w = container.clientWidth;
+                        const h = container.clientHeight;
+                        if (w === 0 || h === 0) return;
+                        camera.aspect = w / h;
+                        camera.updateProjectionMatrix();
+                        renderer.setSize(w, h, false);
+                    }, 300);
                 });
             }
 
@@ -1155,7 +1206,6 @@
             const flashBtn = document.getElementById('flashBtn');
             const firmwareFileInput = document.getElementById('firmwareFile');
             const flashAddressInput = document.getElementById('flashAddress');
-            const baudRateSelect = document.getElementById('baudRate');
             const flashSizeSelect = document.getElementById('flashSize');
             const flashModeSelect = document.getElementById('flashMode');
             const progressContainer = document.getElementById('progressContainer');
