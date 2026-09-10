@@ -373,11 +373,23 @@
 
         #install-page {
             padding: 30px 20px;
+            display: none;
+        }
+
+        #install-page.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .install-container {
             max-width: 720px;
+            width: 100%;
             margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
         }
 
         .install-container > h1 {
@@ -385,11 +397,14 @@
             margin-bottom: 10px;
             border-bottom: 2px solid #000;
             padding-bottom: 10px;
+            text-align: center;
+            width: 100%;
         }
 
         .install-container > p {
             margin-bottom: 20px;
             color: #444;
+            text-align: center;
         }
 
         .install-section {
@@ -398,6 +413,7 @@
             border-radius: 8px;
             padding: 20px;
             margin-bottom: 20px;
+            width: 100%;
         }
 
         .install-section h3 {
@@ -476,16 +492,16 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 12px 24px;
+            padding: 14px 28px;
             border: none;
             border-radius: 4px;
-            font-size: 1rem;
+            font-size: 1.05rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
             gap: 8px;
             text-decoration: none;
-            min-height: 44px;
+            min-height: 48px;
         }
 
         .btn-primary {
@@ -555,6 +571,7 @@
             margin-top: 15px;
             display: none;
             word-break: break-all;
+            width: 100%;
         }
 
         .log.visible {
@@ -582,6 +599,36 @@
             align-items: center;
             flex-wrap: wrap;
             gap: 10px;
+            justify-content: center;
+        }
+
+        .install-instructions-mobile {
+            display: none;
+            background: #fafafa;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .install-instructions-mobile h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #000000;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .install-instructions-mobile ol {
+            padding-left: 20px;
+            font-size: 0.95rem;
+            color: #000000;
+            line-height: 1.5;
+        }
+
+        .install-instructions-mobile ol li {
+            margin-bottom: 8px;
         }
 
         .note {
@@ -594,6 +641,7 @@
             display: flex;
             align-items: flex-start;
             gap: 8px;
+            width: 100%;
         }
 
         .note i {
@@ -656,10 +704,11 @@
         @media (max-width: 768px) {
             .topbar {
                 padding: 0 8px;
-                height: 60px;
+                height: 48px;
+                min-height: 48px;
             }
             .topbar .logo img {
-                height: 32px;
+                height: 30px;
             }
             .topbar .logo span {
                 display: none;
@@ -672,16 +721,13 @@
                 gap: 2px;
             }
             .topbar nav a {
-                padding: 6px 8px;
+                padding: 5px 8px;
                 font-size: 0.8rem;
             }
             .topbar nav a i {
                 font-size: 0.9rem;
             }
             .topbar nav a span {
-                display: none;
-            }
-            .topbar nav a i + * {
                 display: none;
             }
             .banner-content {
@@ -727,17 +773,22 @@
                 font-size: 0.95rem;
             }
             #install-page {
-                padding: 20px 12px;
+                padding: 20px 15px;
+            }
+            .install-container {
+                gap: 15px;
             }
             .install-container > h1 {
                 font-size: 1.5rem;
+                margin-bottom: 0;
             }
             .install-container > p {
                 font-size: 0.9rem;
+                margin-bottom: 0;
             }
             .install-section {
                 padding: 15px;
-                margin-bottom: 15px;
+                margin-bottom: 0;
             }
             .install-section h3 {
                 font-size: 1rem;
@@ -759,6 +810,12 @@
                 margin-left: 0;
                 justify-content: center;
             }
+            .install-instructions-mobile {
+                display: block;
+            }
+            .install-section.hide-on-mobile {
+                display: none;
+            }
         }
 
         @media (max-width: 480px) {
@@ -768,11 +825,15 @@
             #preloader img {
                 max-width: 140px;
             }
+            .topbar {
+                height: 44px;
+                min-height: 44px;
+            }
             .topbar .logo img {
-                height: 28px;
+                height: 26px;
             }
             .topbar nav a {
-                padding: 6px 8px;
+                padding: 4px 6px;
                 font-size: 0.75rem;
             }
             .topbar nav a i {
@@ -806,8 +867,8 @@
                 font-size: 0.95rem;
             }
             .btn {
-                font-size: 0.9rem;
-                padding: 10px 18px;
+                font-size: 0.95rem;
+                padding: 12px 20px;
             }
             .log {
                 font-size: 0.72rem;
@@ -815,17 +876,23 @@
             .note {
                 font-size: 0.78rem;
             }
+            .install-instructions-mobile h2 {
+                font-size: 1.1rem;
+            }
+            .install-instructions-mobile ol {
+                font-size: 0.85rem;
+            }
         }
 
         @media (max-width: 400px) {
             .topbar nav a {
-                padding: 6px 6px;
+                padding: 4px 5px;
             }
             .topbar nav a i {
                 font-size: 0.8rem;
             }
             .topbar .logo img {
-                height: 26px;
+                height: 24px;
             }
         }
 
@@ -852,10 +919,10 @@
             <span>Flock3</span>
         </div>
         <nav>
-            <a href="#" class="active" data-page="home"><i class="fas fa-home"></i> Home</a>
-            <a href="#" data-page="install"><i class="fas fa-download"></i> Install</a>
-            <a href="https://github.com/Shon-Lua/Flock3-Plus" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> GitHub</a>
-            <a href="#" data-page="about"><i class="fas fa-info-circle"></i> About</a>
+            <a href="#" class="active" data-page="home"><i class="fas fa-home"></i> <span>Home</span></a>
+            <a href="#" data-page="install"><i class="fas fa-download"></i> <span>Install</span></a>
+            <a href="https://github.com/Shon-Lua/Flock3-Plus" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> <span>GitHub</span></a>
+            <a href="#" data-page="about"><i class="fas fa-info-circle"></i> <span>About</span></a>
         </nav>
     </header>
 
@@ -891,10 +958,9 @@
     <div class="page" id="install-page">
         <div class="install-container">
             <h1>Install Firmware</h1>
-            <p>Follow the steps below to flash the Flock3+ firmware to your LILYGO T5-4.7-S3 Pro board.</p>
 
             <div class="install-section">
-                <h3><i class="fas fa-plug"></i> 1. Device Connection</h3>
+                <h3><i class="fas fa-plug"></i> Device Connection</h3>
                 <p style="margin-bottom: 15px; font-size: 0.9rem;">Connect the board to your computer via USB. To enter bootloader mode: hold BOOT, press RESET, then release BOOT.</p>
                 <div class="install-actions">
                     <button id="connectBtn" class="btn btn-primary">
@@ -909,59 +975,15 @@
                 </div>
             </div>
 
-            <div class="install-section">
-                <h3><i class="fas fa-file-upload"></i> 2. Firmware File</h3>
-                <div class="form-group">
-                    <label for="firmwareFile"><i class="fas fa-file"></i> Firmware file (.bin)</label>
-                    <input type="file" id="firmwareFile" accept=".bin" />
-                </div>
-                <div class="flash-options">
-                    <div class="form-group">
-                        <label for="flashAddress"><i class="fas fa-map-pin"></i> Flash address</label>
-                        <input type="text" id="flashAddress" value="0x0" placeholder="0x0" />
-                    </div>
-                    <div class="form-group">
-                        <label for="baudRate"><i class="fas fa-tachometer-alt"></i> Baud rate</label>
-                        <select id="baudRate">
-                            <option value="115200">115200</option>
-                            <option value="230400">230400</option>
-                            <option value="460800" selected>460800</option>
-                            <option value="921600">921600</option>
-                            <option value="1500000">1500000</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="flashSize"><i class="fas fa-memory"></i> Flash size</label>
-                        <select id="flashSize">
-                            <option value="4MB">4MB</option>
-                            <option value="8MB">8MB</option>
-                            <option value="16MB" selected>16MB</option>
-                            <option value="32MB">32MB</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="flashMode"><i class="fas fa-cog"></i> Flash mode</label>
-                        <select id="flashMode">
-                            <option value="dio" selected>DIO</option>
-                            <option value="qio">QIO</option>
-                            <option value="dout">DOUT</option>
-                            <option value="qout">QOUT</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <div class="install-section">
-                <h3><i class="fas fa-bolt"></i> 3. Flash Firmware</h3>
-                <button id="flashBtn" class="btn btn-primary" disabled style="width: 100%;">
-                    <i class="fas fa-bolt"></i> Start Flashing
-                </button>
-                <div class="progress-container" id="progressContainer">
-                    <div class="progress-bar">
-                        <div class="progress-fill" id="progressFill"></div>
-                    </div>
-                    <div class="progress-text" id="progressText">0%</div>
-                </div>
+            <div class="install-instructions-mobile">
+                <h2>READ BEFORE INSTALLING</h2>
+                <ol>
+                    <li>Connect the LILYGO T5-4.7-S3 Pro board to USB.</li>
+                    <li>Click Connect and select the correct COM port.</li>
+                    <li>Click the Install button and wait for the download to finish. (Never disconnect the cable during downloading, otherwise flash memory may be damaged.)</li>
+                    <li>During flashing, try to stay on the download page, otherwise transfer speed may decrease.</li>
+                    <li>After the download is complete, disconnect the board from USB and enjoy a high-quality MP3 player.</li>
+                </ol>
             </div>
 
             <div id="log" class="log"></div>
@@ -1032,7 +1054,11 @@
                 }
                 if (pages[pageId]) {
                     pages[pageId].classList.add('active');
-                    pages[pageId].style.display = 'block';
+                    if (pageId === 'home') {
+                        pages[pageId].style.display = 'block';
+                    } else {
+                        pages[pageId].style.display = 'block';
+                    }
                 }
                 topbarLinks.forEach(link => {
                     link.classList.remove('active');
@@ -1206,14 +1232,6 @@
 
             const connectBtn = document.getElementById('connectBtn');
             const disconnectBtn = document.getElementById('disconnectBtn');
-            const flashBtn = document.getElementById('flashBtn');
-            const firmwareFileInput = document.getElementById('firmwareFile');
-            const flashAddressInput = document.getElementById('flashAddress');
-            const flashSizeSelect = document.getElementById('flashSize');
-            const flashModeSelect = document.getElementById('flashMode');
-            const progressContainer = document.getElementById('progressContainer');
-            const progressFill = document.getElementById('progressFill');
-            const progressText = document.getElementById('progressText');
             const logElement = document.getElementById('log');
             const connectionStatus = document.getElementById('connectionStatus');
 
@@ -1237,20 +1255,12 @@
                     connectionStatus.className = 'status-indicator connected';
                     connectBtn.style.display = 'none';
                     disconnectBtn.style.display = 'inline-flex';
-                    flashBtn.disabled = false;
                 } else {
                     connectionStatus.innerHTML = '<i class="fas fa-circle"></i> Not connected';
                     connectionStatus.className = 'status-indicator disconnected';
                     connectBtn.style.display = 'inline-flex';
                     disconnectBtn.style.display = 'none';
-                    flashBtn.disabled = true;
                 }
-            }
-
-            function updateProgress(value) {
-                const percent = Math.round(value * 100);
-                progressFill.style.width = percent + '%';
-                progressText.textContent = percent + '%';
             }
 
             if (connectBtn) {
@@ -1292,74 +1302,6 @@
                     transport = null;
                     esptool = null;
                     updateConnectionStatus(false);
-                    flashBtn.disabled = true;
-                });
-            }
-
-            if (firmwareFileInput) {
-                firmwareFileInput.addEventListener('change', () => {
-                    if (firmwareFileInput.files.length > 0) {
-                        log('Selected file: ' + firmwareFileInput.files[0].name + ' (' + firmwareFileInput.files[0].size + ' bytes)');
-                    }
-                });
-            }
-
-            if (flashBtn) {
-                flashBtn.addEventListener('click', async () => {
-                    if (!isConnected || !esptool) {
-                        alert('Please connect the device first!');
-                        return;
-                    }
-                    const file = firmwareFileInput.files[0];
-                    if (!file) {
-                        alert('Please select a firmware file!');
-                        return;
-                    }
-                    const address = parseInt(flashAddressInput.value, 16) || 0;
-                    const flashSize = flashSizeSelect.value;
-                    const flashMode = flashModeSelect.value;
-                    const flashSizeMap = {
-                        '4MB': 4 * 1024 * 1024,
-                        '8MB': 8 * 1024 * 1024,
-                        '16MB': 16 * 1024 * 1024,
-                        '32MB': 32 * 1024 * 1024
-                    };
-                    const flashSizeBytes = flashSizeMap[flashSize] || 16 * 1024 * 1024;
-                    try {
-                        log('Starting flashing...');
-                        progressContainer.classList.add('visible');
-                        updateProgress(0);
-                        flashBtn.disabled = true;
-                        const fileData = await file.arrayBuffer();
-                        const uint8Data = new Uint8Array(fileData);
-                        log('Writing ' + uint8Data.length + ' bytes at address 0x' + address.toString(16) + '...');
-                        await esptool.writeFlash({
-                            fileArray: [{
-                                data: uint8Data,
-                                address: address
-                            }],
-                            flashSize: flashSizeBytes,
-                            flashMode: flashMode,
-                            flashFreq: '40m',
-                            eraseAll: false,
-                            compress: true,
-                            reportProgress: (fileIndex, written, total) => {
-                                const progress = written / total;
-                                updateProgress(progress);
-                                if (written % 8192 === 0 || written === total) {
-                                    log('Progress: ' + written + '/' + total + ' bytes (' + Math.round(progress * 100) + '%)');
-                                }
-                            }
-                        });
-                        log('Flashing completed successfully!');
-                        updateProgress(1);
-                        alert('Firmware installed successfully!');
-                    } catch (error) {
-                        log('Flashing error: ' + error.message);
-                        alert('Flashing error: ' + error.message);
-                    } finally {
-                        flashBtn.disabled = false;
-                    }
                 });
             }
 
@@ -1371,7 +1313,7 @@
                 }
             });
 
-            log('Welcome! Connect the device and select a firmware file.');
+            log('Welcome! Connect the device to begin.');
         })();
     </script>
 </body>
